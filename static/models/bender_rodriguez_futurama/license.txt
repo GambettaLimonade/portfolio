@@ -1,0 +1,11 @@
+Model Information:
+* title:	Bender Rodriguez Futurama
+* source:	https://sketchfab.com/3d-models/bender-rodriguez-futurama-79e12f3d93024356b2a0d05b7299b3d6
+* author:	Krlts (https://sketchfab.com/Krlts)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Bender Rodriguez Futurama" (https://sketchfab.com/3d-models/bender-rodriguez-futurama-79e12f3d93024356b2a0d05b7299b3d6) by Krlts (https://sketchfab.com/Krlts) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
