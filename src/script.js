@@ -16,12 +16,27 @@ const canvas = document.querySelector('canvas.webgl')
 // Scene
 const scene = new THREE.Scene()
 
-//MOdels
-
+// City
 const gltfLoader = new GLTFLoader()
+
+
+gltfLoader.load(
+    '/models/cartoon_lowpoly_small_city_free_pack/scene.gltf',
+    (gltf) =>
+    {
+        scene.add(gltf.scene)
+        gltf.scene.position.set(0, 110, 0)
+    }
+)
+
+
+//Character
 let mixer = null
 var character_walk;
 let arrow = {};
+var character;
+var action_avancer;
+var action_tourner;
 
 gltfLoader.load(
     '/models/Soldier.glb',
@@ -29,47 +44,24 @@ gltfLoader.load(
     {
         character_walk = gltf.scene
         scene.add(character_walk)
+
+        gltf.scene.position.set(-500, -8, 500)
+        gltf.scene.scale.set(20, 20, 20)
+
+
+        character = gltf
         mixer = new THREE.AnimationMixer(character_walk)
-        mixer.clipAction(gltf.animations[0])
-
-        gltf.scene.scale.set(2, 2, 2)
-
-        var lastUpdate = Date.now();
-        var repeating = false;
-        var repeatRateTimer = null;
-
-        document.addEventListener('keydown', (event) => {
-            // if( repeating == true )
-            // {
-            //     var now = Date.now();
-            //     var dt = now - lastUpdate;
-            //     if(dt >= 900)
-            //     {
-            //         lastUpdate = now;
-            //         arrow[event.key] = true;
-            //         move_character(arrow)
-            //         console.log(dt) 
-            //     }
-
+        action_avancer = mixer.clipAction(character.animations[1])
+        action_tourner = mixer.clipAction(character.animations[0])
         
-            // }
-            // else
-            // {
+        document.addEventListener('keydown', (event) => {
                 arrow[event.key] = true;
-
-            // }
-            // repeating = true;
-
          }, false);
 
          document.addEventListener('keyup', (event) => {
             delete arrow[event.key];
-            // if( repeatRateTimer != null )
-            // {
-            //     clearTimeout( repeatRateTimer );
-            //     repeatRateTimer = null;
-            // }
-            // repeating = false;
+            action_avancer.stop();
+            action_tourner.stop();
         }, false);   
     })
 
@@ -84,34 +76,17 @@ function move_character() {
     var avancer = arrow['ArrowUp'] ? 1 : 0;
     var tourner = (arrow['ArrowLeft']) ? 1 : (arrow['ArrowRight']) ? -1 : 0;
 
-    // mixer = new THREE.AnimationMixer(character_walk)
-    // var action = mixer.clipAction(gltf.animations[1]);
-    // action.setLoop( THREE.LoopOnce );
-    character_walk.position.x = character_walk.position.x - Math.sin(angle) * avancer
-    character_walk.position.z = character_walk.position.z - Math.cos(angle) * avancer
+    if (avancer) action_avancer.play()
+    if (tourner) action_tourner.play()
+
+    character_walk.position.x = character_walk.position.x - Math.sin(angle) * (avancer * 1)
+    character_walk.position.z = character_walk.position.z - Math.cos(angle) * (avancer * 1)
     
-    character_walk.rotation.y = character_walk.rotation.y + (Math.PI/8) * tourner
+    character_walk.rotation.y = character_walk.rotation.y + (Math.PI/20) * tourner
     angle = character_walk.rotation.y  
 
     }
 }
-
-
-/**
- * Floor
- */
-const floor = new THREE.Mesh(
-    new THREE.PlaneBufferGeometry(100, 100),
-    new THREE.MeshStandardMaterial({
-        color: '#444444',
-        metalness: 0,
-        roughness: 0.5
-    })
-)
-floor.receiveShadow = true
-floor.rotation.x = - Math.PI * 0.5
-scene.add(floor)
-
 
 
 
@@ -155,39 +130,17 @@ window.addEventListener('resize', () =>
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 })
 
-
-// cube
-const cubeGeometry = new THREE.BoxGeometry(1, 1, 1)
-const cubeMaterial = new THREE.MeshBasicMaterial({
-    color: '#ff0000'
-})
-const cube = new THREE.Mesh(cubeGeometry, cubeMaterial)
-scene.add(cube)
-
-cube.position.set(4, 3, 0)
-
-// sphere
-const sphereGeo = new THREE.SphereBufferGeometry(1, 1, 1)
-const sphereMat = new THREE.MeshBasicMaterial({
-    color: '#00ff00'
-})
-const sphere = new THREE.Mesh(sphereGeo, sphereMat)
-scene.add(sphere)
-
-sphere.position.set(-4, 3, 0)
-
-
 /**
  * Camera
  */
 // Base camera
 const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 10000)
-camera.position.set(0, 6, 10)
+camera.position.set(0, 100, 100)
 scene.add(camera)
 
 // Controls
 const controls = new OrbitControls(camera, canvas)
-controls.target.set(4, 10, 0)
+controls.target.set(0, 100, 0)
 controls.enableDamping = true
 
 
@@ -230,8 +183,8 @@ const tick = () =>
     if (character_walk)
     {
         controls.target.set(character_walk.position.x,character_walk.position.y,character_walk.position.z)
-        camera.position.x = character_walk.position.x + 10
-        camera.position.z = character_walk.position.z + 10
+        camera.position.x = character_walk.position.x + 50
+        camera.position.z = character_walk.position.z + 50
     }
     // Update controls
     controls.update()
