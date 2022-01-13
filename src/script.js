@@ -5,6 +5,9 @@ import * as THREE from 'three'
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import * as dat from 'dat.gui'
+import CANNON from 'cannon'
+
+console.log(CANNON)
 
 /**
  * Base
@@ -15,113 +18,94 @@ const gui = new dat.GUI()
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
 
+
+/**
+ * Physics
+ */
+
+//World
+const world = new CANNON.World()
+world.gravity.set(0, -9.82, 0)
+
+// Materials
+const defautMaterial = new CANNON.Material('defaut')
+
+const defautContactMaterial = new CANNON.ContactMaterial(
+    defautMaterial,
+    defautMaterial,
+    {
+        friction : 0.1,
+        restitution : 0.5
+    }
+)
+
+world.addContactMaterial(defautContactMaterial)
+world.defaultContactMaterial = defautContactMaterial
+//On a pas besoin de mettre le defaut material dans le sol et 
+// le sphère car on dit au monde que le matériel par defaut et celui la.
+
+
+//Sphere
+const sphereShape = new CANNON.Sphere(0.5)
+const sphereBody = new CANNON.Body({
+    mass: 1,
+    position: new CANNON.Vec3(0,30,-30),
+    shape:sphereShape,
+})
+world.addBody(sphereBody)
+
+// Floor 
+const floorShape = new CANNON.Plane()
+const floorBody = new CANNON.Body()
+floorBody.mass = 0
+floorBody.addShape(floorShape)
+floorBody.quaternion.setFromAxisAngle(new CANNON.Vec3(-1, 0, 0), Math.PI * 0.5)
+world.addBody(floorBody)
+
+
 // Scene
 const scene = new THREE.Scene()
+scene.background = new THREE.Color( 0x000000 );
+
+
+/**
+ * Floor
+ */
+ const floor = new THREE.Mesh(
+    new THREE.PlaneBufferGeometry(3000, 3000),
+    new THREE.MeshStandardMaterial({
+        color: '#777777',
+        metalness: 0,
+        roughness: 0.5
+    })
+)
+floor.receiveShadow = true
+floor.rotation.x = - Math.PI * 0.5
+
+
+scene.add(floor)
+
+const sphereGeometry = new THREE.SphereBufferGeometry(0.5, 32, 32)
+const sphereMaterial = new THREE.MeshStandardMaterial({
+    metalness: 0.3,
+    roughness : 0.4
+})
+
+const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial)
+sphere.position.set(100,50,100)
+scene.add(sphere)
 
 // Loader
 const gltfLoader = new GLTFLoader()
 
 let mixer = null
-let mixer_n = null
-let mixer_g = null
-let mixer_s = null
 var character_walk;
 let arrow = {};
 var character;
 var action_avancer;
 var action_tourner;
 
-var g_walk;
-var g;
-var action_g;
 
-
-var n_walk;
-var n;
-var action_n;
-
-var s_walk;
-var s;
-var action_s;
-
-
-
-// City
-gltfLoader.load(
-    '/models/cartoon_lowpoly_small_city_free_pack/scene.gltf',
-    (gltf) =>
-    {
-        scene.add(gltf.scene)
-        gltf.scene.position.set(0, 110, 0)
-    }
-)
-
-// //Naruto
-gltfLoader.load(
-    '/models/hatch_naruto/scene.gltf',
-    (gltf) =>
-    {
-        n_walk = gltf.scene
-        scene.add(n_walk)
-
-        gltf.scene.position.set(-450, -8, 550)
-        gltf.scene.scale.set(30, 30, 30)
-
-        n = gltf
-        mixer_n = new THREE.AnimationMixer(n_walk)
-        action_n = mixer_n.clipAction(n.animations[0])
-    }
-)
-
-
-// //Sasuke
-gltfLoader.load(
-    '/models/rumba_dancing_sasuke/scene.gltf',
-    (gltf) =>
-    {
-        s_walk = gltf.scene
-        scene.add(s_walk)
-
-        gltf.scene.position.set(-400, -8, 550)
-        gltf.scene.scale.set(30, 30, 30)
-
-        s = gltf
-        mixer_s = new THREE.AnimationMixer(s_walk)
-        action_s = mixer_s.clipAction(s.animations[0])
-    }
-)
-
-
-
-
-//Goku
-gltfLoader.load(
-    '/models/goku_rigged__animated/scene.gltf',
-    (gltf) =>
-    {
-        g_walk = gltf.scene
-        scene.add(g_walk)
-
-        gltf.scene.position.set(-580, -8, 500)
-        gltf.scene.scale.set(20, 20, 20)
-
-        g = gltf
-        mixer_g = new THREE.AnimationMixer(g_walk)
-        action_g = mixer_g.clipAction(g.animations[0])
-    }
-)
-
-function move_goku(){
-    if (g) action_g.play();
-}
-
-function move_naruto(){
-    if (n) action_n.play()
-}
-
-function move_sasuke(){
-    if (s) action_s.play();
-}
 
 
 //main Character
@@ -130,12 +114,19 @@ gltfLoader.load(
     (gltf) =>
     {
         character_walk = gltf.scene
+
+
         scene.add(character_walk)
 
-        gltf.scene.position.set(-500, -8, 500)
-        gltf.scene.scale.set(30, 30, 30)
+        gltf.scene.position.set(0, 0, 0)
 
-       // console.log('main chara : ', gltf.scene)
+        gltf.scene.rotation.y = Math.PI
+        gltf.scene.scale.set(5,5,5)
+
+
+        //character_walk.children[0].children[0].castShadow = true; //default
+        character_walk.children[0].children[1].castShadow = true; //default
+        //character_walk.children[0].children[2].castShadow = true; //default
 
 
         character = gltf
@@ -157,7 +148,7 @@ gltfLoader.load(
 
 
 let angle = 0;        
-const vitesse = 3;    
+const vitesse = 1;    
 const rotation = Math.PI/60 ;
 
 function move_character() {
@@ -190,13 +181,17 @@ scene.add(ambientLight)
 const directionalLight = new THREE.DirectionalLight(0xffffff, 0.6)
 directionalLight.castShadow = true
 directionalLight.shadow.mapSize.set(1024, 1024)
-directionalLight.shadow.camera.far = 15
-directionalLight.shadow.camera.left = - 7
-directionalLight.shadow.camera.top = 7
-directionalLight.shadow.camera.right = 7
-directionalLight.shadow.camera.bottom = - 7
-directionalLight.position.set(5, 5, 5)
+directionalLight.shadow.camera.far = 200
+directionalLight.shadow.camera.left = 200
+directionalLight.shadow.camera.top = 200
+directionalLight.shadow.camera.right = - 200
+directionalLight.shadow.camera.bottom = - 200
+var shadowHelper = new THREE.CameraHelper( directionalLight.shadow.camera );
+scene.add( shadowHelper );
+directionalLight.position.set(5, 100, 5)
 scene.add(directionalLight)
+
+
 
 /**
  * Sizes
@@ -225,22 +220,24 @@ window.addEventListener('resize', () =>
  * Camera
  */
 // Base camera
-const camera = new THREE.PerspectiveCamera(75, sizes.width / sizes.height, 0.1, 10000)
-camera.position.y = 100
+const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 10, 2000)
+camera.position.y = 30
 scene.add(camera)
 
 // Controls
 const controls = new OrbitControls(camera, canvas)
 controls.target.set(0, 0, 0)
 controls.enableDamping = true
+controls.enableZoom = false;
 
 
 /**
  * Renderer
  */
 const renderer = new THREE.WebGLRenderer({
-    canvas: canvas
+    canvas: canvas,
 })
+
 renderer.shadowMap.enabled = true
 renderer.shadowMap.type = THREE.PCFSoftShadowMap
 renderer.setSize(sizes.width, sizes.height)
@@ -258,36 +255,29 @@ const tick = () =>
 {
     move_character(arrow)
 
-    // if (idle) {
-    //     console.log(idle)
-    //     console.log(idle._clip)
-    //     console.log(idle._clip.name)
-    // }
-
-    // if (goku) console.log('goku animation : ', goku.animations)
-    // if (character_walk) console.log('main character animation : ', character_walk.animations)
 
 
     const elapsedTime = clock.getElapsedTime()
     const deltaTime = elapsedTime - previousTime
     previousTime = elapsedTime
-    const distance = 170
+    const distance = 100
     
+    //update Physics World
+    world.step(1/60, deltaTime, 3)
+
+    sphere.position.copy(sphereBody.position)
+
     //update mixer
     if(mixer) mixer.update(deltaTime)
-    if(mixer_s) mixer_s.update(deltaTime)
-    if(mixer_g) mixer_g.update(deltaTime)
-    if(mixer_n) mixer_n.update(deltaTime)
 
-    if (n_walk) move_naruto();
-    if (s_walk) move_sasuke();
-    if (g_walk) move_goku();
 
     if (character_walk)
     {
-        controls.target.set(character_walk.position.x,character_walk.position.y,character_walk.position.z)
-        camera.position.x = character_walk.position.x + Math.sin(character_walk.rotation.y) * distance
-        camera.position.z = character_walk.position.z + Math.cos(character_walk.rotation.y) * distance
+            
+            controls.target.set(character_walk.position.x,character_walk.position.y,character_walk.position.z)
+            camera.position.x = character_walk.position.x + Math.sin(character_walk.rotation.y) * distance
+            camera.position.z = character_walk.position.z + Math.cos(character_walk.rotation.y) * distance
+ 
     }
     // Update controls
     controls.update()
