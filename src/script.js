@@ -7,7 +7,6 @@ import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
 import * as dat from 'dat.gui'
 import CANNON from 'cannon'
 
-console.log(CANNON)
 
 /**
  * Base
@@ -45,14 +44,6 @@ world.defaultContactMaterial = defautContactMaterial
 // le sphère car on dit au monde que le matériel par defaut et celui la.
 
 
-//Sphere
-const sphereShape = new CANNON.Sphere(0.5)
-const sphereBody = new CANNON.Body({
-    mass: 1,
-    position: new CANNON.Vec3(0,30,-30),
-    shape:sphereShape,
-})
-world.addBody(sphereBody)
 
 // Floor 
 const floorShape = new CANNON.Plane()
@@ -63,9 +54,60 @@ floorBody.quaternion.setFromAxisAngle(new CANNON.Vec3(-1, 0, 0), Math.PI * 0.5)
 world.addBody(floorBody)
 
 
-// Scene
+/**
+ * Scene
+ */
+
+
 const scene = new THREE.Scene()
 scene.background = new THREE.Color( 0x000000 );
+
+/**
+ * Utils (sphere, bricks)...
+ */
+
+const objectToUpdate = []
+
+
+const createSphere = (radius, position) =>
+{
+    // THREE LIBRARY
+    const mesh = new THREE.Mesh(
+        new THREE.SphereBufferGeometry(radius, 20, 20),
+        new THREE.MeshStandardMaterial({
+            metalness: 0.3,
+            roughness: 0.4
+        })
+    )
+    mesh.castShadow = true
+    mesh.position.copy(position)
+    scene.add(mesh)
+
+    //CANNON LIBRARY
+    const shape = new CANNON.Sphere(radius)
+    const body = new CANNON.Body({
+        mass:1,
+        position: new CANNON.Vec3(0,3,0),
+        shape:shape,
+        material:defautMaterial
+    })
+    body.position.copy(position)
+    world.addBody(body)
+
+    //Save the object to update
+    objectToUpdate.push({
+        mesh:mesh,
+        body:body
+    })
+    
+}
+
+
+createSphere(0.5, {x : 0, y : 20, z : 0})
+
+console.log('tableau contenant l objet : ', objectToUpdate)
+console.log('objet 1 body : ', objectToUpdate[0].body)
+console.log('objet 1 mesh : ', objectToUpdate[0].mesh)
 
 
 /**
@@ -85,15 +127,7 @@ floor.rotation.x = - Math.PI * 0.5
 
 scene.add(floor)
 
-const sphereGeometry = new THREE.SphereBufferGeometry(0.5, 32, 32)
-const sphereMaterial = new THREE.MeshStandardMaterial({
-    metalness: 0.3,
-    roughness : 0.4
-})
 
-const sphere = new THREE.Mesh(sphereGeometry, sphereMaterial)
-sphere.position.set(100,50,100)
-scene.add(sphere)
 
 // Loader
 const gltfLoader = new GLTFLoader()
@@ -251,6 +285,9 @@ renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
 const clock = new THREE.Clock()
 let previousTime = 0
 
+
+
+
 const tick = () =>
 {
     move_character(arrow)
@@ -265,7 +302,13 @@ const tick = () =>
     //update Physics World
     world.step(1/60, deltaTime, 3)
 
-    sphere.position.copy(sphereBody.position)
+    for (const object of objectToUpdate)
+    {
+
+        object.mesh.position.copy(object.body.position)
+
+    }
+
 
     //update mixer
     if(mixer) mixer.update(deltaTime)
