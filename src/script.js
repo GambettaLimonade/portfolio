@@ -11,8 +11,19 @@ import CANNON from 'cannon'
 /**
  * Base
  */
-// Debug
+
+
+/**
+ * Debug
+ *  */ 
 const gui = new dat.GUI()
+const debugObject = {}
+
+debugObject.createSphere = () =>
+{
+    createSphere(1, { x : 0, y : 3, z : 0})
+}
+gui.add(debugObject, 'createSphere')
 
 // Canvas
 const canvas = document.querySelector('canvas.webgl')
@@ -86,7 +97,7 @@ const createSphere = (radius, position) =>
     //CANNON LIBRARY
     const shape = new CANNON.Sphere(radius)
     const body = new CANNON.Body({
-        mass:1,
+        mass:3,
         position: new CANNON.Vec3(0,3,0),
         shape:shape,
         material:defautMaterial
@@ -102,12 +113,6 @@ const createSphere = (radius, position) =>
     
 }
 
-
-createSphere(0.5, {x : 0, y : 20, z : 0})
-
-console.log('tableau contenant l objet : ', objectToUpdate)
-console.log('objet 1 body : ', objectToUpdate[0].body)
-console.log('objet 1 mesh : ', objectToUpdate[0].mesh)
 
 
 /**
@@ -204,6 +209,26 @@ function move_character() {
     }
 }
 
+    //CANNON LIBRARY CYLINDRE
+const shapeCharacter = new CANNON.Cylinder(2,2, 18, 10)
+const bodyCharacter = new CANNON.Body({
+    mass:6,
+    position: new CANNON.Vec3(0,0,0),
+    shape:shapeCharacter,
+    material:defautMaterial
+})
+bodyCharacter.quaternion.setFromAxisAngle(new CANNON.Vec3(-1, 0, 0), Math.PI * 0.5)
+
+world.addBody(bodyCharacter)
+
+
+
+//cylindre three
+
+// const geometry = new THREE.CylinderGeometry(2, 2, 18, 10);
+// const material = new THREE.MeshBasicMaterial( {color: 0xffff00} );
+// const cylinder = new THREE.Mesh( geometry, material );
+// scene.add( cylinder );
 
 
 /**
@@ -254,8 +279,8 @@ window.addEventListener('resize', () =>
  * Camera
  */
 // Base camera
-const camera = new THREE.PerspectiveCamera(45, sizes.width / sizes.height, 10, 2000)
-camera.position.y = 30
+const camera = new THREE.PerspectiveCamera(30, sizes.width / sizes.height, 10, 2000)
+camera.position.y = 20
 scene.add(camera)
 
 // Controls
@@ -302,6 +327,8 @@ const tick = () =>
     //update Physics World
     world.step(1/60, deltaTime, 3)
 
+
+
     for (const object of objectToUpdate)
     {
 
@@ -314,13 +341,16 @@ const tick = () =>
     if(mixer) mixer.update(deltaTime)
 
 
+
     if (character_walk)
     {
             
             controls.target.set(character_walk.position.x,character_walk.position.y,character_walk.position.z)
             camera.position.x = character_walk.position.x + Math.sin(character_walk.rotation.y) * distance
             camera.position.z = character_walk.position.z + Math.cos(character_walk.rotation.y) * distance
- 
+            bodyCharacter.position.copy(character_walk.position)
+            //cylinder.position.copy(character_walk.position)
+
     }
     // Update controls
     controls.update()
