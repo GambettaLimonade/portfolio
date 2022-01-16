@@ -164,11 +164,6 @@ const main = new Main(document.querySelector('canvas.webgl'));
 //         gltf.scene.scale.set(5,5,5)
 
 
-//         //character_walk.children[0].children[0].castShadow = true; //default
-//         character_walk.children[0].children[1].castShadow = true; //default
-//         //character_walk.children[0].children[2].castShadow = true; //default
-
-
 //         character = gltf
 //         mixer = new THREE.AnimationMixer(character_walk)
 //         action_avancer = mixer.clipAction(character.animations[1])

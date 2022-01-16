@@ -33,7 +33,7 @@ export default class Main
         this.resources = new Resources(sources)
         this.camera = new Camera()
         this.renderer = new Renderer()
-        this.world = new World
+        this.world = new World()
 
         this.sizes.on('resize', () => 
         {
@@ -57,8 +57,8 @@ export default class Main
     
     update()
     {
-        this.camera.update()
         this.world.update()
+        this.camera.update()
         this.renderer.update()
 
     }
