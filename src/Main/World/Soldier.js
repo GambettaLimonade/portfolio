@@ -1,5 +1,7 @@
 import Main from "../Main";
 import * as THREE from 'three'
+import CANNON from 'cannon'
+
 
 export default class Soldier
 {
@@ -14,6 +16,7 @@ export default class Soldier
         this.angle = 0
         this.keys = {}
         this.distance = 100
+        this.world = this.main.physics.world
 
         //Debug
         if(this.debug.active)
@@ -39,6 +42,9 @@ export default class Soldier
         }
         this.pressKey()
         this.releaseKey()
+
+        this.setShape()
+        this.setBody()
 
     }
 
@@ -114,6 +120,9 @@ export default class Soldier
         const rotation = Math.PI/60 ;
 
 
+        //REVOIR CETTE LIGNE AVEC TIPHAINE
+        this.animation.actions.idle.play()
+        
         if (Object.keys(this.keys).length !== 0)
         {
             this.keys = this.keys || window.event
@@ -122,7 +131,7 @@ export default class Soldier
             var tourner = (this.keys['ArrowLeft']) ? 1 : (this.keys['ArrowRight']) ? -1 : 0;
 
             if (avancer) this.animation.actions.running.play()
-            if (tourner) this.animation.actions.idle.play()
+            if (tourner) this.animation.actions.running.play()
 
             this.model.position.x = this.model.position.x - Math.sin(this.angle) * (avancer * vitesse)
             this.model.position.z = this.model.position.z - Math.cos(this.angle) * (avancer * vitesse)
@@ -133,6 +142,25 @@ export default class Soldier
 
     }
 
+    setShape()
+    {
+        this.shapeCharacter = new CANNON.Cylinder(2,2, 18, 10)
+    }
+
+    setBody()
+    {
+        this.bodyCharacter = new CANNON.Body({
+                mass:6,
+                position: new CANNON.Vec3(0,0,0),
+                shape:this.shapeCharacter,
+                material:this.world.defaultMaterial
+            })
+        this.bodyCharacter.quaternion.setFromAxisAngle(new CANNON.Vec3(-1, 0, 0), Math.PI * 0.5)
+        this.main.physics.world.addBody(this.bodyCharacter)
+    }
+
+
+
     update()
     {
         this.animation.mixer.update(this.time.delta * 0.001)
@@ -140,109 +168,7 @@ export default class Soldier
         this.camera.controls.target.set(this.model.position.x,this.model.position.y,this.model.position.z)
         this.camera.instance.position.x = this.model.position.x + Math.sin(this.model.rotation.y) * this.distance
         this.camera.instance.position.z = this.model.position.z + Math.cos(this.model.rotation.y) * this.distance
+        this.bodyCharacter.position.copy(this.model.position)
+
     }
 }
-
-
-
-// // Loader
-// const gltfLoader = new GLTFLoader()
-
-// let mixer = null
-// var character_walk;
-// let arrow = {};
-// var character;
-// var action_avancer;
-// var action_tourner;
-
-
-
-
-// //main Character
-// gltfLoader.load(
-//     '/models/Soldier.glb',
-//     (gltf) =>
-//     {
-//         character_walk = gltf.scene
-
-
-//         scene.add(character_walk)
-
-//         gltf.scene.position.set(0, 0, 0)
-
-//         gltf.scene.rotation.y = Math.PI
-//         gltf.scene.scale.set(5,5,5)
-
-
-//         character = gltf
-//         mixer = new THREE.AnimationMixer(character_walk)
-//         action_avancer = mixer.clipAction(character.animations[1])
-//         action_tourner = mixer.clipAction(character.animations[0])
-        
-//         document.addEventListener('keydown', (event) => {
-//                 arrow[event.key] = true;
-//          }, false);
-
-//          document.addEventListener('keyup', (event) => {
-//             delete arrow[event.key];
-//             action_avancer.stop();
-//             action_tourner.stop();
-//         }, false);   
-//     })
-
-
-
-// let angle = 0;        
-// const vitesse = 1;    
-// const rotation = Math.PI/60 ;
-
-// function move_character() {
-//     if (Object.keys(arrow).length !== 0){
-    
-//     arrow = arrow || window.event;
-    
-//     var avancer = arrow['ArrowUp'] ? 1 : 0;
-//     var tourner = (arrow['ArrowLeft']) ? 1 : (arrow['ArrowRight']) ? -1 : 0;
-
-//     if (avancer) action_avancer.play()
-//     if (tourner) action_tourner.play()
-//     character_walk.position.x = character_walk.position.x - Math.sin(angle) * (avancer * vitesse)
-//     character_walk.position.z = character_walk.position.z - Math.cos(angle) * (avancer * vitesse)
-    
-//     character_walk.rotation.y = character_walk.rotation.y + rotation * tourner
-//     angle = character_walk.rotation.y  
-
-//     }
-// }
-
-
-
-
-
-
-// DANS LA FONCTION TICK Y AVAIT TOUT CA
-
-//     move_character(arrow)
-
-//     const elapsedTime = clock.getElapsedTime()
-//     const deltaTime = elapsedTime - previousTime
-//     previousTime = elapsedTime
-//     const distance = 100
-    
-
-
-//     //update mixer
-//     if(mixer) mixer.update(deltaTime)
-
-
-
-//     if (character_walk)
-//     {
-            
-//             controls.target.set(character_walk.position.x,character_walk.position.y,character_walk.position.z)
-//             camera.position.x = character_walk.position.x + Math.sin(character_walk.rotation.y) * distance
-//             camera.position.z = character_walk.position.z + Math.cos(character_walk.rotation.y) * distance
-//             bodyCharacter.position.copy(character_walk.position)
-//             //cylinder.position.copy(character_walk.position)
-
-//     }

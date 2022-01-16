@@ -1,5 +1,7 @@
 import Main from "../Main";
 import * as THREE from 'three'
+import CANNON from 'cannon'
+
 
 export default class Floor
 {
@@ -13,26 +15,9 @@ export default class Floor
         this.setMaterial()
         this.setMesh()
 
+        this.setShape()
+        this.setBody()
     }
-
-// /**
-//  * Floor
-//  */
-//  const floor = new THREE.Mesh(
-//     new THREE.PlaneBufferGeometry(3000, 3000),
-//     new THREE.MeshStandardMaterial({
-//         color: '#777777',
-//         metalness: 0,
-//         roughness: 0.5
-//     })
-// )
-// floor.receiveShadow = true
-// floor.rotation.x = - Math.PI * 0.5
-
-
-// scene.add(floor)
-
-
 
     setGeometry()
     {
@@ -54,5 +39,20 @@ export default class Floor
         this.mesh.rotation.x = - Math.PI * 0.5
         this.mesh.receiveShadow = true
         this.scene.add(this.mesh)
+    }
+
+    setShape()
+    {
+        this.floorShape = new CANNON.Plane()
+    }
+
+    setBody()
+    {
+        this.floorBody = new CANNON.Body({
+            mass: 0,
+            shape: this.floorShape,
+        })
+        this.floorBody.quaternion.setFromAxisAngle(new CANNON.Vec3(-1, 0, 0), Math.PI * 0.5)
+        this.main.physics.world.addBody(this.floorBody)
     }
 }

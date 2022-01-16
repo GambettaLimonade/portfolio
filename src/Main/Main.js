@@ -7,6 +7,7 @@ import World from './World/World.js'
 import Resources from './Utils/Resources.js'
 import sources from './sources.js'
 import Debug from './Utils/Debug.js'
+import Physics from './World/Physics.js'
 
 let instance = null
 
@@ -34,6 +35,7 @@ export default class Main
         this.camera = new Camera()
         this.renderer = new Renderer()
         this.world = new World()
+        this.physics = new Physics()
 
         this.sizes.on('resize', () => 
         {
@@ -57,6 +59,7 @@ export default class Main
     
     update()
     {
+        this.physics.update()
         this.world.update()
         this.camera.update()
         this.renderer.update()
