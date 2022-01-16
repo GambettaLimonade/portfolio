@@ -150,7 +150,7 @@ export default class Soldier
     setBody()
     {
         this.bodyCharacter = new CANNON.Body({
-                mass:6,
+                mass:0,
                 position: new CANNON.Vec3(0,0,0),
                 shape:this.shapeCharacter,
                 material:this.world.defaultMaterial

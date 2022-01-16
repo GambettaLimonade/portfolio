@@ -20,7 +20,7 @@ export default class Physics
             this.defautMaterial,
             this.defautMaterial,
                 {
-                    friction : 0.1,
+                    friction : 10,
                     restitution : 0.5
                 }
             )

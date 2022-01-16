@@ -9,15 +9,16 @@ export default class Ballon
         this.main = new Main()
         this.scene = this.main.scene
         this.resources = this.main.resources
-        this.radius = 3
+        this.length = 10
+        this.height = 5
         this.position = position
-        this.createBall()
+        this.createBrick()
         
     }
 
     setGeometry()
     {
-        this.geometry = new THREE.SphereBufferGeometry(this.radius, 20, 20)
+        this.geometry = new THREE.BoxBufferGeometry(this.length, this.height, this.height)
     }
 
     setMaterial()
@@ -32,10 +33,10 @@ export default class Ballon
 
     setMesh()
     {
-        this.meshBallon = new THREE.Mesh(this.geometry, this.material)
-        this.meshBallon.rotation.x = - Math.PI * 0.5
-        this.meshBallon.castShadow = true
-        this.scene.add(this.meshBallon)
+        this.meshBrick = new THREE.Mesh(this.geometry, this.material)
+        this.meshBrick.rotation.x = - Math.PI * 0.5
+        this.meshBrick.castShadow = true
+        this.scene.add(this.meshBrick)
     }
 
 
@@ -43,7 +44,7 @@ export default class Ballon
 
     setShape()
     {
-        this.shape = new CANNON.Sphere(this.radius)
+        this.shape = new CANNON.Box(new CANNON.Vec3(this.length, this.height, this.height))
 
     }
 
@@ -58,11 +59,9 @@ export default class Ballon
             })
             
         this.main.physics.world.addBody(this.body)
-
-
     }
 
-    createBall()
+    createBrick()
     {
         this.setGeometry()
         this.setMaterial()
@@ -73,9 +72,11 @@ export default class Ballon
         this.body.position = new CANNON.Vec3(this.position)
 
     }
-
+    
     update()
     {
-        this.meshBallon.position.copy(this.body.position)
+        this.meshBrick.position.copy(this.body.position)
+        this.meshBrick.position.y = this.height / 2
+
     }
 }
