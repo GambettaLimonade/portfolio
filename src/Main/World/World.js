@@ -4,6 +4,7 @@ import Floor from "./Floor.js";
 import Soldier from "./Soldier.js";
 import Ballon from './Ballon.js'
 import Bricks from "./Bricks.js";
+import Sky from "./Sky.js";
 
 
 export default class World
@@ -21,12 +22,15 @@ export default class World
         this.resources.on('ready', () =>
         {
             this.floor = new Floor()
+            this.sky = new Sky()
+            console.log(this.sky)
             this.soldier = new Soldier()
             for(var i=0; i<this.ballonsPosition.length; i++)
                 this.ballons.push(new Ballon(this.ballonsPosition[i]))
                 for(var i=0; i<this.bricksPosition.length; i++)
                 this.bricks.push(new Bricks(this.bricksPosition[i]))
             this.environment = new Environment()
+
             
         })
 

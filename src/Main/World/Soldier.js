@@ -27,6 +27,8 @@ export default class Soldier
         //Setup
         this.resource = this.resources.items.soldier
 
+        console.log(this.resource)
+
         this.setModel()
         this.setAnimation()
         this.animation.play = (name) =>
@@ -51,7 +53,7 @@ export default class Soldier
     setModel()
     {
         this.model = this.resource.scene
-        this.model.scale.set(5,5,5)
+        this.model.scale.set(2,2,2)
         this.scene.add(this.model)
 
         this.model.traverse((child) =>
@@ -121,8 +123,8 @@ export default class Soldier
 
 
         //REVOIR CETTE LIGNE AVEC TIPHAINE
-        this.animation.actions.idle.play()
-        
+        //this.animation.actions.idle.play()
+
         if (Object.keys(this.keys).length !== 0)
         {
             this.keys = this.keys || window.event
@@ -133,11 +135,15 @@ export default class Soldier
             if (avancer) this.animation.actions.running.play()
             if (tourner) this.animation.actions.running.play()
 
-            this.model.position.x = this.model.position.x - Math.sin(this.angle) * (avancer * vitesse)
-            this.model.position.z = this.model.position.z - Math.cos(this.angle) * (avancer * vitesse)
+            this.model.position.x = this.model.position.x + Math.sin(this.angle) * (avancer * vitesse)
+            this.model.position.z = this.model.position.z + Math.cos(this.angle) * (avancer * vitesse)
             
             this.model.rotation.y = this.model.rotation.y + rotation * tourner
             this.angle = this.model.rotation.y
+
+            
+            this.camera.instance.position.x = this.model.position.x - Math.sin(this.model.rotation.y) * this.distance
+            this.camera.instance.position.z = this.model.position.z - Math.cos(this.model.rotation.y) * this.distance
         }
 
     }
@@ -165,9 +171,11 @@ export default class Soldier
     {
         this.animation.mixer.update(this.time.delta * 0.001)
         this.moveCharacter(this.keys)
+
+
         this.camera.controls.target.set(this.model.position.x,this.model.position.y,this.model.position.z)
-        this.camera.instance.position.x = this.model.position.x + Math.sin(this.model.rotation.y) * this.distance
-        this.camera.instance.position.z = this.model.position.z + Math.cos(this.model.rotation.y) * this.distance
+        this.camera.controls.maxDistance = 5 * 100;
+        this.camera.controls.minDistance = 20;      
         this.bodyCharacter.position.copy(this.model.position)
 
     }

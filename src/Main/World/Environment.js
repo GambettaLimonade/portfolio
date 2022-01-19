@@ -22,8 +22,11 @@ export default class Environment
         this.sunLight.shadow.camera.top = 200
         this.sunLight.shadow.camera.right = - 200
         this.sunLight.shadow.camera.bottom = - 200
-        var shadowHelper = new THREE.CameraHelper( this.sunLight.shadow.camera );
-        this.scene.add( shadowHelper );
+        
+        //PERMET DE VOIR JUSQU OU LA LUMIERE VA
+        //var shadowHelper = new THREE.CameraHelper( this.sunLight.shadow.camera );
+        //this.scene.add( shadowHelper );
+        
         this.sunLight.position.set(5, 100, 5)
         this.scene.add(this.sunLight)
     }
