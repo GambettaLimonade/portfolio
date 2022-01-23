@@ -1,6 +1,7 @@
 import Main from "../Main";
 import * as THREE from 'three'
 import CANNON from 'cannon'
+import { Raycaster } from "three";
 
 
 export default class Soldier
@@ -17,33 +18,38 @@ export default class Soldier
         this.keys = {}
         this.distance = 100
         this.world = this.main.physics.world
+        this.raycaster = new Raycaster()
 
+        
+        
+        
         //Debug
         if(this.debug.active)
         {
             this.debugFolder = this.debug.ui.addFolder('soldier')
         }
-
+        
         //Setup
         this.resource = this.resources.items.soldier
-
+        
         console.log(this.resource)
-
+        
         this.setModel()
         this.setAnimation()
         this.animation.play = (name) =>
         {
             const newAction = this.animation.actions[name]
             const oldAction = this.animation.actions.current
-
+            
             newAction.reset()
             newAction.play()
             newAction.crossFadeFrom(oldAction, 1)
-
+            
             this.animation.actions.current = newAction
         }
         this.pressKey()
         this.releaseKey()
+        this.onDoubleClick()
 
         this.setShape()
         this.setBody()
@@ -115,13 +121,35 @@ export default class Soldier
         
     }
 
+    onDoubleClick()
+    {
+        document.addEventListener('dblclick', () => 
+        { 
+            this.height =  this.main.sizes.height
+            this.width =  this.main.sizes.width
+            var event = window.event;
+
+            const raycaster = new THREE.Raycaster();
+            const mouse = new THREE.Vector2();
+            mouse.x = ( event.clientX / this.width ) * 2 - 1;
+            mouse.y = - ( event.clientY / this.height ) * 2 + 1;
+
+            raycaster.setFromCamera( mouse, this.camera.instance );
+            const intersects = raycaster.intersectObjects( this.scene.children );
+
+            this.model.position.x = intersects[0].point.x
+            this.model.position.z = intersects[0].point.z
+
+            console.log('position x : ', intersects[0].point.x, ' et z : ', intersects[0].point.z)
+            
+          });
+    }
+
     moveCharacter()
     {
 
         const vitesse = 1;    
         const rotation = Math.PI/60 ;
-
-
         //REVOIR CETTE LIGNE AVEC TIPHAINE
         //this.animation.actions.idle.play()
 
@@ -171,12 +199,15 @@ export default class Soldier
     {
         this.animation.mixer.update(this.time.delta * 0.001)
         this.moveCharacter(this.keys)
+        this.onDoubleClick()
 
 
         this.camera.controls.target.set(this.model.position.x,this.model.position.y,this.model.position.z)
         this.camera.controls.maxDistance = 5 * 100;
         this.camera.controls.minDistance = 20;      
         this.bodyCharacter.position.copy(this.model.position)
+
+
 
     }
 }
