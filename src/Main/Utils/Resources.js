@@ -21,6 +21,7 @@ export default class Resources extends EventEmitter
         this.items = {}
         this.toLoad = this.sources.length
         this.loaded = 0
+        this.sceneReady = false
         this.loadingManager = new THREE.LoadingManager(
             () =>
             {
@@ -29,7 +30,11 @@ export default class Resources extends EventEmitter
                     this.loadingBarElement.classList.add('ended')
                     this.loadingBarElement.style.transform = ''
                 })
+                gsap.delayedCall(2, () => {
+                    this.sceneReady = true
+                })
             },
+
             (itemUrl, itemsLoaded, itemsTotal) =>
             {
                 const progressRatio = itemsLoaded / itemsTotal

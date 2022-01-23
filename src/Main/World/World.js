@@ -1,3 +1,4 @@
+import * as THREE from 'three';
 import Main from "../Main.js";
 import Environment from "./Environment.js";
 import Floor from "./Floor.js";
@@ -6,6 +7,7 @@ import Ballon from './Ballon.js'
 import Bricks from "./Bricks.js";
 import Sky from "./Sky.js";
 import Overlay from "./Overlay.js";
+import Points from './Points.js';
 
 
 export default class World
@@ -21,11 +23,12 @@ export default class World
         this.ballonsPosition = [(-1,-1,-1),(1,1,1),(-2,-2,-2),(2,2,2), (-3,-3,-3),(3,3,3)]
         this.bricksPosition = [(0,0,0)]
 
+
         this.resources.on('ready', () =>
         {
+            this.points = new Points()
             this.floor = new Floor()
             this.sky = new Sky()
-            console.log(this.sky)
             this.soldier = new Soldier()
             for(var i=0; i<this.ballonsPosition.length; i++)
                 this.ballons.push(new Ballon(this.ballonsPosition[i]))
@@ -42,6 +45,11 @@ export default class World
 
     update()
     {
+        if(this.points)
+        {
+            this.points.update()
+        }
+
         if(this.soldier)
         {
             this.soldier.update()
@@ -56,7 +64,8 @@ export default class World
         if(this.bricks)
         {
             for(var brick of this.bricks)
-            brick.update()        }
+            brick.update()        
         }
+    }
     
 }
