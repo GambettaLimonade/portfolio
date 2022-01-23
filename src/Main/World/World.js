@@ -5,6 +5,7 @@ import Soldier from "./Soldier.js";
 import Ballon from './Ballon.js'
 import Bricks from "./Bricks.js";
 import Sky from "./Sky.js";
+import Overlay from "./Overlay.js";
 
 
 export default class World
@@ -13,6 +14,7 @@ export default class World
     {
         this.main = new Main()
         this.scene = this.main.scene
+        this.overlay = new Overlay()
         this.resources = this.main.resources
         this.ballons = []
         this.bricks = []
