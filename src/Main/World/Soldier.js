@@ -123,7 +123,7 @@ export default class Soldier
 
     onDoubleClick()
     {
-        document.addEventListener('dblclick', () => 
+        document.addEventListener('click', () => 
         { 
             this.height =  this.main.sizes.height
             this.width =  this.main.sizes.width
