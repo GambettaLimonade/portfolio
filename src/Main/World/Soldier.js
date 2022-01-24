@@ -49,7 +49,8 @@ export default class Soldier
         }
         this.pressKey()
         this.releaseKey()
-        this.onDoubleClick()
+
+        this.onTouch()
 
         this.setShape()
         this.setBody()
@@ -121,85 +122,37 @@ export default class Soldier
         
     }
 
-
-
-
-
-    onDoubleClick()
-    {
-        document.addEventListener('touchstart', handleTouchStart, false);        
-        document.addEventListener('touchmove', handleTouchMove, false);
-
-        var xDown = null;                                                        
-        var yDown = null;
-
-        function getTouches(evt) {
-        return evt.touches ||             // browser API
-                evt.originalEvent.touches; // jQuery
-        }                                                     
-                                                                                
-        function handleTouchStart(evt) {
-            const firstTouch = getTouches(evt)[0];                                      
-            xDown = firstTouch.clientX;                                      
-            yDown = firstTouch.clientY;                                      
-        };                                                
-                                                                                
-        function handleTouchMove(evt) {
-            if ( ! xDown || ! yDown ) {
-                return;
-            }
-
-            var xUp = evt.touches[0].clientX;                                    
-            var yUp = evt.touches[0].clientY;
-
-            var xDiff = xDown - xUp;
-            var yDiff = yDown - yUp;
-
+    onTouch()
+    {   
+        console.log('onTouch function')
+        screen = document.querySelector(".webgl")
+        screen.addEventListener('touchstart', (e) => 
+        { 
+            this.height =  this.main.sizes.height
+            this.width =  this.main.sizes.width
 
             const raycaster = new THREE.Raycaster();
             const mouse = new THREE.Vector2();
-            mouse.x = xDown;
-            mouse.y = yDown;
+
+            var x = e.touches[0].pageX
+            var y = e.touches[0].pageY
+
+            mouse.x = ( x / this.width ) * 2 - 1;
+            mouse.y = - ( y / this.height ) * 2 + 1;
 
             raycaster.setFromCamera( mouse, this.camera.instance );
             const intersects = raycaster.intersectObjects( this.scene.children );
 
             this.model.position.x = intersects[0].point.x
             this.model.position.z = intersects[0].point.z
-
-            console.log('position x : ', intersects[0].point.x, ' et z : ', intersects[0].point.z)
-
-                                                                                
             
-            /* reset values */
-            xDown = null;
-            yDown = null;                                             
-        };
+          });
 
 
-
-        // window.addEventListener('touchstart ', () => 
-        // { 
-        //     console.log('touch!!!')
-        //     this.height =  this.main.sizes.height
-        //     this.width =  this.main.sizes.width
-        //     var event = window.event;
-
-        //     const raycaster = new THREE.Raycaster();
-        //     const mouse = new THREE.Vector2();
-        //     mouse.x = ( event.clientX / this.width ) * 2 - 1;
-        //     mouse.y = - ( event.clientY / this.height ) * 2 + 1;
-
-        //     raycaster.setFromCamera( mouse, this.camera.instance );
-        //     const intersects = raycaster.intersectObjects( this.scene.children );
-
-        //     this.model.position.x = intersects[0].point.x
-        //     this.model.position.z = intersects[0].point.z
-
-        //     console.log('position x : ', intersects[0].point.x, ' et z : ', intersects[0].point.z)
-            
-        //   });
     }
+
+
+
 
     moveCharacter()
     {
