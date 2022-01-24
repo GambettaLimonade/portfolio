@@ -208,7 +208,6 @@ export default class Soldier
     {
         this.animation.mixer.update(this.time.delta * 0.001)
         this.moveCharacter(this.keys)
-        this.onDoubleClick()
 
 
         this.camera.controls.target.set(this.model.position.x,this.model.position.y,this.model.position.z)
