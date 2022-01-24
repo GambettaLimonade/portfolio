@@ -124,7 +124,7 @@ export default class Soldier
 
     onDoubleClick()
     {
-        document.addEventListener('touchstart ', () => 
+        window.addEventListener('touchstart ', () => 
         { 
             this.height =  this.main.sizes.height
             this.width =  this.main.sizes.width
