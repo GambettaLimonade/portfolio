@@ -61,6 +61,7 @@ export default class Soldier
     {
         this.model = this.resource.scene
         this.model.scale.set(2,2,2)
+        this.model.position.set(1,0,1)
         this.scene.add(this.model)
 
         this.model.traverse((child) =>
@@ -124,27 +125,46 @@ export default class Soldier
 
     onTouch()
     {   
-        console.log('onTouch function')
         screen = document.querySelector(".webgl")
         screen.addEventListener('touchstart', (e) => 
         { 
             this.height =  this.main.sizes.height
             this.width =  this.main.sizes.width
-
+            
             const raycaster = new THREE.Raycaster();
             const mouse = new THREE.Vector2();
-
+            
             var x = e.touches[0].pageX
             var y = e.touches[0].pageY
-
+            
             mouse.x = ( x / this.width ) * 2 - 1;
             mouse.y = - ( y / this.height ) * 2 + 1;
-
+            
             raycaster.setFromCamera( mouse, this.camera.instance );
             const intersects = raycaster.intersectObjects( this.scene.children );
+            
+            var distanceMax = 20;
 
-            this.model.position.x = intersects[0].point.x
-            this.model.position.z = intersects[0].point.z
+            const positionPerso = this.model.position
+            const touchClick = intersects[0].point
+            const distancePerostouchClick =  positionPerso.distanceTo(touchClick)
+
+
+            if (distancePerostouchClick > distanceMax)
+            { 
+                console.log('position model : ', this.model.position)
+                console.log('position click : ', intersects[0].point)
+
+                this.model.position.x = (this.model.position.x * (2/3) + intersects[0].point.x * (1/3))
+                this.model.position.z = (this.model.position.z * (2/3) + intersects[0].point.z * (1/3))
+            
+            }
+            else
+            {
+                this.model.position.x = intersects[0].point.x
+                this.model.position.z = intersects[0].point.z
+            }
+            
             
           });
 
@@ -208,7 +228,6 @@ export default class Soldier
     {
         this.animation.mixer.update(this.time.delta * 0.001)
         this.moveCharacter(this.keys)
-
 
         this.camera.controls.target.set(this.model.position.x,this.model.position.y,this.model.position.z)
         this.camera.controls.maxDistance = 5 * 100;

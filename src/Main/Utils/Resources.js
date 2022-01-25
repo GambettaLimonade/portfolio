@@ -17,7 +17,6 @@ export default class Resources extends EventEmitter
 
         // Set up
         this.loadingBarElement = document.querySelector('.loading-bar')
-        console.log(this.loadingBarElement)
         this.items = {}
         this.toLoad = this.sources.length
         this.loaded = 0
