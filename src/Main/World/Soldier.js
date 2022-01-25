@@ -32,7 +32,6 @@ export default class Soldier
         //Setup
         this.resource = this.resources.items.soldier
         
-        console.log(this.resource)
         
         this.setModel()
         this.setAnimation()
@@ -127,46 +126,55 @@ export default class Soldier
     {   
         screen = document.querySelector(".webgl")
         screen.addEventListener('touchstart', (e) => 
-        { 
-            this.height =  this.main.sizes.height
-            this.width =  this.main.sizes.width
-            
-            const raycaster = new THREE.Raycaster();
-            const mouse = new THREE.Vector2();
-            
-            var x = e.touches[0].pageX
-            var y = e.touches[0].pageY
-            
-            mouse.x = ( x / this.width ) * 2 - 1;
-            mouse.y = - ( y / this.height ) * 2 + 1;
-            
-            raycaster.setFromCamera( mouse, this.camera.instance );
-            const intersects = raycaster.intersectObjects( this.scene.children );
-            
-            var distanceMax = 20;
-
-            const positionPerso = this.model.position
-            const touchClick = intersects[0].point
-            const distancePerostouchClick =  positionPerso.distanceTo(touchClick)
-
-
-            if (distancePerostouchClick > distanceMax)
             { 
-                console.log('position model : ', this.model.position)
-                console.log('position click : ', intersects[0].point)
+                this.height =  this.main.sizes.height
+                this.width =  this.main.sizes.width
+                
+                const raycaster = new THREE.Raycaster();
+                const mouse = new THREE.Vector2();
+                
+                var x = e.touches[0].pageX
+                var y = e.touches[0].pageY
+                
+                mouse.x = ( x / this.width ) * 2 - 1;
+                mouse.y = - ( y / this.height ) * 2 + 1;
+                
+                raycaster.setFromCamera( mouse, this.camera.instance );
+                const intersects = raycaster.intersectObjects( this.scene.children );
+                
+                var distanceMax = 20;
 
-                this.model.position.x = (this.model.position.x * (2/3) + intersects[0].point.x * (1/3))
-                this.model.position.z = (this.model.position.z * (2/3) + intersects[0].point.z * (1/3))
-            
+                const positionPerso = this.model.position
+                const touchClick = intersects[0].point
+                const distancePerostouchClick =  positionPerso.distanceTo(touchClick)
+
+
+                if (distancePerostouchClick > distanceMax)
+                { 
+
+                    this.model.position.x = (this.model.position.x * (7/10) + intersects[0].point.x * (3/10))
+                    this.model.position.z = (this.model.position.z * (7/10) + intersects[0].point.z * (3/10))
+                    this.animation.actions.running.play()
+                
+                }
+                else
+                {
+                    this.model.position.x = intersects[0].point.x
+                    this.model.position.z = intersects[0].point.z
+                }
+                
+                // this.camera.instance.position.x = this.model.position.x - Math.sin(this.model.rotation.y) * this.distance
+                // this.camera.instance.position.z = this.model.position.z - Math.cos(this.model.rotation.y) * this.distance
             }
-            else
+        );
+
+        screen.addEventListener('touchend', (e) => 
             {
-                this.model.position.x = intersects[0].point.x
-                this.model.position.z = intersects[0].point.z
+                // console.log(e)
+                // this.animation.actions.running.stop()
+
             }
-            
-            
-          });
+        );
 
 
     }
@@ -228,6 +236,7 @@ export default class Soldier
     {
         this.animation.mixer.update(this.time.delta * 0.001)
         this.moveCharacter(this.keys)
+
 
         this.camera.controls.target.set(this.model.position.x,this.model.position.y,this.model.position.z)
         this.camera.controls.maxDistance = 5 * 100;
