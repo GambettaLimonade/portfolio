@@ -15,14 +15,19 @@ export default class Soldier
         this.debug = this.main.debug
         this.camera = this.main.camera
         this.angle = 0
-        this.keys = {}
+        this.keys = {}      
         this.distance = 100
         this.world = this.main.physics.world
         this.raycaster = new Raycaster()
         this.intersects; 
+        this.movements = [];
+        this.playerSpeed = 1;
+        this.hasRotated = false
 
-
-        
+          // Create a rotation point.
+        this.rotationPoint = new THREE.Object3D();
+        this.rotationPoint.position.set( 0, 0, 0 );
+        this.scene.add(this.rotationPoint );
         
         //Debug
         if(this.debug.active)
@@ -125,92 +130,114 @@ export default class Soldier
 
     onTouch()
     {   
-        screen = document.querySelector(".webgl")
-        screen.addEventListener('touchstart', (e) => 
+        document.addEventListener('touchstart', (e) => 
         { 
-                this.height =  this.main.sizes.height
-                this.width =  this.main.sizes.width
-                
-                this.raycaster = new THREE.Raycaster();
-                const mouse = new THREE.Vector2();
-                
-                var x = e.touches[0].pageX
-                var y = e.touches[0].pageY
-                
-                mouse.x = ( x / this.width ) * 2 - 1;
-                mouse.y = - ( y / this.height ) * 2 + 1;
-                
-                this.raycaster.setFromCamera( mouse, this.camera.instance );
-                this.intersects = this.raycaster.intersectObjects( this.scene.children );
+            this.movements = [];
+            this.animation.actions.running.play()
+            this.height =  this.main.sizes.height
+            this.width =  this.main.sizes.width
+            
+            const mouse = new THREE.Vector2();
+            
+            var x = e.touches[0].pageX
+            var y = e.touches[0].pageY
+            
+            mouse.x = ( x / this.width ) * 2 - 1;
+            mouse.y = - ( y / this.height ) * 2 + 1;
+            
+            this.raycaster.setFromCamera(mouse, this.camera.instance);
+            const intersects = this.raycaster.intersectObjects(this.scene.children);
 
-                console.log('on a touché')
-
-                var moveDistance = 5;
- 
-                // Translate over to the position.
-                var posX = this.model.position.x;
-                var posZ = this.model.position.z;
-                var newPosX = this.intersects[0].point.x;
-                var newPosZ = this.intersects[0].point.z;
-             
-                // Set a multiplier just in case we need negative values.
-                var multiplierX = 1;
-                var multiplierZ = 1;
-             
-                // Detect the distance between the current pos and target.
-                var diffX = Math.abs( posX - newPosX );
-                var diffZ = Math.abs( posZ - newPosZ );
-                var distance = Math.sqrt( diffX * diffX + diffZ * diffZ );
-             
-                // Use negative multipliers if necessary.
-                if (posX > newPosX) {
-                  multiplierX = -1;
-                }
-             
-                if (posZ > newPosZ) {
-                  multiplierZ = -1;
-                }
-             
-                // Update the main position.
-                this.model.position.x = this.model.position.x + ( moveDistance * ( diffX / distance )) * multiplierX;
-                this.model.position.z = this.model.position.z + ( moveDistance * ( diffZ / distance )) * multiplierZ;
-             
-                // If the position is close we can call the movement complete.
-                if (
-                        ( Math.floor( this.model.position.x ) <= Math.floor( newPosX ) + 1.5 && 
-                        Math.floor( this.model.position.x ) >= Math.floor( newPosX ) - 1.5 ) &&
-                        ( Math.floor( this.model.position.z ) <= Math.floor( newPosZ ) + 1.5 && 
-                        Math.floor( this.model.position.z ) >= Math.floor( newPosZ ) - 1.5 )
-                    )
-                    {
-                        this.model.position.x = Math.floor( this.model.position.x );
-                        this.model.position.z = Math.floor( this.model.position.z );
-                    }
-
-
-                console.log('on a coulé')
-
-
-
-
-                // this.model.position.x = this.intersects[0].point.x
-                // this.model.position.z = this.intersects[0].point.z
-
-                // this.camera.instance.position.x = this.model.position.x - Math.sin(this.model.rotation.y) * this.distance
-                // this.camera.instance.position.z = this.model.position.z - Math.cos(this.model.rotation.y) * this.distance
-            }
-        );
-
-        screen.addEventListener('touchend', (e) => 
-            {
-                // console.log(e)
-                // this.animation.actions.running.stop()
+            
+            if (intersects.length > 0 ) {
+                this.movements.push(intersects[ 0 ].point);
+              }
 
             }
         );
+
+        // document.addEventListener('touchend', (e) => 
+        //     {
+        //         console.log(e)
+        //         this.animation.actions.running.stop()
+
+        //     }
+        // );
 
 
     }
+
+    stopMovement() {
+        this.movements = [];
+        window.setTimeout(() => {
+            this.animation.actions.running.stop()
+        }, 100)
+        this.hasRotated = false
+    }
+      
+
+    move( location, destination, speed = this.playerSpeed ) {
+        var moveDistance = speed;
+        // Translate over to the position.
+        var posX = location.position.x;
+        var posZ = location.position.z;
+        var newPosX = destination.x;
+        var newPosZ = destination.z;
+    
+        // Set a multiplier just in case we need negative values.
+        var multiplierX = 1;
+        var multiplierZ = 1;
+        
+        // Detect the distance between the current pos and target.
+        var diffX = Math.abs( posX - newPosX );
+        var diffZ = Math.abs( posZ - newPosZ );
+        var distance = Math.sqrt( diffX * diffX + diffZ * diffZ );
+        
+        // Use negative multipliers if necessary.
+        if (posX > newPosX) {
+            multiplierX = -1;
+        }
+    
+        if (posZ > newPosZ) {
+            multiplierZ = -1;
+        }
+    
+        // Update the main position.
+        location.position.x = location.position.x + ( moveDistance * ( diffX / distance )) * multiplierX;
+        location.position.z = location.position.z + ( moveDistance * ( diffZ / distance )) * multiplierZ;
+        const vecteur = {
+            x: newPosX - posX,
+            y: newPosZ - posZ
+        }
+
+        let theta = Math.atan(vecteur.y / vecteur.x)
+        // console.log("vecteur", vecteur)
+        console.log("theta", theta * (180 / Math.PI))
+        //theta = 90
+        if (!this.hasRotated)
+        {
+            location.rotation.y = theta + Math.PI/2 // * (Math.PI / 180)
+            this.hasRotated = true
+            console.log("ROTATION", location.rotation.y)        
+        }
+
+        const positionOffset = 5
+        // If the position is close we can call the movement complete.
+        if (( Math.floor( location.position.x ) <= Math.floor( newPosX ) + positionOffset && 
+            Math.floor( location.position.x ) >= Math.floor( newPosX ) - positionOffset ) &&
+            ( Math.floor( location.position.z ) <= Math.floor( newPosZ ) + positionOffset && 
+            Math.floor( location.position.z ) >= Math.floor( newPosZ ) - positionOffset ))
+        {
+            location.position.x = Math.floor( location.position.x );
+            location.position.z = Math.floor( location.position.z );
+            
+        // Reset any movements.
+        this.stopMovement();
+        
+        // Maybe move should return a boolean. True if completed, false if not. 
+        }
+  }
+  
 
     moveCharacter()
     {
@@ -236,9 +263,17 @@ export default class Soldier
             this.model.rotation.y = this.model.rotation.y + rotation * tourner
             this.angle = this.model.rotation.y
 
-            
+
+            this.camera.instance.position.x = this.model.position.x - Math.sin(this.model.rotation.y) * this.distance
+            this.camera.instance.position.z = this.model.position.z - Math.cos(this.model.rotation.y) * this.distance
+            this.camera.controls.target.set(this.model.position.x,this.model.position.y,this.model.position.z)
+            this.camera.controls.maxDistance = 5 * 100;
+            this.camera.controls.minDistance = 20;
+
 
         }
+
+
 
     }
 
@@ -259,21 +294,18 @@ export default class Soldier
         this.main.physics.world.addBody(this.bodyCharacter)
     }
 
-
-
-    
-
     update()
     {
         this.animation.mixer.update(this.time.delta * 0.001)
         this.moveCharacter(this.keys)
-  
 
-        this.camera.instance.position.x = this.model.position.x - Math.sin(this.model.rotation.y) * this.distance
-        this.camera.instance.position.z = this.model.position.z - Math.cos(this.model.rotation.y) * this.distance
-        this.camera.controls.target.set(this.model.position.x,this.model.position.y,this.model.position.z)
-        this.camera.controls.maxDistance = 5 * 100;
-        this.camera.controls.minDistance = 20;      
+
+        // If any movement was added, run it!
+        if (this.movements.length > 0) {    
+            this.move(this.model, this.movements[ 0 ]);
+        }
+
+      
         this.bodyCharacter.position.copy(this.model.position)
 
 
