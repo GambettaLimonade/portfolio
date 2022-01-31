@@ -212,13 +212,14 @@ export default class Soldier
 
         let theta = Math.atan(vecteur.y / vecteur.x)
         // console.log("vecteur", vecteur)
-        console.log("theta", theta * (180 / Math.PI))
+        console.log('position : ', newPosX, newPosZ)
+        console.log("theta : ", (theta * 180 / Math.PI) - 90 )
+
         //theta = 90
         if (!this.hasRotated)
         {
-            location.rotation.y = theta + Math.PI/2 // * (Math.PI / 180)
+            location.rotation.y = (theta * 180 / Math.PI) - 90 // * (Math.PI / 180)
             this.hasRotated = true
-            console.log("ROTATION", location.rotation.y)        
         }
 
         const positionOffset = 5
