@@ -22,7 +22,6 @@ export default class Soldier
         this.intersects; 
         this.movements = [];
         this.playerSpeed = 1;
-        this.hasRotated = false
 
           // Create a rotation point.
         this.rotationPoint = new THREE.Object3D();
@@ -148,7 +147,8 @@ export default class Soldier
             this.raycaster.setFromCamera(mouse, this.camera.instance);
             const intersects = this.raycaster.intersectObjects(this.scene.children);
 
-            
+            this.direction = new THREE.Vector3(intersects[ 0 ].point.x, 0, intersects[ 0 ].point.z)
+
             if (intersects.length > 0 ) {
                 this.movements.push(intersects[ 0 ].point);
               }
@@ -205,22 +205,14 @@ export default class Soldier
         // Update the main position.
         location.position.x = location.position.x + ( moveDistance * ( diffX / distance )) * multiplierX;
         location.position.z = location.position.z + ( moveDistance * ( diffZ / distance )) * multiplierZ;
-        const vecteur = {
-            x: newPosX - posX,
-            y: newPosZ - posZ
-        }
 
-        let theta = Math.atan(vecteur.y / vecteur.x)
-        // console.log("vecteur", vecteur)
-        console.log('position : ', newPosX, newPosZ)
-        console.log("theta : ", (theta * 180 / Math.PI) - 90 )
+
+        //POINT C
+        const xC = this.model.position.x + Math.sin(this.model.rotation.y) 
+        const zC = this.model.position.z + Math.cos(this.model.rotation.y) 
 
         //theta = 90
-        if (!this.hasRotated)
-        {
-            location.rotation.y = (theta * 180 / Math.PI) - 90 // * (Math.PI / 180)
-            this.hasRotated = true
-        }
+
 
         const positionOffset = 5
         // If the position is close we can call the movement complete.
@@ -300,9 +292,9 @@ export default class Soldier
         this.animation.mixer.update(this.time.delta * 0.001)
         this.moveCharacter(this.keys)
 
-
         // If any movement was added, run it!
         if (this.movements.length > 0) {    
+            this.model.lookAt(this.direction)
             this.move(this.model, this.movements[ 0 ]);
         }
 
