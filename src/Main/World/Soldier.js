@@ -22,22 +22,14 @@ export default class Soldier
         this.intersects; 
         this.movements = [];
         this.playerSpeed = 1;
-
-          // Create a rotation point.
-        this.rotationPoint = new THREE.Object3D();
-        this.rotationPoint.position.set( 0, 0, 0 );
-        this.scene.add(this.rotationPoint );
+        this.resource = this.resources.items.soldier
         
         //Debug
         if(this.debug.active)
         {
             this.debugFolder = this.debug.ui.addFolder('soldier')
         }
-        
-        //Setup
-        this.resource = this.resources.items.soldier
-        
-        
+           
         this.setModel()
         this.setAnimation()
         this.animation.play = (name) =>
@@ -51,15 +43,18 @@ export default class Soldier
             
             this.animation.actions.current = newAction
         }
+
         this.pressKey()
         this.releaseKey()
-
         this.onTouch()
 
         this.setShape()
         this.setBody()
-
     }
+
+    /**
+     * CREATE MODEL AND PHYSICS PART
+     */
 
     setModel()
     {
@@ -69,12 +64,13 @@ export default class Soldier
         this.scene.add(this.model)
 
         this.model.traverse((child) =>
-        {
-            if(child instanceof THREE.Mesh)
             {
-                child.castShadow = true
+                if(child instanceof THREE.Mesh)
+                {
+                    child.castShadow = true
+                }
             }
-        })
+        )
     }
 
     setAnimation()
@@ -94,10 +90,10 @@ export default class Soldier
         //Debug
         if(this.debug.active)
         {
-            const debugObject = {
+            const debugObject = 
+            {
                 playIdle : () => { this.animation.play('idle')},
                 playRunning : () => { this.animation.play('running')}
-
             }
 
             this.debugFolder.add(debugObject, 'playIdle')
@@ -106,26 +102,29 @@ export default class Soldier
 
     }
 
-    pressKey()
+    setShape()
     {
-        document.addEventListener('keydown', (event) => 
-        {
-            this.keys[event.key] = true;
-        }, false);
+        this.shapeCharacter = new CANNON.Cylinder(2,2, 18, 10)
     }
 
-    releaseKey()
+    setBody()
     {
-        
-        document.addEventListener('keyup', (event) => 
-        {
-                delete this.keys[event.key];
-                this.animation.actions.running.stop();
-                this.animation.actions.idle.stop();
-            }, false
-        );   
-        
+        this.bodyCharacter = new CANNON.Body(
+                {
+                    mass:0,
+                    position: new CANNON.Vec3(0,0,0),
+                    shape:this.shapeCharacter,
+                    material:this.world.defaultMaterial
+                }
+            )
+        this.bodyCharacter.quaternion.setFromAxisAngle(new CANNON.Vec3(-1, 0, 0), Math.PI * 0.5)
+        this.main.physics.world.addBody(this.bodyCharacter)
     }
+
+
+    /**
+     * MOVING WITH FINGERS PART
+     */
 
     onTouch()
     {   
@@ -155,19 +154,9 @@ export default class Soldier
 
             }
         );
-
-        // document.addEventListener('touchend', (e) => 
-        //     {
-        //         console.log(e)
-        //         this.animation.actions.running.stop()
-
-        //     }
-        // );
-
-
     }
 
-    stopMovement() {
+    stopMovementFinger() {
         this.movements = [];
         window.setTimeout(() => {
             this.animation.actions.running.stop()
@@ -176,9 +165,9 @@ export default class Soldier
     }
       
 
-    move( location, destination, speed = this.playerSpeed ) {
+    moveModelFinger( location, destination, speed = this.playerSpeed )
+    {
         var moveDistance = speed;
-        // Translate over to the position.
         var posX = location.position.x;
         var posZ = location.position.z;
         var newPosX = destination.x;
@@ -194,25 +183,19 @@ export default class Soldier
         var distance = Math.sqrt( diffX * diffX + diffZ * diffZ );
         
         // Use negative multipliers if necessary.
-        if (posX > newPosX) {
+        if (posX > newPosX)
+        {
             multiplierX = -1;
         }
     
-        if (posZ > newPosZ) {
+        if (posZ > newPosZ)
+        {
             multiplierZ = -1;
         }
     
         // Update the main position.
         location.position.x = location.position.x + ( moveDistance * ( diffX / distance )) * multiplierX;
         location.position.z = location.position.z + ( moveDistance * ( diffZ / distance )) * multiplierZ;
-
-
-        //POINT C
-        const xC = this.model.position.x + Math.sin(this.model.rotation.y) 
-        const zC = this.model.position.z + Math.cos(this.model.rotation.y) 
-
-        //theta = 90
-
 
         const positionOffset = 5
         // If the position is close we can call the movement complete.
@@ -223,22 +206,42 @@ export default class Soldier
         {
             location.position.x = Math.floor( location.position.x );
             location.position.z = Math.floor( location.position.z );
-            
-        // Reset any movements.
-        this.stopMovement();
-        
-        // Maybe move should return a boolean. True if completed, false if not. 
+            // Reset any movements.
+            this.stopMovementFinger();
         }
-  }
-  
+    }
 
-    moveCharacter()
+
+    /**
+     * MOVING WITH ARROW PART
+     */
+
+    pressKey()
+    {
+        document.addEventListener('keydown', (event) => 
+        {
+            this.keys[event.key] = true;
+        }, false);
+    }
+
+    releaseKey()
+    {
+        
+        document.addEventListener('keyup', (event) => 
+        {
+                delete this.keys[event.key];
+                this.animation.actions.running.stop();
+                this.animation.actions.idle.stop();
+            }, false
+        );   
+        
+    }
+
+    moveModelArrow()
     {
 
         const vitesse = 1;    
         const rotation = Math.PI/60 ;
-        //REVOIR CETTE LIGNE AVEC TIPHAINE
-        //this.animation.actions.idle.play()
 
         if (Object.keys(this.keys).length !== 0)
         {
@@ -265,43 +268,25 @@ export default class Soldier
 
 
         }
-
-
-
     }
+    
 
-    setShape()
-    {
-        this.shapeCharacter = new CANNON.Cylinder(2,2, 18, 10)
-    }
-
-    setBody()
-    {
-        this.bodyCharacter = new CANNON.Body({
-                mass:0,
-                position: new CANNON.Vec3(0,0,0),
-                shape:this.shapeCharacter,
-                material:this.world.defaultMaterial
-            })
-        this.bodyCharacter.quaternion.setFromAxisAngle(new CANNON.Vec3(-1, 0, 0), Math.PI * 0.5)
-        this.main.physics.world.addBody(this.bodyCharacter)
-    }
+    /**
+     * UPDATE PART
+     */
 
     update()
     {
         this.animation.mixer.update(this.time.delta * 0.001)
-        this.moveCharacter(this.keys)
+        this.moveModelArrow(this.keys)
 
-        // If any movement was added, run it!
-        if (this.movements.length > 0) {    
+        if (this.movements.length > 0)
+        {    
             this.model.lookAt(this.direction)
-            this.move(this.model, this.movements[ 0 ]);
+            this.moveModelFinger(this.model, this.movements[ 0 ]);
         }
 
-      
         this.bodyCharacter.position.copy(this.model.position)
-
-
 
     }
 }
