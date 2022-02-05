@@ -9,7 +9,7 @@ export default class Ballon
         this.main = new Main()
         this.scene = this.main.scene
         this.resources = this.main.resources
-        this.radius = 3
+        this.radius = 1
         this.position = position
         this.createBall()
         

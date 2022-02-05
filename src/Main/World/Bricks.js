@@ -16,6 +16,10 @@ export default class Ballon
         
     }
 
+
+
+
+
     setGeometry()
     {
         this.geometry = new THREE.BoxBufferGeometry(this.length, this.height, this.height)

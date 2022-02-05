@@ -1,0 +1,11 @@
+Model Information:
+* title:	Coffee Table Low-poly 3D model
+* source:	https://sketchfab.com/3d-models/coffee-table-low-poly-3d-model-7852c5b3c2df449d86e6ff64d9b48bd8
+* author:	Andrew.Maria (https://sketchfab.com/Andrew.Maria)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Coffee Table Low-poly 3D model" (https://sketchfab.com/3d-models/coffee-table-low-poly-3d-model-7852c5b3c2df449d86e6ff64d9b48bd8) by Andrew.Maria (https://sketchfab.com/Andrew.Maria) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

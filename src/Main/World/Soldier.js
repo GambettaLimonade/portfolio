@@ -1,7 +1,7 @@
 import Main from "../Main";
 import * as THREE from 'three'
 import CANNON from 'cannon'
-import { MathUtils, Raycaster } from "three";
+import { Raycaster } from "three";
 
 
 export default class Soldier
@@ -23,7 +23,8 @@ export default class Soldier
         this.movements = [];
         this.playerSpeed = 1;
         this.resource = this.resources.items.soldier
-        
+        this.temp = new THREE.Vector3;
+
         //Debug
         if(this.debug.active)
         {
@@ -32,18 +33,7 @@ export default class Soldier
            
         this.setModel()
         this.setAnimation()
-        this.animation.play = (name) =>
-        {
-            const newAction = this.animation.actions[name]
-            const oldAction = this.animation.actions.current
-            
-            newAction.reset()
-            newAction.play()
-            newAction.crossFadeFrom(oldAction, 1)
-            
-            this.animation.actions.current = newAction
-        }
-
+       
         this.pressKey()
         this.releaseKey()
         this.onTouch()
@@ -60,7 +50,10 @@ export default class Soldier
     {
         this.model = this.resource.scene
         this.model.scale.set(2,2,2)
-        this.model.position.set(1,0,1)
+        this.model.position.set(0,0,0)
+        this.behind = new THREE.Object3D
+        this.behind.position.set(this.model.position.x, this.model.position.y+10, this.model.position.z - 50)
+        this.model.add(this.behind)
         this.scene.add(this.model)
 
         this.model.traverse((child) =>
@@ -80,23 +73,22 @@ export default class Soldier
         
         this.animation.actions = {}
 
-        this.animation.actions.idle = this.animation.mixer.clipAction(this.resource.animations[0])
+        this.animation.actions.stand = this.animation.mixer.clipAction(this.resource.animations[0])
         this.animation.actions.running = this.animation.mixer.clipAction(this.resource.animations[1])
-
-        this.animation.actions.current = this.animation.actions.idle
-        this.animation.actions.current.play()
-
+        
+        this.animation.actions.stand.play()
+        
 
         //Debug
         if(this.debug.active)
         {
             const debugObject = 
             {
-                playIdle : () => { this.animation.play('idle')},
+                playstand : () => { this.animation.play('idle')},
                 playRunning : () => { this.animation.play('running')}
             }
 
-            this.debugFolder.add(debugObject, 'playIdle')
+            this.debugFolder.add(debugObject, 'playidle')
             this.debugFolder.add(debugObject, 'playRunning')
         }
 
@@ -165,7 +157,7 @@ export default class Soldier
     }
       
 
-    moveModelFinger( location, destination, speed = this.playerSpeed )
+    moveModelFinger(location, destination, speed = this.playerSpeed )
     {
         var moveDistance = speed;
         var posX = location.position.x;
@@ -197,8 +189,9 @@ export default class Soldier
         location.position.x = location.position.x + ( moveDistance * ( diffX / distance )) * multiplierX;
         location.position.z = location.position.z + ( moveDistance * ( diffZ / distance )) * multiplierZ;
 
-        const positionOffset = 5
+       
         // If the position is close we can call the movement complete.
+        const positionOffset = 5
         if (( Math.floor( location.position.x ) <= Math.floor( newPosX ) + positionOffset && 
             Math.floor( location.position.x ) >= Math.floor( newPosX ) - positionOffset ) &&
             ( Math.floor( location.position.z ) <= Math.floor( newPosZ ) + positionOffset && 
@@ -231,7 +224,6 @@ export default class Soldier
         {
                 delete this.keys[event.key];
                 this.animation.actions.running.stop();
-                this.animation.actions.idle.stop();
             }, false
         );   
         
@@ -240,33 +232,25 @@ export default class Soldier
     moveModelArrow()
     {
 
+        // console.log(this.model.position)
+
         const vitesse = 1;    
         const rotation = Math.PI/60 ;
-
+        
         if (Object.keys(this.keys).length !== 0)
         {
             this.keys = this.keys || window.event
             
             var avancer = this.keys['ArrowUp'] ? 1 : 0;
             var tourner = (this.keys['ArrowLeft']) ? 1 : (this.keys['ArrowRight']) ? -1 : 0;
-
-            if (avancer) this.animation.actions.running.play()
+            
+            if (avancer) this.animation.actions.running.play(); 
             if (tourner) this.animation.actions.running.play()
-
             this.model.position.x = this.model.position.x + Math.sin(this.angle) * (avancer * vitesse)
             this.model.position.z = this.model.position.z + Math.cos(this.angle) * (avancer * vitesse)
             
             this.model.rotation.y = this.model.rotation.y + rotation * tourner
             this.angle = this.model.rotation.y
-
-
-            this.camera.instance.position.x = this.model.position.x - Math.sin(this.model.rotation.y) * this.distance
-            this.camera.instance.position.z = this.model.position.z - Math.cos(this.model.rotation.y) * this.distance
-            this.camera.controls.target.set(this.model.position.x,this.model.position.y,this.model.position.z)
-            this.camera.controls.maxDistance = 5 * 100;
-            this.camera.controls.minDistance = 20;
-
-
         }
     }
     
@@ -279,13 +263,16 @@ export default class Soldier
     {
         this.animation.mixer.update(this.time.delta * 0.001)
         this.moveModelArrow(this.keys)
-
         if (this.movements.length > 0)
         {    
             this.model.lookAt(this.direction)
             this.moveModelFinger(this.model, this.movements[ 0 ]);
         }
-
+        
+        this.temp.setFromMatrixPosition(this.behind.matrixWorld);
+        
+        this.camera.instance.position.lerp(this.temp, 0.2);
+        this.camera.controls.target.set(this.model.position.x,this.model.position.y,this.model.position.z)    
         this.bodyCharacter.position.copy(this.model.position)
 
     }
