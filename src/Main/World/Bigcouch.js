@@ -50,7 +50,6 @@ export default class Bigcouch
         
         
 
-        console.log(this.model)
 
 
         this.model.material = new THREE.MeshStandardMaterial({ color: 0xff4400 })
@@ -64,9 +63,8 @@ export default class Bigcouch
                 if(child instanceof THREE.Mesh)
                 {
                     child.castShadow = true
-                    const material = new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: 0.9, roughness: 0.5, name: 'white' })
-                    child.material = material;
-                    child.material.map = null
+                    const material = new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: 0.01, roughness: 0.5, name: 'white' })
+                    // child.material.map = null
                 }
             }
         )

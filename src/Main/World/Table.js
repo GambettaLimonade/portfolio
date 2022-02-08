@@ -46,14 +46,7 @@ export default class Table
         this.model = this.resource.scene
         this.model.scale.set(.1,.1,.1)
         this.model.position.set(0,0,0)
-        
-        
-        this.model.material = new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: 0.9, roughness: 0.5, name: 'white' })
-        this.model.material.needsUpdate = true;
 
-
-        this.model.material = new THREE.MeshStandardMaterial({ color: 0xff4400 })
-        this.model.material.needsUpdate = true;
 
 
         this.scene.add(this.model)
@@ -63,8 +56,8 @@ export default class Table
                 if(child instanceof THREE.Mesh)
                 {
                     child.castShadow = true
-                    child.material.color.set( 0xffffff );
-                    child.material.alphaTest = 0.5;
+                    const material = new THREE.MeshStandardMaterial({ color: 0x976C42, metalness: 0.01, roughness: 0.5, name: 'white' })
+                    child.material = material;
 
                 }
             }
@@ -106,8 +99,10 @@ export default class Table
     update()
     {
         this.model.position.copy(this.body.position)
-        this.model.position.y = this.height / 2
+        this.model.position.y = 0
         this.model.rotation.y = 0
+
+
 
     }
 }

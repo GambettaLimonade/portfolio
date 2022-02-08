@@ -45,14 +45,6 @@ export default class Couch
         this.model.scale.set(.1,.1,.1)
         this.model.position.set(0,0,0)
         
-        
-        this.model.material = new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: 0.9, roughness: 0.5, name: 'white' })
-        this.model.material.needsUpdate = true;
-
-
-
-        this.model.material = new THREE.MeshStandardMaterial({ color: 0xff4400 })
-        this.model.material.needsUpdate = true;
 
 
         this.scene.add(this.model)
@@ -62,9 +54,8 @@ export default class Couch
                 if(child instanceof THREE.Mesh)
                 {
                     child.castShadow = true
-                    const material = new THREE.MeshStandardMaterial({ color: 0xffffff, metalness: 0.9, roughness: 0.5, name: 'white' })
+                    const material = new THREE.MeshStandardMaterial({ color: 0xE0D0AB})
                     child.material = material;
-                    child.material.map = null
                 }
             }
         )
@@ -105,7 +96,7 @@ export default class Couch
     update()
     {
         this.model.position.copy(this.body.position)
-        this.model.position.y = this.height / 2
+        this.model.position.y = 0
         this.model.rotation.y = Math.PI / 2
 
     }

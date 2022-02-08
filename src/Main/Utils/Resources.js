@@ -73,6 +73,8 @@ export default class Resources extends EventEmitter
                     source.path,
                     (file =>
                         {
+                            file.encoding = THREE.sRGBEncoding;        
+                            file.flipY = false;
                             this.sourceLoaded(source, file)
                         })
                 )

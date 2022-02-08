@@ -11,8 +11,10 @@ export default class Tv
         this.resources = this.main.resources
         this.length = 10
         this.height = 5
-        this.resource = this.resources.items.tv
+        this.resource = this.resources.items.retro_tv
         this.position = (100, 0, 50)
+
+        this.images = [this.resources.items.maths78]
 
         this.createBrick()
         // this.helper()
@@ -43,7 +45,7 @@ export default class Tv
     setModel()
     {
         this.model = this.resource.scene
-        this.model.scale.set(20,20,20)
+        this.model.scale.set(10,10,10)
         this.model.position.set(0,0,0)
         
         
@@ -64,11 +66,24 @@ export default class Tv
                 {
                     child.castShadow = true
                     child.material.color.set( 0xffffff );
+                    
+                    if (child.name == "Plane018_2")
+                    {
+                        this.screen = child
+                        
+
+                    }
                 }
             }
         )
+
+        // console.log(this.model)
     }
 
+    changeColor()
+    {
+        this.screen.material.map = this.images[0]
+    }
 
     setShape()
     {
@@ -104,7 +119,7 @@ export default class Tv
     update()
     {
         this.model.position.copy(this.body.position)
-        this.model.position.y = this.height / 2
+        this.model.position.y = 25
         this.model.rotation.y = Math.PI
 
     }
