@@ -40,5 +40,12 @@ export default[
         name : 'maths78',
         type : 'texture',
         path : 'images/maths78.png'
+
+    },
+
+    {
+        name : 'ccd',
+        type : 'texture',
+        path : 'images/ccd.png'
     }
  ]

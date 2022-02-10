@@ -14,9 +14,11 @@ export default class Tv
         this.resource = this.resources.items.retro_tv
         this.position = (100, 0, 50)
 
-        this.images = [this.resources.items.maths78]
+        this.images = [this.resources.items.maths78, this.resources.items.ccd]
+        this.index = 0
 
         this.createBrick()
+        this.changeColor()
         // this.helper()
         
     }
@@ -81,9 +83,21 @@ export default class Tv
     }
 
     changeColor()
-    {
-        this.screen.material.map = this.images[0]
+    {   
+        this.index = 0
+        setInterval(() => { 
+
+                this.index = (this.index + 1) % this.images.length
+                this.screen.material.map = this.images[this.index]
+
+                console.log('index : ', this.index)
+
+
+        }, 3000);
+
     }
+
+
 
     setShape()
     {
