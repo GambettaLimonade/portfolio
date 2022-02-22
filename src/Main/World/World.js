@@ -12,7 +12,7 @@ import Points from './Points.js';
 import Floor1 from './Floor1.js';
 import Floor2 from './Floor2.js';
 import Table from './Table.js';
-import Bigcouch from './Bigcouch.js';
+// import Bigcouch from './Bigcouch.js';
 import Tv from './Tv.js';
 
 
@@ -41,7 +41,7 @@ export default class World
             this.soldier = new Soldier()
             this.couch = new Couch()
             this.table = new Table()
-            this.bigcouch = new Bigcouch()
+            // this.bigcouch = new Bigcouch()
             this.tv = new Tv()
             // this.floor1 = new Floor1()
             this.floor2 = new Floor2()
@@ -101,10 +101,10 @@ export default class World
             this.table.update()
         }
 
-        if(this.bigcouch)
-        {
-            this.bigcouch.update()
-        }
+        // if(this.bigcouch)
+        // {
+        //     this.bigcouch.update()
+        // }
 
         if (this.tv)
         {

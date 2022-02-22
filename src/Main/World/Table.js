@@ -14,6 +14,14 @@ export default class Table
         this.resource = this.resources.items.table
         this.position = (100, 0, 20)
 
+        this.debug = this.main.debug
+
+
+        if(this.debug.active)
+        {
+            this.debugFolder = this.debug.ui.addFolder('Table')
+        }
+
 
         this.createBrick()
         // this.helper()
@@ -58,6 +66,20 @@ export default class Table
                     child.castShadow = true
                     const material = new THREE.MeshStandardMaterial({ color: 0x976C42, metalness: 0.01, roughness: 0.5, name: 'white' })
                     child.material = material;
+
+                    const parameters = {
+                        color: 0xff0000,
+                    }
+
+                    this.debugFolder
+                    .addColor(parameters, 'color')
+                    .name('color')
+                    .onChange((c) => 
+                    {
+                        console.log(child)
+                        child.material.color = new THREE.Color(c)
+                        child.material.needsUpdate = true;
+                    })
 
                 }
             }

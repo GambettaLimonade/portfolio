@@ -19,11 +19,11 @@ export default[
         path: 'models/soviet_sofa/scene.glb'
     },
 
-    {
-        name: 'bigcouch',
-        type: 'gltfModel',
-        path: 'models/bigcouch/scene.glb'
-    },
+    // {
+    //     name: 'bigcouch',
+    //     type: 'gltfModel',
+    //     path: 'models/bigcouch/scene.glb'
+    // },
 
     {
         name: 'tv',

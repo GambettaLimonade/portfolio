@@ -16,6 +16,16 @@ export default class Tv
 
         this.images = [this.resources.items.maths78, this.resources.items.ccd]
         this.index = 0
+        
+        this.debug = this.main.debug
+
+
+        if(this.debug.active)
+        {
+            this.debugFolder = this.debug.ui.addFolder('TV')
+        }
+
+
 
         this.createBrick()
         this.changeColor()
@@ -69,6 +79,23 @@ export default class Tv
                     child.castShadow = true
                     child.material.color.set( 0xffffff );
                     
+
+                    const parameters = {
+                        color: 0xff0000,
+                    }
+
+                    this.debugFolder
+                    .addColor(parameters, 'color')
+                    .name('color')
+                    .onChange((c) => 
+                    {
+                        console.log(child)
+                        child.material.color = new THREE.Color(c)
+                        child.material.needsUpdate = true;
+                    })
+
+
+
                     if (child.name == "Plane018_2")
                     {
                         this.screen = child
@@ -90,10 +117,8 @@ export default class Tv
                 this.index = (this.index + 1) % this.images.length
                 this.screen.material.map = this.images[this.index]
 
-                console.log('index : ', this.index)
 
-
-        }, 3000);
+        }, 10000);
 
     }
 

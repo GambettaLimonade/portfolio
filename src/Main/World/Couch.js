@@ -12,7 +12,12 @@ export default class Couch
         this.length = 10
         this.height = 5
         this.resource = this.resources.items.couch
+        this.debug = this.main.debug
 
+        if(this.debug.active)
+        {
+            this.debugFolder = this.debug.ui.addFolder('Couch')
+        }
         this.createBrick()
         // this.helper()
         
@@ -56,9 +61,27 @@ export default class Couch
                     child.castShadow = true
                     const material = new THREE.MeshStandardMaterial({ color: 0xE0D0AB})
                     child.material = material;
+                    const parameters = {
+                        color: 0xff0000,
+                    }
+            
+                    this.debugFolder
+                    .addColor(parameters, 'color')
+                    .name('color')
+                    .onChange((c) => 
+                    {
+                        console.log(child)
+                        child.material.color = new THREE.Color(c)
+                        child.material.needsUpdate = true;
+                    })
+                    
                 }
             }
         )
+
+
+
+
     }
 
 
@@ -83,13 +106,27 @@ export default class Couch
         this.main.physics.world.addBody(this.body)
     }
 
+
+
     createBrick()
     {
         this.setModel()
 
         this.setShape()
         this.setBody()
-        this.body.position = new CANNON.Vec3(40,0, 190)
+        this.body.position = new CANNON.Vec3(20,0, 175)
+
+        this.debugFolder.add(this.body.position, 'x')
+        .min(-500)
+        .max(500)
+        .step(5)
+
+
+        this.debugFolder.add(this.body.position, 'z')
+        .min(-500)
+        .max(500)
+        .step(5)
+
 
     }
     

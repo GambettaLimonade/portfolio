@@ -61,6 +61,20 @@ export default class Soldier
                 if(child instanceof THREE.Mesh)
                 {
                     child.castShadow = true
+
+                    const parameters = {
+                        color: 0xff0000,
+                    }
+
+                    this.debugFolder
+                    .addColor(parameters, 'color')
+                    .name('color')
+                    .onChange((c) => 
+                    {
+                        console.log(child)
+                        child.material.color = new THREE.Color(c)
+                        child.material.needsUpdate = true;
+                    })
                 }
             }
         )
@@ -88,8 +102,8 @@ export default class Soldier
                 playRunning : () => { this.animation.play('running')}
             }
 
-            this.debugFolder.add(debugObject, 'playidle')
-            this.debugFolder.add(debugObject, 'playRunning')
+            // this.debugFolder.add(debugObject, 'playidle')
+            // this.debugFolder.add(debugObject, 'playRunning')
         }
 
     }
