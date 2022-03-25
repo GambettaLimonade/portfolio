@@ -64,16 +64,19 @@ export default class Couch
                     const parameters = {
                         color: 0xff0000,
                     }
-            
-                    this.debugFolder
-                    .addColor(parameters, 'color')
-                    .name('color')
-                    .onChange((c) => 
+                    
+                    if(this.debug.active)
                     {
-                        console.log(child)
-                        child.material.color = new THREE.Color(c)
-                        child.material.needsUpdate = true;
-                    })
+                        this.debugFolder
+                        .addColor(parameters, 'color')
+                        .name('color')
+                        .onChange((c) => 
+                        {
+                            console.log(child)
+                            child.material.color = new THREE.Color(c)
+                            child.material.needsUpdate = true;
+                        })
+                    }
                     
                 }
             }
@@ -116,17 +119,21 @@ export default class Couch
         this.setBody()
         this.body.position = new CANNON.Vec3(20,0, 175)
 
-        this.debugFolder.add(this.body.position, 'x')
-        .min(-500)
-        .max(500)
-        .step(5)
+        if(this.debug.active)
+        {
 
-
-        this.debugFolder.add(this.body.position, 'z')
-        .min(-500)
-        .max(500)
-        .step(5)
-
+            this.debugFolder.add(this.body.position, 'x')
+            .min(-500)
+            .max(500)
+            .step(5)
+    
+    
+            this.debugFolder.add(this.body.position, 'z')
+            .min(-500)
+            .max(500)
+            .step(5)
+            
+        }
 
     }
     

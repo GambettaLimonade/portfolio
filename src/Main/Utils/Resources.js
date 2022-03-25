@@ -81,32 +81,33 @@ export default class Resources extends EventEmitter
                     source.path,
                     (file =>
                         {
-                            
-                            file.encoding = THREE.sRGBEncoding;        
-                            file.flipY = false;
-                            file.rotation = Math.PI / 2
-                            file.wrapS = 10;
-                            file.wrapT = 20;
-                            file.repeat.set( 3,3 );
-                            this.debugFolder
-                            .add(file.repeat, 'x', 0, 5)
-                            .name(`${source.name}.repeat.x`);
-                            this.debugFolder
-                            .add(file.repeat, 'y', 0, 5)
-                            .name(`${source.name}.repeat.y`);
-                            this.debugFolder
-                            .add(file.offset, 'x', -2, 2)
-                            .name(`${source.name}.offset.x`);
-                            this.debugFolder
-                            .add(file.offset, 'y', -2, 2)
-                            .name(`${source.name}.offset.y`);
-                            this.debugFolder
-                            .add(file.center, 'x', -.5, 1.5, .01)
-                            .name(`${source.name}.center.x`);
-                            this.debugFolder
-                            .add(file.center, 'y', -.5, 1.5, .01)
-                            .name(`${source.name}.center.y`);
-                
+                            if(this.debug.active)
+                            {       
+                                file.encoding = THREE.sRGBEncoding;        
+                                file.flipY = false;
+                                file.rotation = Math.PI / 2
+                                file.wrapS = 10;
+                                file.wrapT = 20;
+                                file.repeat.set( 3,3 );
+                                this.debugFolder
+                                .add(file.repeat, 'x', 0, 5)
+                                .name(`${source.name}.repeat.x`);
+                                this.debugFolder
+                                .add(file.repeat, 'y', 0, 5)
+                                .name(`${source.name}.repeat.y`);
+                                this.debugFolder
+                                .add(file.offset, 'x', -2, 2)
+                                .name(`${source.name}.offset.x`);
+                                this.debugFolder
+                                .add(file.offset, 'y', -2, 2)
+                                .name(`${source.name}.offset.y`);
+                                this.debugFolder
+                                .add(file.center, 'x', -.5, 1.5, .01)
+                                .name(`${source.name}.center.x`);
+                                this.debugFolder
+                                .add(file.center, 'y', -.5, 1.5, .01)
+                                .name(`${source.name}.center.y`);
+                            }
                             this.sourceLoaded(source, file)
                         })
                 )

@@ -66,15 +66,18 @@ export default class Soldier
                         color: 0xff0000,
                     }
 
-                    this.debugFolder
-                    .addColor(parameters, 'color')
-                    .name('color')
-                    .onChange((c) => 
+                    if(this.debug.active)
                     {
-                        console.log(child)
-                        child.material.color = new THREE.Color(c)
-                        child.material.needsUpdate = true;
-                    })
+                        this.debugFolder
+                        .addColor(parameters, 'color')
+                        .name('color')
+                        .onChange((c) => 
+                        {
+                            console.log(child)
+                            child.material.color = new THREE.Color(c)
+                            child.material.needsUpdate = true;
+                        })
+                    }
                 }
             }
         )
