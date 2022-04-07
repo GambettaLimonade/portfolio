@@ -1,0 +1,11 @@
+Model Information:
+* title:	Gaming Room
+* source:	https://sketchfab.com/3d-models/gaming-room-3d0c90d37a0b429c848f92deacdb869e
+* author:	Indvisible (https://sketchfab.com/indvisible)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Gaming Room" (https://sketchfab.com/3d-models/gaming-room-3d0c90d37a0b429c848f92deacdb869e) by Indvisible (https://sketchfab.com/indvisible) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

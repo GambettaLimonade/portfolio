@@ -57,7 +57,7 @@ export default class Tv
     setModel()
     {
         this.model = this.resource.scene
-        this.model.scale.set(10,10,10)
+        this.model.scale.set(2,2,2)
         this.model.position.set(0,0,0)
         
         
@@ -155,14 +155,14 @@ export default class Tv
 
         this.setShape()
         this.setBody()
-        this.body.position = new CANNON.Vec3(0, 0, 300)
+        this.body.position = new CANNON.Vec3(0, 0, 50)
 
     }
     
     update()
     {
         this.model.position.copy(this.body.position)
-        this.model.position.y = 25
+        this.model.position.y = 5
         this.model.rotation.y = Math.PI
 
     }

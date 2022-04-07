@@ -11,6 +11,8 @@ export default class Ballon
         this.resources = this.main.resources
         this.radius = 1
         this.position = position
+        this.yarnTexture = this.resources.items.yarn
+
         this.createBall()
         
     }
@@ -25,7 +27,8 @@ export default class Ballon
         this.material = new THREE.MeshStandardMaterial(
             {
             metalness: 0.3,
-            roughness: 0.4
+            roughness: 0.4,
+            // map: this.yarnTexture
             }
         )
     }
@@ -53,7 +56,7 @@ export default class Ballon
                 mass:0.1,
                 shape:this.shape,
                 material:this.main.physics.world.defaultMaterial,
-                linearDamping:0.3
+                linearDamping:0.8
                 
             })
             

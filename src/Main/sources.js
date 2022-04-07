@@ -8,6 +8,12 @@ export default[
     },
 
     {
+        name: 'room',
+        type: 'gltfModel',
+        path: 'models/gaming_room/scene.gltf'        
+    },
+
+    {
         name: 'table',
         type: 'gltfModel',
         path: 'models/table/scene.glb'
@@ -47,5 +53,11 @@ export default[
         name : 'ccd',
         type : 'texture',
         path : 'images/ccd.png'
+    },
+
+    {
+        name : 'yarn',
+        type : 'texture',
+        path : 'textures/matcaps/ball.png'
     }
  ]

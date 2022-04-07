@@ -2,7 +2,7 @@ import Main from "../Main";
 import * as THREE from 'three'
 import CANNON from 'cannon'
 
-export default class Ballon
+export default class Bricks
 {
     constructor(position)
     {
@@ -13,6 +13,7 @@ export default class Ballon
         this.height = 5
         this.position = position
         this.createBrick()
+        this.brickBoundingBox;
         
     }
 
@@ -30,7 +31,8 @@ export default class Ballon
         this.material = new THREE.MeshStandardMaterial(
             {
             metalness: 0.3,
-            roughness: 0.4
+            roughness: 0.4,
+            // color : 0xFF0000
             }
         )
     }
@@ -41,6 +43,9 @@ export default class Ballon
         this.meshBrick.rotation.x = - Math.PI * 0.5
         this.meshBrick.castShadow = true
         this.scene.add(this.meshBrick)
+
+        this.brickBoundingBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
+        this.brickBoundingBox.setFromObject(this.meshBrick);
     }
 
 
@@ -48,7 +53,7 @@ export default class Ballon
 
     setShape()
     {
-        this.shape = new CANNON.Box(new CANNON.Vec3(this.length, this.height, this.height))
+        this.shape = new CANNON.Box(new CANNON.Vec3(this.length / 2, this.height / 2, this.height / 2))
 
     }
 
@@ -57,11 +62,11 @@ export default class Ballon
         this.body = new CANNON.Body({
                 mass:0.1,
                 shape:this.shape,
-                material:this.main.physics.world.defaultMaterial,
-                linearDamping:0.3
+                material:this.main.physics.world.heavyMaterial,
+                linearDamping:0.95
+
                 
-            })
-            
+            })            
         this.main.physics.world.addBody(this.body)
     }
 
@@ -81,6 +86,6 @@ export default class Ballon
     {
         this.meshBrick.position.copy(this.body.position)
         this.meshBrick.position.y = this.height / 2
-
+        this.brickBoundingBox.copy(this.meshBrick.geometry.boundingBox).applyMatrix4(this.meshBrick.matrixWorld);
     }
 }

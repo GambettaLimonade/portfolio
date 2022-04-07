@@ -3,7 +3,6 @@ import * as THREE from 'three'
 import CANNON from 'cannon'
 import { Raycaster } from "three";
 
-
 export default class Soldier
 {
     constructor()
@@ -18,19 +17,25 @@ export default class Soldier
         this.keys = {}      
         this.distance = 100
         this.world = this.main.physics.world
+        this.world2 = this.main.world
+
         this.raycaster = new Raycaster()
         this.intersects; 
         this.movements = [];
         this.playerSpeed = 1;
         this.resource = this.resources.items.soldier
         this.temp = new THREE.Vector3;
+        this.collisions = []
+        this.characterBoundingBox;
 
         //Debug
         if(this.debug.active)
         {
             this.debugFolder = this.debug.ui.addFolder('soldier')
         }
-           
+        
+        
+        this.bricksBB = this.world2.bricks[0].brickBoundingBox
         this.setModel()
         this.setAnimation()
        
@@ -40,6 +45,9 @@ export default class Soldier
 
         this.setShape()
         this.setBody()
+
+
+        this.checkCollisions()
     }
 
     /**
@@ -66,6 +74,7 @@ export default class Soldier
                         color: 0xff0000,
                     }
 
+
                     if(this.debug.active)
                     {
                         this.debugFolder
@@ -81,6 +90,9 @@ export default class Soldier
                 }
             }
         )
+
+        this.characterBoundingBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
+        this.characterBoundingBox.setFromObject(this.model);
     }
 
     setAnimation()
@@ -123,7 +135,8 @@ export default class Soldier
                     mass:0,
                     position: new CANNON.Vec3(0,0,0),
                     shape:this.shapeCharacter,
-                    material:this.world.defaultMaterial
+                    material:this.world.defaultMaterial,
+
                 }
             )
         this.bodyCharacter.quaternion.setFromAxisAngle(new CANNON.Vec3(-1, 0, 0), Math.PI * 0.5)
@@ -153,12 +166,13 @@ export default class Soldier
             mouse.y = - ( y / this.height ) * 2 + 1;
             
             this.raycaster.setFromCamera(mouse, this.camera.instance);
-            const intersects = this.raycaster.intersectObjects(this.scene.children);
+            this.intersects = this.raycaster.intersectObjects(this.scene.children);
 
-            this.direction = new THREE.Vector3(intersects[ 0 ].point.x, 0, intersects[ 0 ].point.z)
+            this.direction = new THREE.Vector3(this.intersects[ 0 ].point.x, 0, this.intersects[ 0 ].point.z)
 
-            if (intersects.length > 0 ) {
-                this.movements.push(intersects[ 0 ].point);
+            if (this.intersects.length > 0 ) {
+                this.movements.push(this.intersects[ 0 ].point);
+                
               }
 
             }
@@ -270,6 +284,19 @@ export default class Soldier
             this.angle = this.model.rotation.y
         }
     }
+
+
+    checkCollisions()
+    {
+
+        // if(this.characterBoundingBox.intersectsBox(this.bricksBB))
+        // {
+        //     console.log(' <!> INTERSECTION <!> ')
+        // }
+        // else {
+        //     console.log("finito")
+        // }
+    }
     
 
     /**
@@ -291,6 +318,19 @@ export default class Soldier
         this.camera.instance.position.lerp(this.temp, 0.2);
         this.camera.controls.target.set(this.model.position.x,this.model.position.y,this.model.position.z)    
         this.bodyCharacter.position.copy(this.model.position)
+        
+        this.model.traverse((child) =>
+        {
+            if(child instanceof THREE.Mesh)
+            {
+                this.characterBoundingBox.copy(child.geometry.boundingBox).applyMatrix4(child.matrixWorld)
+                // console.log(this.characterBoundingBox)
+            }
+        })
+
+        this.checkCollisions()
+        
+        // console.log(this.model.children)
 
     }
 }

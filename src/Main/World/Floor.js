@@ -29,7 +29,8 @@ export default class Floor
         this.material = new THREE.MeshStandardMaterial({
                     color: '#faa96a',
                     metalness: 0,
-                    roughness: 0.5
+                    roughness: 0.5,
+
                 })
     }
 
@@ -51,6 +52,8 @@ export default class Floor
         this.floorBody = new CANNON.Body({
             mass: 0,
             shape: this.floorShape,
+            material:this.main.physics.world.defaultMaterial,
+
         })
         this.floorBody.quaternion.setFromAxisAngle(new CANNON.Vec3(-1, 0, 0), Math.PI * 0.5)
         this.main.physics.world.addBody(this.floorBody)

@@ -16,9 +16,12 @@ export default class Sky
 
     }
 
+
+
+    
     setGeometry()
     {
-        this.geometry = new THREE.SphereGeometry(1000, 25, 25);
+        this.geometry = new THREE.SphereGeometry(140, 25, 25);
 
     }
 
@@ -31,9 +34,15 @@ export default class Sky
 
     setMesh()
     {
-        this.mesh = new THREE.Mesh(this.geometry, this.material)
-        this.mesh.material.side = THREE.BackSide;
 
+        // const edges = new THREE.EdgesGeometry( this.geometry );
+        // const line = new THREE.LineSegments( edges, new THREE.LineBasicMaterial( { color: 0xffffff } ) );
+        
+        
+        this.mesh = new THREE.Mesh(this.geometry, this.material)
+        this.mesh.material.side = THREE.DoubleSide;
+        
+        // this.scene.add( line );
         this.scene.add(this.mesh)
     }
 

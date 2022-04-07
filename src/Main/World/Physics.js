@@ -20,12 +20,29 @@ export default class Physics
             this.defautMaterial,
             this.defautMaterial,
                 {
-                    friction : 10,
-                    restitution : 0.5
+                    friction : 0
                 }
             )
 
+
+        this.heavyMaterial = new CANNON.Material('heavy')
+        
+            this.heavyContactMaterial = new CANNON.ContactMaterial(
+                this.defautContactMaterial,
+                this.heavyMaterial,
+                    {
+                        restitution:0.3
+                    }
+                )
+
+
+
+
+
         this.world.addContactMaterial(this.defautContactMaterial)
+        this.world.addContactMaterial(this.heavyContactMaterial)
+
+
         this.world.defaultContactMaterial = this.defautContactMaterial
 
         this.update()
