@@ -139,7 +139,7 @@ export default class Room
     {
         this.model.position.copy(this.body.position)
         this.model.position.y = 0
-        this.model.rotation.y = - Math.PI / 4
+        this.model.rotation.y = - Math.PI * 2
 
     }
 }
