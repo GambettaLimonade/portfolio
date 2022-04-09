@@ -315,38 +315,30 @@ export default class Soldier
     update()
     {
         this.animation.mixer.update(this.time.delta * 0.001)
-        this.moveModelArrow(this.keys)
-        if (this.movements.length > 0)
-        {    
-            this.model.lookAt(this.direction)
-            this.moveModelFinger(this.model, this.movements[ 0 ]);
-        }
-        
-        this.temp.setFromMatrixPosition(this.behind.matrixWorld);
-        
-        this.camera.instance.position.lerp(this.temp, 0.2);
-        this.camera.controls.target.set(this.model.position.x,this.model.position.y,this.model.position.z)    
-        this.bodyCharacter.position.copy(this.model.position)
-        
-        this.model.traverse((child) =>
-        {
-            if(child instanceof THREE.Mesh)
-            {
-                this.characterBoundingBox.copy(child.geometry.boundingBox).applyMatrix4(child.matrixWorld)
-                // console.log(this.characterBoundingBox)
-            }
-        })
 
-        this.checkCollisions()
-
-        if ((this.model.position.x)**2 + (this.model.position.z)**2 > 39000 )
+        
+        if ((this.model.position.x - 0)**2 + (this.model.position.z - 0)**2 > ((this.skyRadius**2) - 3000) )
         {
             console.log('on sort bientot de la sphere')
+            // this.releaseKey()
             // bloquer la position du character
-        }
-        // console.log(this.model.position)
-        // console.log(this.sky)
-        
+        } 
+        else
+        {            
+            this.moveModelArrow(this.keys)
+            if (this.movements.length > 0)
+            {    
+                this.model.lookAt(this.direction)
+                this.moveModelFinger(this.model, this.movements[ 0 ]);
+            }
+            
+            this.temp.setFromMatrixPosition(this.behind.matrixWorld);
+            
+            this.camera.instance.position.lerp(this.temp, 0.2);
+            this.camera.controls.target.set(this.model.position.x,this.model.position.y,this.model.position.z)    
+            this.bodyCharacter.position.copy(this.model.position)
+            
+        }        
 
     }
 }
