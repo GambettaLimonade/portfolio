@@ -19,6 +19,15 @@ export default class Soldier
         this.world = this.main.physics.world
         this.world2 = this.main.world
 
+
+        this.sky = this.world2.sky
+        this.skyPosition = this.world2.sky.mesh.position
+        this.skyRadius = this.sky.sphereRadius
+
+        console.log('ciel : ', this.sky)
+        console.log('position ciel : ', this.skyPosition)
+        console.log('rayon ciel : ', this.skyRadius)
+        
         this.raycaster = new Raycaster()
         this.intersects; 
         this.movements = [];
@@ -329,8 +338,15 @@ export default class Soldier
         })
 
         this.checkCollisions()
+
+        if ((this.model.position.x)**2 + (this.model.position.z)**2 > 39000 )
+        {
+            console.log('on sort bientot de la sphere')
+            // bloquer la position du character
+        }
+        // console.log(this.model.position)
+        // console.log(this.sky)
         
-        // console.log(this.model.children)
 
     }
 }

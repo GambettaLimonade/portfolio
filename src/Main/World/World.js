@@ -70,7 +70,6 @@ export default class World
 
             for(var i=0; i<this.cylindersValues['position'].length; i++)
             {
-                console.log(this.cylindersValues['position'])
                 this.cylinders.push(new Cylindre(this.cylindersValues['position'][i], this.cylindersValues['diametre'][i], this.cylindersValues['hauteur'][i]))
             }
 
