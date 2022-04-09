@@ -30,11 +30,17 @@ export default class World
         this.resources = this.main.resources
 
         this.ballons = []
-        this.bricks = []
         this.cylinders = []
+        this.bricks = []
 
-        this.ballonsPosition = [(0,0,0)]
-        this.cylindersValues = {
+        this.ballonsValues = 
+        {
+            'position' : [[100,0,-100], [90,0,-105], [103,0,-101], [80,0,-95], [93,0,-104], [99,0,-97]],
+            'diametre' : [3, 1, 2, 1.5, 0.5, 1.2]
+
+        }
+        this.cylindersValues = 
+        {
             'position' : [[-90,0,70],[-80,3,80], [-60,0, 100], [-60,0, 70], [-65,0, 95], [-50, 0, 60], [-90, 0, 50], [-80, 0, 30], [-80, 0, 50]],
             'diametre' : [5, 3, 2, 4, 4, 3, 6, 1, 4, 3],
             'hauteur' : [25, 20, 30, 10, 70, 35, 20, 40, 100, 70]
@@ -54,18 +60,14 @@ export default class World
             this.floor = new Floor()
             this.sky = new Sky()
             this.soldier = new Soldier()
-            // this.couch = new Couch()
             this.table = new Table()
-            // this.bigcouch = new Bigcouch()
             this.tv = new Tv()
-            // this.floor1 = new Floor1()
-            // this.floor2 = new Floor2()
 
             this.room = new Room()
 
-            for(var i=0; i<this.ballonsPosition.length; i++)
+            for(var i=0; i<this.ballonsValues['position'].length; i++)
             {
-                this.ballons.push(new Ballon(this.ballonsPosition[i]))
+                this.ballons.push(new Ballon(this.ballonsValues['position'][i], this.ballonsValues['diametre'][i]))
             }
 
             for(var i=0; i<this.cylindersValues['position'].length; i++)

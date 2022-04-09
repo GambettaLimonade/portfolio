@@ -4,12 +4,12 @@ import CANNON from 'cannon'
 
 export default class Ballon
 {
-    constructor(position)
+    constructor(position, diametre)
     {
         this.main = new Main()
         this.scene = this.main.scene
         this.resources = this.main.resources
-        this.radius = 1
+        this.diametre = diametre
         this.position = position
         this.yarnTexture = this.resources.items.yarn
 
@@ -19,7 +19,7 @@ export default class Ballon
 
     setGeometry()
     {
-        this.geometry = new THREE.SphereBufferGeometry(this.radius, 20, 20)
+        this.geometry = new THREE.SphereBufferGeometry(this.diametre, 20, 20)
     }
 
     setMaterial()
@@ -46,7 +46,7 @@ export default class Ballon
 
     setShape()
     {
-        this.shape = new CANNON.Sphere(this.radius)
+        this.shape = new CANNON.Sphere(this.diametre)
 
     }
 
@@ -73,8 +73,7 @@ export default class Ballon
 
         this.setShape()
         this.setBody()
-        this.body.position = new CANNON.Vec3(this.position)
-
+        this.body.position = new CANNON.Vec3(this.position[0],this.position[1], this.position[2])
     }
 
     update()
