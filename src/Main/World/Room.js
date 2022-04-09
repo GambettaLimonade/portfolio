@@ -117,7 +117,6 @@ export default class Room
                 mass:0.1,
                 shape:this.shape,
                 material:this.main.physics.world.defaultMaterial,
-                linearDamping:0.3
                 
             })
             

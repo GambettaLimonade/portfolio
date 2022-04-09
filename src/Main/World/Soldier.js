@@ -24,9 +24,12 @@ export default class Soldier
         this.skyPosition = this.world2.sky.mesh.position
         this.skyRadius = this.sky.sphereRadius
 
-        console.log('ciel : ', this.sky)
-        console.log('position ciel : ', this.skyPosition)
-        console.log('rayon ciel : ', this.skyRadius)
+
+        this.flooor = this.world2.floor
+        this.floorColor = this.flooor.mesh.material.color
+        
+
+
         
         this.raycaster = new Raycaster()
         this.intersects; 
@@ -56,7 +59,8 @@ export default class Soldier
         this.setBody()
 
 
-        this.checkCollisions()
+        this.changementDambiance()
+        this.lerp()
     }
 
     /**
@@ -257,6 +261,41 @@ export default class Soldier
         }, false);
     }
 
+
+
+
+    changementDambiance()
+    {
+        var centreScene = new THREE.Vector3( 0, 0, 0 );
+        var pointLerpage = new THREE.Vector3( 55, 0, 100 );
+        var distanceCentrePointLerpage = centreScene.distanceTo( pointLerpage );
+        var distanceCharacterPointLerpage = this.model.position.distanceTo( pointLerpage );
+        var distanceCharacterCentre = this.model.position.distanceTo( centreScene );
+
+        var coeff = 1 - (distanceCharacterPointLerpage / distanceCentrePointLerpage)
+
+        if (this.model.position.x > 0 && this.model.position.z > 72)
+        {
+
+            var purple = [32, 12, 64]
+            var sandColor = [255, 239, 151]
+            var skyColor = [138, 173, 184]
+
+            const [r, g, b] = [this.lerp(sandColor[0], purple[0], coeff), this.lerp(sandColor[1], purple[1], coeff), this.lerp(sandColor[2], purple[2], coeff)].map(Math.round)
+            this.floorColor.set(new THREE.Color(`rgb(${r}, ${g}, ${b})`))
+      
+        } else {
+            this.floorColor.setHex(0xfaa96a)
+        }
+    }
+
+    lerp(x, y, a)
+    {
+        return (1 - a) * x + a * y
+    }
+
+
+
     releaseKey()
     {
         
@@ -292,19 +331,6 @@ export default class Soldier
             this.model.rotation.y = this.model.rotation.y + rotation * tourner
             this.angle = this.model.rotation.y
         }
-    }
-
-
-    checkCollisions()
-    {
-
-        // if(this.characterBoundingBox.intersectsBox(this.bricksBB))
-        // {
-        //     console.log(' <!> INTERSECTION <!> ')
-        // }
-        // else {
-        //     console.log("finito")
-        // }
     }
     
 
@@ -342,7 +368,11 @@ export default class Soldier
             this.camera.instance.position.lerp(this.temp, 0.2);
             this.camera.controls.target.set(this.model.position.x,this.model.position.y,this.model.position.z)    
             this.bodyCharacter.position.copy(this.model.position)
-            
+            this.changementDambiance()
+            // console.log('X : ', this.model.position.x)
+            // console.log('Y : ', this.model.position.z)
+
+
         }        
 
     }
