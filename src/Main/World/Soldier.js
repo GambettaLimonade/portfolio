@@ -317,9 +317,14 @@ export default class Soldier
         this.animation.mixer.update(this.time.delta * 0.001)
 
         
-        if ((this.model.position.x - 0)**2 + (this.model.position.z - 0)**2 > ((this.skyRadius**2) - 3000) )
+        if ((this.model.position.x - 0)**2 + (this.model.position.z - 0)**2 > ((this.skyRadius**2) - 1000) )
         {
             console.log('on sort bientot de la sphere')
+            console.log(this.model.position)
+
+            var distance = 1
+            this.model.position.x -= Math.sin(this.model.rotation.y) * distance
+            this.model.position.z -= Math.cos(this.model.rotation.y) * distance
             // this.releaseKey()
             // bloquer la position du character
         } 
