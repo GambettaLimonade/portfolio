@@ -32,6 +32,8 @@ export default class Soldier
         
         this.raycaster = new Raycaster()
         this.intersects; 
+        this.intersectsFocus; 
+
         this.movements = [];
         this.playerSpeed = 1;
         this.resource = this.resources.items.soldier
@@ -59,6 +61,7 @@ export default class Soldier
 
 
         this.changementDambiance()
+        this.focusedObject()
     }
 
     /**
@@ -175,6 +178,8 @@ export default class Soldier
             
             mouse.x = ( x / this.width ) * 2 - 1;
             mouse.y = - ( y / this.height ) * 2 + 1;
+
+            console.log('mouse origine : ', mouse)
             
             this.raycaster.setFromCamera(mouse, this.camera.instance);
             this.intersects = this.raycaster.intersectObjects(this.scene.children);
@@ -360,6 +365,43 @@ export default class Soldier
             this.angle = this.model.rotation.y
         }
     }
+
+
+    focusedObject()
+    {
+        document.addEventListener('click', (event) => {
+
+
+            //TODO : ramener la 2eme camera a la même place que la premiere
+            // faire avancer la deuxième camera en direction de l'objet cliqué
+            this.height =  this.main.sizes.height
+            this.width =  this.main.sizes.width
+            const focusCamera = new THREE.PerspectiveCamera( 45, this.width / this.height, 1, 1000 );
+            this.scene.add( focusCamera );
+            console.log(focusCamera)
+
+
+            const mouse = new THREE.Vector2();
+            
+            var x = event.clientX
+            var y = event.clientY
+
+            mouse.x = ( x / this.width ) * 2 - 1;
+            mouse.y = - ( y / this.height ) * 2 + 1;
+            
+            this.raycaster.setFromCamera(mouse, this.camera.instance);
+            this.intersectsFocus = this.raycaster.intersectObjects(this.scene.children);
+
+            console.log(this.intersectsFocus)
+
+            for (const i in this.intersectsFocus) {
+                console.log(i);
+              }
+              
+        })
+    }
+
+
     
 
     /**
