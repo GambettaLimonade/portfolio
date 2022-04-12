@@ -21,7 +21,6 @@ export default class Soldier
 
 
         this.sky = this.world2.sky
-        this.skyPosition = this.world2.sky.mesh.position
         this.skyRadius = this.sky.sphereRadius
 
 
@@ -60,7 +59,6 @@ export default class Soldier
 
 
         this.changementDambiance()
-        this.lerp()
     }
 
     /**
@@ -267,33 +265,63 @@ export default class Soldier
     changementDambiance()
     {
         var centreScene = new THREE.Vector3( 0, 0, 0 );
-        var pointLerpage = new THREE.Vector3( 55, 0, 100 );
-        var distanceCentrePointLerpage = centreScene.distanceTo( pointLerpage );
-        var distanceCharacterPointLerpage = this.model.position.distanceTo( pointLerpage );
+        var pointA = new THREE.Vector3(123,0,153);
+        var pointB = new THREE.Vector3(-153,0,123);
+        var pointC = new THREE.Vector3(153,0,-123);
+        var pointD = new THREE.Vector3(-153,0,-123);
+
+        var distanceCharacterPointA = this.model.position.distanceTo( pointA );
+        var distanceCharacterPointB = this.model.position.distanceTo( pointB );
+        var distanceCharacterPointC = this.model.position.distanceTo( pointC );
+        var distanceCharacterPointD = this.model.position.distanceTo( pointD );
         var distanceCharacterCentre = this.model.position.distanceTo( centreScene );
+        var distTotal = distanceCharacterPointA+distanceCharacterPointB+distanceCharacterPointC+distanceCharacterPointD+distanceCharacterCentre
 
-        var coeff = 1 - (distanceCharacterPointLerpage / distanceCentrePointLerpage)
+        var colorDistance = 
+        [
+                {
+                    value : distanceCharacterPointA,
+                    key : [255, 0, 0] 
+                }
+            ,
+            {
+                value : distanceCharacterPointB,
+                key : [0, 255, 0]     
+            },
+            {
+                value : distanceCharacterPointC,
+                key : [0,0,0]   
+            },
+            {
+                value : distanceCharacterPointD,
+                key : [0,0,0] 
 
-        if (this.model.position.x > 0 && this.model.position.z > 72)
+            },
+            {
+                value : distanceCharacterCentre,
+                key : [0, 0, 255]
+
+            }
+        ]
+
+
+
+        var pourcentage = [ (distanceCharacterPointA/distTotal),(distanceCharacterPointB/distTotal),(distanceCharacterPointC/distTotal),(distanceCharacterPointD/distTotal),(distanceCharacterCentre/distTotal)]
+        var a = colorDistance[0].key.map(function(x) {return x * pourcentage[0]; })
+        var b = colorDistance[1].key.map(function(x) {return x * pourcentage[1]; })
+        var c = colorDistance[2].key.map(function(x) {return x * pourcentage[2]; })
+        var d = colorDistance[3].key.map(function(x) {return x * pourcentage[3]; })
+        var e = colorDistance[4].key.map(function(x) {return x * pourcentage[4]; })
+        var Total = []
+
+        for( var i = 0; i < a.length; i++)
         {
-
-            var purple = [32, 12, 64]
-            var sandColor = [255, 239, 151]
-            var skyColor = [138, 173, 184]
-
-            const [r, g, b] = [this.lerp(sandColor[0], purple[0], coeff), this.lerp(sandColor[1], purple[1], coeff), this.lerp(sandColor[2], purple[2], coeff)].map(Math.round)
-            this.floorColor.set(new THREE.Color(`rgb(${r}, ${g}, ${b})`))
-      
-        } else {
-            this.floorColor.setHex(0xfaa96a)
+            Total.push(a[i]+b[i]+c[i]+d[i]+e[i]);
         }
+    
+        this.floorColor.set(new THREE.Color(`rgb(${Math.round(Total[0])}, ${Math.round(Total[1])}, ${Math.round(Total[2])})`)) 
+        this.sky.mesh.material[0].color.set(new THREE.Color(`rgb(${Math.round(Total[0])}, ${Math.round(Total[1])}, ${Math.round(Total[2])})`))
     }
-
-    lerp(x, y, a)
-    {
-        return (1 - a) * x + a * y
-    }
-
 
 
     releaseKey()
@@ -346,8 +374,6 @@ export default class Soldier
         if ((this.model.position.x - 0)**2 + (this.model.position.z - 0)**2 > ((this.skyRadius**2) - 1000) )
         {
             console.log('on sort bientot de la sphere')
-            console.log(this.model.position)
-
             var distance = 1
             this.model.position.x -= Math.sin(this.model.rotation.y) * distance
             this.model.position.z -= Math.cos(this.model.rotation.y) * distance

@@ -21,15 +21,16 @@ export default class Floor
 
     setGeometry()
     {
-        this.geometry = new THREE.PlaneBufferGeometry(3000, 3000)
+        this.geometry = new THREE.PlaneBufferGeometry(1000, 1000)
     }
 
     setMaterial()
     {
+        console.log('couleur blanche')
         this.material = new THREE.MeshStandardMaterial({
-                    color: '#faa96a',
-                    metalness: 0,
-                    roughness: 0.5,
+                    color: '#ffffff',
+                    // metalness: 0,
+                    // roughness: 0.5,
 
                 })
     }
