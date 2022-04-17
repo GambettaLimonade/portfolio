@@ -2,6 +2,9 @@ import Main from "../Main";
 import * as THREE from 'three'
 import CANNON from 'cannon'
 import { Raycaster } from "three";
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
+import { gsap } from "gsap";
+
 
 export default class Soldier
 {
@@ -18,6 +21,7 @@ export default class Soldier
         this.distance = 100
         this.world = this.main.physics.world
         this.world2 = this.main.world
+        this.canvas = this.main.canvas
 
 
         this.sky = this.world2.sky
@@ -371,14 +375,10 @@ export default class Soldier
     {
         document.addEventListener('click', (event) => {
 
-
-            //TODO : ramener la 2eme camera a la même place que la premiere
-            // faire avancer la deuxième camera en direction de l'objet cliqué
             this.height =  this.main.sizes.height
             this.width =  this.main.sizes.width
             const focusCamera = new THREE.PerspectiveCamera( 45, this.width / this.height, 1, 1000 );
             this.scene.add( focusCamera );
-            console.log(focusCamera)
 
 
             const mouse = new THREE.Vector2();
@@ -391,13 +391,41 @@ export default class Soldier
             
             this.raycaster.setFromCamera(mouse, this.camera.instance);
             this.intersectsFocus = this.raycaster.intersectObjects(this.scene.children);
+            
+            console.log(this.intersectsFocus[0].object)
 
-            console.log(this.intersectsFocus)
-
-            for (const i in this.intersectsFocus) {
-                console.log(i);
-              }
-              
+            var aabb = new THREE.Box3().setFromObject( this.intersectsFocus[0].object );
+            var center = aabb.getCenter( new THREE.Vector3() );
+            var size = aabb.getSize( new THREE.Vector3() );
+            
+            gsap.to( this.camera.instance.position, {
+                duration: 2.5,
+                x: this.intersectsFocus[0].object.position.x,
+                y: -100,
+                z: this.intersectsFocus[0].object.position.z, // maybe adding even more offset depending on your model
+                // onUpdate: function() {
+                    // console.log('camera bouge')
+                    // for (var i = 0; i< 10000; i++)
+                    // {
+                    //     console.log('i : ', i)
+                    // }
+                    // this.camera.lookAt( center );
+                // }
+            } );
+            
+            
+            this.camera.controls.target.set(this.intersectsFocus[0].object.position.x,this.intersectsFocus[0].object.position.y,this.intersectsFocus[0].object.position.z) 
+            
+            // this.camera.controls.zoomSpeed = 2
+            // this.camera.controls.enablePan = true; 
+            // this.camera.controls.enableDamping = true;
+            // this.camera.controls.autoRotate = true  // QUAND ON CLIQUE SA TOURNE AUTOUR DE LOBJECT CLIQUé
+            
+            // this.camera.controls.dampingFactor = 0.001;
+            // this.camera.controls.rotateSpeed = 0.001;
+            // this.camera.controls.panSpeed = 0.001;
+            
+            this.camera.controls.update()      
         })
     }
 
@@ -433,14 +461,23 @@ export default class Soldier
             
             this.temp.setFromMatrixPosition(this.behind.matrixWorld);
             
-            this.camera.instance.position.lerp(this.temp, 0.2);
-            this.camera.controls.target.set(this.model.position.x,this.model.position.y,this.model.position.z)    
+            this.camera.controls.minDistance = 30
+            this.camera.controls.maxDistance = 400
+
+            // ESSAYER DE COMMENTER ET DECOMMENTER CCETTE LIGNE QUAND ON TESTE LE GSAP
+            // COMMENTER LA CAMERA VA FIXER LOBJECT ET REVENIR A SA POSITION
+            // DECOMMENTER LA LIGNE ET LA CAMERA VA FIXER LOBJECT PUIS SE METTRE AU DESSUS ???
+            // VOIR AVEC TIphaine
+            this.camera.instance.position.lerp(this.temp, 0.2);    
+            
+            
+            
+            
+            // this.camera.controls.target.set(this.model.position.x,this.model.position.y,this.model.position.z)    
             this.bodyCharacter.position.copy(this.model.position)
             this.changementDambiance()
-            // console.log('X : ', this.model.position.x)
-            // console.log('Y : ', this.model.position.z)
 
-
+            // this.camera.controls.update()
         }        
 
     }
