@@ -409,6 +409,7 @@ export default class Soldier
             this.camera.controls.target.set(this.intersectsFocus[0].object.position.x,this.intersectsFocus[0].object.position.y,this.intersectsFocus[0].object.position.z) 
             this.focused = true
 
+            document.getElementById("info").style.display = "block";
 
             setTimeout(() => { this.focused = false}, 2500)
 
