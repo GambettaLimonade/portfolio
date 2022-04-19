@@ -17,6 +17,7 @@ import Table from './Table.js';
 import Tv from './Tv.js';
 import Room from './Room.js';
 import Cylindre from './Cylindres.js';
+import Sun from './Sun.js';
 
 
 
@@ -77,6 +78,7 @@ export default class World
 
 
             this.environment = new Environment()
+            this.sun = new Sun()
 
             
         })
@@ -138,6 +140,11 @@ export default class World
         if (this.room)
         {
             this.room.update()
+        }
+
+        if(this.sun)
+        {
+            this.sun.update()
         }
 
     }
