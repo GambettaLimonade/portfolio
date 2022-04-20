@@ -89,8 +89,6 @@ export default class World
             for(var i=0; i<this.pathValues['position'].length; i++)
             {
                 this.path.push(new Path(this.pathValues['position'][i], this.pathValues['diametre'][i], this.pathValues['hauteur'][i]))
-                console.log(this.path)
-                // this.path[i]
             }
 
 

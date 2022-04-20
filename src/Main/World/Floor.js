@@ -26,7 +26,6 @@ export default class Floor
 
     setMaterial()
     {
-        console.log('couleur blanche')
         this.material = new THREE.MeshStandardMaterial({
                     color: '#ffffff',
                     // metalness: 0,

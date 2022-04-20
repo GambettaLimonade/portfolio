@@ -16,7 +16,6 @@ export default class Sun
 
     setSun()
     {
-        console.log('Auuuuu Soleil !!!')
         this.light = new THREE.PointLight( 0xFDB813, 1, 100 );
         this.light.position.set( 0, 20, 0 );
         this.scene.add( this.light );
