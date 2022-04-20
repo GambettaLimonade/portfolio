@@ -411,7 +411,12 @@ export default class Soldier
 
             document.getElementById("info").style.display = "block";
 
-            setTimeout(() => { this.focused = false}, 2500)
+            setTimeout(() =>
+             { 
+                this.focused = false;
+                document.getElementById("info").style.display = "none";
+
+            }, 2500)
 
         })
         

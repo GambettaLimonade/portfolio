@@ -18,6 +18,7 @@ import Tv from './Tv.js';
 import Room from './Room.js';
 import Cylindre from './Cylindres.js';
 import Sun from './Sun.js';
+import Path from './Path.js';
 
 
 
@@ -33,6 +34,7 @@ export default class World
         this.ballons = []
         this.cylinders = []
         this.bricks = []
+        this.path = []
 
         this.ballonsValues = 
         {
@@ -47,6 +49,12 @@ export default class World
             'hauteur' : [25, 20, 30, 10, 70, 35, 20, 40, 100, 70]
         }
         
+
+        this.pathValues = {
+            'position' : [[0,0,0]],
+            'diametre' : [1],
+            'hauteur' : [0.1]
+        }
 
         this.bricksPosition = [(0,1,0)]
         
@@ -76,10 +84,19 @@ export default class World
                 this.cylinders.push(new Cylindre(this.cylindersValues['position'][i], this.cylindersValues['diametre'][i], this.cylindersValues['hauteur'][i]))
             }
 
+            for(var i=0; i<this.pathValues['position'].length; i++)
+            {
+                this.path.push(new Path(this.pathValues['position'][i], this.pathValues['diametre'][i], this.pathValues['hauteur'][i]))
+                console.log(this.path)
+                // this.path[i]
+            }
+
+
 
             this.environment = new Environment()
             this.sun = new Sun()
 
+            console.log(this.sky)
             
         })
         
