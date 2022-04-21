@@ -19,6 +19,7 @@ import Room from './Room.js';
 import Cylindre from './Cylindres.js';
 import Sun from './Sun.js';
 import Path from './Path.js';
+import Programming from './Programming.js';
 
 
 
@@ -72,6 +73,8 @@ export default class World
             this.sky = new Sky()
             this.soldier = new Soldier()
             this.table = new Table()
+            this.programming = new Programming()
+
             this.tv = new Tv()
 
             this.room = new Room()
@@ -94,11 +97,11 @@ export default class World
 
 
             this.environment = new Environment()
-            this.sun = new Sun()
-
-            console.log(this.sky)
-            
+            this.sun = new Sun()            
         })
+
+
+
         
     }
 
@@ -143,6 +146,14 @@ export default class World
         {
             this.table.update()
         }
+
+
+        if(this.programming)
+        {
+            this.programming.update()
+        }
+
+
 
         // if(this.bigcouch)
         // {

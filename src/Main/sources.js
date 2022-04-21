@@ -8,6 +8,13 @@ export default[
     },
 
     {
+        name : 'python',
+        type: 'gltfModel',
+        path : 'models/python_programming_language/scene.gltf'
+
+    },
+
+    {
         name: 'room',
         type: 'gltfModel',
         path: 'models/gaming_room/scene.gltf'        
@@ -59,5 +66,8 @@ export default[
         name : 'yarn',
         type : 'texture',
         path : 'textures/matcaps/ball.png'
-    }
+    },
+
+
+
  ]

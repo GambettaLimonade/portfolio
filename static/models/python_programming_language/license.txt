@@ -1,0 +1,11 @@
+Model Information:
+* title:	Python Programming language
+* source:	https://sketchfab.com/3d-models/python-programming-language-44d992bf56e244448e9ee5b4da083287
+* author:	Acvantad (https://sketchfab.com/Acvantad)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Python Programming language" (https://sketchfab.com/3d-models/python-programming-language-44d992bf56e244448e9ee5b4da083287) by Acvantad (https://sketchfab.com/Acvantad) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
