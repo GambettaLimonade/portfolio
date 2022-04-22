@@ -16,15 +16,15 @@ export default class Points
 
         this.points = [
             {
-                position: new THREE.Vector3(4, 3, 0),
+                position: new THREE.Vector3(50, 20, 100),
                 element: document.querySelector('.point-0')
             },
             {
-                position: new THREE.Vector3(10, 3, 1),
+                position: new THREE.Vector3(-50, 10, 70),
                 element: document.querySelector('.point-1')
             },
             {
-                position: new THREE.Vector3(4, 3, -10),
+                position: new THREE.Vector3(-95, 3, -90),
                 element: document.querySelector('.point-2')
             },
             

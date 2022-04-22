@@ -13,6 +13,10 @@ export default class Cylindre
         this.diametre = diametre
         this.hauteur = hauteur
 
+        this.world2 = this.main.world
+        this.sky = this.world2.sky
+        this.skyRadius = this.sky.sphereRadius
+
         this.createCylindre()
         
     }
@@ -57,7 +61,7 @@ export default class Cylindre
                 mass:0.1,
                 shape:this.shape,
                 material:this.main.physics.world.defaultMaterial,
-                linearDamping:1
+                linearDamping:0.9
                 
             })
             
@@ -80,6 +84,14 @@ export default class Cylindre
 
     update()
     {
+
+        if ((this.meshCylindre.position.x - 0)**2 + (this.meshCylindre.position.z - 0)**2 > ((this.skyRadius**2) - 1000) )
+        {
+            this.body.position.x = (this.body.position.x + 0.9) 
+            this.body.position.z = (this.body.position.z + 0.9)
+            // this.releaseKey()
+            // bloquer la position du character
+        } 
         this.meshCylindre.position.copy(this.body.position)
         this.meshCylindre.position.y = this.hauteur/2
     }

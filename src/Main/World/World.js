@@ -19,7 +19,7 @@ import Room from './Room.js';
 import Cylindre from './Cylindres.js';
 import Sun from './Sun.js';
 import Path from './Path.js';
-import Programming from './Programming.js';
+import Python from './Python.js';
 
 
 
@@ -73,7 +73,7 @@ export default class World
             this.sky = new Sky()
             this.soldier = new Soldier()
             this.table = new Table()
-            this.programming = new Programming()
+            this.python = new Python()
 
             this.tv = new Tv()
 
@@ -148,9 +148,9 @@ export default class World
         }
 
 
-        if(this.programming)
+        if(this.python)
         {
-            this.programming.update()
+            this.python.update()
         }
 
 

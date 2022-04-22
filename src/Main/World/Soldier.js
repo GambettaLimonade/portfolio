@@ -348,7 +348,7 @@ export default class Soldier
 
     moveModelArrow()
     {
-        const vitesse = 1;    
+        const vitesse = 2;    
         const rotation = Math.PI/60 ;
         
         if (Object.keys(this.keys).length !== 0)
@@ -468,7 +468,6 @@ export default class Soldier
 
 
 
-            
             this.bodyCharacter.position.copy(this.model.position)
             this.changementDambiance()
             // console.log(this.model.position)

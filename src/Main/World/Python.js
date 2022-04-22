@@ -2,7 +2,7 @@ import Main from "../Main";
 import * as THREE from 'three'
 import CANNON from 'cannon'
 
-export default class Programming
+export default class Python
 {
     constructor()
     {
@@ -21,7 +21,7 @@ export default class Programming
 
 
 
-        this.createProgramming()
+        this.createPython()
         
     }
 
@@ -40,7 +40,7 @@ export default class Programming
                 if(child instanceof THREE.Mesh)
                 {
                     child.castShadow = true
-                    const material = new THREE.MeshStandardMaterial({ color: 0x976C42, metalness: 0.01, roughness: 0.5, name: 'white' })
+                    const material = new THREE.MeshStandardMaterial({ metalness: 0.01, roughness: 0.5, name: 'white' })
                     child.material = material;
 
                     const parameters = {
@@ -74,7 +74,7 @@ export default class Programming
         this.main.physics.world.addBody(this.body)
     }
 
-    createProgramming()
+    createPython()
     {
         this.setModel()
 

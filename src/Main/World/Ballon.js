@@ -13,6 +13,10 @@ export default class Ballon
         this.position = position
         this.yarnTexture = this.resources.items.yarn
 
+        this.world2 = this.main.world
+        this.sky = this.world2.sky
+        this.skyRadius = this.sky.sphereRadius
+
         this.createBall()
         
     }
@@ -53,7 +57,7 @@ export default class Ballon
     setBody()
     {
         this.body = new CANNON.Body({
-                mass:0.1,
+                mass:0.8,
                 shape:this.shape,
                 material:this.main.physics.world.defaultMaterial,
                 linearDamping:0.8
@@ -78,6 +82,13 @@ export default class Ballon
 
     update()
     {
+        if ((this.meshBallon.position.x - 0)**2 + (this.meshBallon.position.z - 0)**2 > ((this.skyRadius**2) - 1000) )
+        {
+            this.body.position.x = (this.body.position.x + 0.9) 
+            this.body.position.z = (this.body.position.z + 0.9)
+            // this.releaseKey()
+            // bloquer la position du character
+        } 
         this.meshBallon.position.copy(this.body.position)
     }
 }
