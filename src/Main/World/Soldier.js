@@ -391,32 +391,34 @@ export default class Soldier
             this.raycaster.setFromCamera(mouse, this.camera.instance);
             this.intersectsFocus = this.raycaster.intersectObjects(this.scene.children);
             
-            console.log(this.intersectsFocus[0].object)
-            
-            gsap.to( this.camera.instance.position, {
-                duration: 2.5,
-                x: this.intersectsFocus[0].object.position.x,
-                y: -100,
-                z: this.intersectsFocus[0].object.position.z, // maybe adding even more offset depending on your model
-                // onUpdate: function()
-                    // {
-                    //     console.log('i : ', i)
+            if (this.intersectsFocus[0].object.name == "cylindre" || this.intersectsFocus[0].object.name == "ball")
+            {
+                console.log("on focus un cylindre ou une balle")
+                gsap.to( this.camera.instance.position, {
+                    duration: 2.5,
+                    x: this.intersectsFocus[0].object.position.x,
+                    y: -100,
+                    z: this.intersectsFocus[0].object.position.z, // maybe adding even more offset depending on your model
+                    // onUpdate: function()
+                        // {
+                        //     console.log('i : ', i)
+                        // }
                     // }
-                // }
-            } );
-            
-            
-            this.camera.controls.target.set(this.intersectsFocus[0].object.position.x,this.intersectsFocus[0].object.position.y,this.intersectsFocus[0].object.position.z) 
-            this.focused = true
-
-            document.getElementById("info").style.display = "block";
-
-            setTimeout(() =>
-             { 
-                this.focused = false;
-                document.getElementById("info").style.display = "none";
-
-            }, 2500)
+                } );
+                
+                
+                this.camera.controls.target.set(this.intersectsFocus[0].object.position.x,this.intersectsFocus[0].object.position.y,this.intersectsFocus[0].object.position.z) 
+                this.focused = true
+    
+                // document.getElementById("info").style.display = "block";
+    
+                // setTimeout(() =>
+                //  { 
+                //     this.focused = false;
+                //     document.getElementById("info").style.display = "none";
+    
+                // }, 2500)
+            }
 
         })
         

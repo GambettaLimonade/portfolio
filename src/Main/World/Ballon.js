@@ -42,6 +42,8 @@ export default class Ballon
         this.meshBallon = new THREE.Mesh(this.geometry, this.material)
         this.meshBallon.rotation.x = - Math.PI * 0.5
         this.meshBallon.castShadow = true
+        this.meshBallon.name = "ball"
+
         this.scene.add(this.meshBallon)
     }
 

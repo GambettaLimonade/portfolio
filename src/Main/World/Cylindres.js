@@ -43,6 +43,7 @@ export default class Cylindre
         // this.meshCylindre.rotation.x = - Math.PI * 0.5
 
         this.meshCylindre.castShadow = true
+        this.meshCylindre.name = "cylindre"
         this.scene.add(this.meshCylindre)
     }
 
