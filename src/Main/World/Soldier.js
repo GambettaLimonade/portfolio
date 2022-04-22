@@ -291,7 +291,7 @@ export default class Soldier
         [
                 {
                     value : distanceCharacterPointA,
-                    key : [255, 0, 0] 
+                    key : [255, 218, 193]
                 }
             ,
             {
@@ -433,7 +433,7 @@ export default class Soldier
     {
         this.animation.mixer.update(this.time.delta * 0.001)
 
-        
+        // console.log(this.model.position.x, this.model.position.z)
 
         if ((this.model.position.x - 0)**2 + (this.model.position.z - 0)**2 > ((this.skyRadius**2) - 1000) )
         {

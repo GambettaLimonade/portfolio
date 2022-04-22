@@ -1,6 +1,8 @@
 import Main from "../Main";
 import * as THREE from 'three'
 import CANNON from 'cannon'
+import { Raycaster } from "three";
+
 
 export default class Python
 {
@@ -13,6 +15,9 @@ export default class Python
         this.height = 5
         this.resource = this.resources.items.python
         this.position = (100, 0, 20)
+        this.raycaster = new Raycaster()
+        this.camera = this.main.camera
+
 
         this.world2 = this.main.world
         this.sky = this.world2.sky
@@ -30,8 +35,7 @@ export default class Python
         this.modelPython = this.resource.scene
         this.modelPython.scale.set(1,1,1)
         this.modelPython.position.set(0,0,0)
-
-
+        this.modelPython.name = "python"
 
         this.scene.add(this.modelPython)
 
@@ -40,8 +44,8 @@ export default class Python
                 if(child instanceof THREE.Mesh)
                 {
                     child.castShadow = true
-                    const material = new THREE.MeshStandardMaterial({ metalness: 0.01, roughness: 0.5, name: 'white' })
-                    child.material = material;
+                    // const material = new THREE.MeshStandardMaterial({ metalness: 0.01, roughness: 0.5, name: 'white' })
+                    // child.material = material;
 
                     const parameters = {
                         color: 0xff0000,
@@ -50,6 +54,7 @@ export default class Python
                 }
             }
         )
+
     }
 
 
@@ -77,13 +82,12 @@ export default class Python
     createPython()
     {
         this.setModel()
-
         this.setShape()
         this.setBody()
         this.body.position = new CANNON.Vec3(-100, 0, -100)
-
     }
-    
+
+      
     update()
     {
         // console.log('position python : ', (this.modelPython.position.x - 0)**2 + (this.modelPython.position.z - 0)**2)
