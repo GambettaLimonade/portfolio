@@ -4,6 +4,7 @@ import CANNON from 'cannon'
 import { Raycaster } from "three";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { gsap } from "gsap";
+import Python from "./Python";
 
 
 export default class Soldier
@@ -389,8 +390,8 @@ export default class Soldier
             mouse.y = - ( y / this.height ) * 2 + 1;
             
             this.raycaster.setFromCamera(mouse, this.camera.instance);
-            this.intersectsFocus = this.raycaster.intersectObjects(this.scene.children);
-            
+            this.intersectsFocus = this.raycaster.intersectObjects(this.scene.children, true);
+
             if (this.intersectsFocus[0].object.name == "cylindre" || this.intersectsFocus[0].object.name == "ball")
             {
                 console.log("on focus un cylindre ou une balle")
@@ -406,8 +407,7 @@ export default class Soldier
                     // }
                 } );
                 
-                
-                this.camera.controls.target.set(this.intersectsFocus[0].object.position.x,this.intersectsFocus[0].object.position.y,this.intersectsFocus[0].object.position.z) 
+                                this.camera.controls.target.set(this.intersectsFocus[0].object.position.x,this.intersectsFocus[0].object.position.y,this.intersectsFocus[0].object.position.z) 
                 this.focused = true
     
                 // document.getElementById("info").style.display = "block";
@@ -418,6 +418,15 @@ export default class Soldier
                     // document.getElementById("info").style.display = "none";
     
                 }, 2500)
+            }
+
+            //
+            if (this.intersectsFocus[0].object.name == "python")
+            {
+                console.log(this.world2.python)
+                this.world2.python.model.scale.set(5, 5, 5)
+
+
             }
 
         })

@@ -32,21 +32,20 @@ export default class Python
 
     setModel()
     {
-        this.modelPython = this.resource.scene
-        this.modelPython.scale.set(1,1,1)
-        this.modelPython.position.set(0,0,0)
-        this.modelPython.name = "python"
+        this.model = this.resource.scene
+        this.model.scale.set(3, 3, 3)
+        this.model.position.set(0,0,0)
+        this.model.name = "python"
+        this.scene.add(this.model)
 
-        this.scene.add(this.modelPython)
-
-        this.modelPython.traverse((child) =>
+        this.model.traverse((child) =>
             {
                 if(child instanceof THREE.Mesh)
                 {
                     child.castShadow = true
                     // const material = new THREE.MeshStandardMaterial({ metalness: 0.01, roughness: 0.5, name: 'white' })
                     // child.material = material;
-
+                    child.name = "python"
                     const parameters = {
                         color: 0xff0000,
                     }
@@ -90,20 +89,21 @@ export default class Python
       
     update()
     {
-        // console.log('position python : ', (this.modelPython.position.x - 0)**2 + (this.modelPython.position.z - 0)**2)
+        // console.log('position python : ', (this.model.position.x - 0)**2 + (this.model.position.z - 0)**2)
         // console.log('rayon sphère : ', this.skyRadius ** 2)
-        // console.log('threejs y rotation : ', this.modelPython.rotation.y)
+        // console.log('threejs y rotation : ', this.model.rotation.y)
         // console.log('cannon body quaternion y ', this.body.quaternion)
 
-        if ((this.modelPython.position.x - 0)**2 + (this.modelPython.position.z - 0)**2 > ((this.skyRadius**2) - 1000) )
+        if ((this.model.position.x - 0)**2 + (this.model.position.z - 0)**2 > ((this.skyRadius**2) - 1000) )
         {
             this.body.position.x = (this.body.position.x + 0.9) 
             this.body.position.z = (this.body.position.z + 0.9)
             // this.releaseKey()
             // bloquer la position du character
-        } 
+        }   
+        this.body.position.y = 7
         
-        this.modelPython.position.copy(this.body.position)
+        this.model.position.copy(this.body.position)
 
     }
 }
