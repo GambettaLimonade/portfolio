@@ -13,6 +13,8 @@ import Floor1 from './Floor1.js';
 import Floor2 from './Floor2.js';
 import Table from './Table.js';
 
+//Commentaire
+
 // import Bigcouch from './Bigcouch.js';
 import Tv from './Tv.js';
 import Room from './Room.js';
