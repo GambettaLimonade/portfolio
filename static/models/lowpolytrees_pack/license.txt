@@ -1,0 +1,11 @@
+Model Information:
+* title:	Lowpolytrees Pack
+* source:	https://sketchfab.com/3d-models/lowpolytrees-pack-5105e26087674843843ac80ff639124c
+* author:	freddielin (https://sketchfab.com/freddielin)
+
+Model License:
+* license type:	CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
+* requirements:	Author must be credited. No commercial use.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Lowpolytrees Pack" (https://sketchfab.com/3d-models/lowpolytrees-pack-5105e26087674843843ac80ff639124c) by freddielin (https://sketchfab.com/freddielin) licensed under CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)

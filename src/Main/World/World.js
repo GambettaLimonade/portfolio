@@ -22,6 +22,9 @@ import Cylindre from './Cylindres.js';
 import Sun from './Sun.js';
 import Path from './Path.js';
 import Python from './Python.js';
+import Trees from './Trees.js';
+import Html from './Html.js';
+import Css from './Css.js';
 
 
 
@@ -61,7 +64,7 @@ export default class World
             'hauteur' : [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
         }
 
-        this.bricksPosition = [(0,1,0)]
+        this.bricksPosition = [(0,3,0)]
         
         
         this.resources.on('ready', () =>
@@ -76,10 +79,15 @@ export default class World
             this.soldier = new Soldier()
             this.table = new Table()
             this.python = new Python()
+            this.html = new Html()
+
+            this.css = new Css()
+
 
             this.tv = new Tv()
 
             this.room = new Room()
+            this.trees = new Trees()
 
             for(var i=0; i<this.ballonsValues['position'].length; i++)
             {
@@ -155,6 +163,16 @@ export default class World
             this.python.update()
         }
 
+        if(this.html)
+        {
+            this.html.update()
+        }
+
+        if(this.css)
+        {
+            this.css.update()
+        }
+
 
 
         // if(this.bigcouch)
@@ -171,6 +189,13 @@ export default class World
         {
             this.room.update()
         }
+
+
+        if (this.trees)
+        {
+            this.trees.update()
+        }
+
 
         if(this.sun)
         {

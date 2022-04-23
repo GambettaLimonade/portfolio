@@ -46,15 +46,13 @@ export default class Soldier
         this.collisions = []
         this.characterBoundingBox;
         this.focused = false;
-
         //Debug
         if(this.debug.active)
         {
             this.debugFolder = this.debug.ui.addFolder('soldier')
         }
         
-        
-        this.bricksBB = this.world2.bricks[0].brickBoundingBox
+
         this.setModel()
         this.setAnimation()
        
@@ -456,13 +454,28 @@ export default class Soldier
             // bloquer la position du character
         } 
         else
-        {            
-            this.moveModelArrow(this.keys)
-            if (this.movements.length > 0)
-            {    
-                this.model.lookAt(this.direction)
-                this.moveModelFinger(this.model, this.movements[ 0 ]);
-            }
+        {      
+            
+            if (this.world2.bricks[0].center)
+            {
+                if (this.model.position.distanceTo(this.world2.bricks[0].center) < 5)
+                {
+                    var distance = 1
+                    this.model.position.x -= Math.sin(this.model.rotation.y) * distance * 5
+                    this.model.position.z -= Math.cos(this.model.rotation.y) * distance * 5
+                }
+            }            
+
+            
+    
+                this.moveModelArrow(this.keys)
+                if (this.movements.length > 0)
+                {    
+                    this.model.lookAt(this.direction)
+                    this.moveModelFinger(this.model, this.movements[ 0 ]);
+                }
+
+
 
             
             if (!this.focused)
@@ -475,10 +488,10 @@ export default class Soldier
                 
                 this.camera.controls.target.set(this.model.position.x,this.model.position.y,this.model.position.z)
             }
-            
 
+ 
 
-
+            // console.log('position personnage : ', this.model.position)
             this.bodyCharacter.position.copy(this.model.position)
             this.changementDambiance()
             // console.log(this.model.position)

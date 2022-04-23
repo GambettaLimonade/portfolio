@@ -7,12 +7,38 @@ export default[
 
     },
 
+
+    {
+        name: 'trees',
+        type: 'gltfModel',
+        path: 'models/lowpolytrees_pack/scene.gltf'
+
+
+    },
+
     {
         name : 'python',
         type: 'gltfModel',
         path : 'models/python_programming_language/scene.gltf'
 
     },
+
+
+    {
+        name : 'html',
+        type: 'gltfModel',
+        path : 'models/html/html.glb'
+
+    },
+
+
+    {
+        name : 'css',
+        type: 'gltfModel',
+        path : 'models/css/css.glb'
+
+    },
+
 
     {
         name: 'room',

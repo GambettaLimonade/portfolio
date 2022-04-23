@@ -4,7 +4,7 @@ import CANNON from 'cannon'
 import { Raycaster } from "three";
 
 
-export default class Python
+export default class Css
 {
     constructor()
     {
@@ -13,8 +13,8 @@ export default class Python
         this.resources = this.main.resources
         this.length = 10
         this.height = 5
-        this.resource = this.resources.items.python
-        this.position = (100, 0, 20)
+        this.resource = this.resources.items.css
+        this.position = (100, 0, 60)
         this.raycaster = new Raycaster()
         this.camera = this.main.camera
 
@@ -26,7 +26,7 @@ export default class Python
 
 
 
-        this.createPython()
+        this.createCss()
         
     }
 
@@ -35,7 +35,7 @@ export default class Python
         this.model = this.resource.scene
         this.model.scale.set(3, 3, 3)
         this.model.position.set(0,0,0)
-        this.model.name = "python"
+        this.model.name = "css"
 
 
 
@@ -83,17 +83,18 @@ export default class Python
         this.main.physics.world.addBody(this.body)
     }
 
-    createPython()
+    createCss()
     {
         this.setModel()
         this.setShape()
         this.setBody()
-        this.body.position = new CANNON.Vec3(-100, 0, -100)
+        this.body.position = new CANNON.Vec3(-100, 0, -30)
     }
 
       
     update()
     {
+
         // console.log('position python : ', (this.model.position.x - 0)**2 + (this.model.position.z - 0)**2)
         // console.log('rayon sphère : ', this.skyRadius ** 2)
         // console.log('threejs y rotation : ', this.model.rotation.y)

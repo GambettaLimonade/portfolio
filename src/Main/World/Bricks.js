@@ -44,6 +44,7 @@ export default class Bricks
         this.meshBrick.castShadow = true
         this.scene.add(this.meshBrick)
 
+
         this.brickBoundingBox = new THREE.Box3(new THREE.Vector3(), new THREE.Vector3());
         this.brickBoundingBox.setFromObject(this.meshBrick);
     }
@@ -63,7 +64,7 @@ export default class Bricks
                 mass:0.1,
                 shape:this.shape,
                 material:this.main.physics.world.heavyMaterial,
-                linearDamping:0.95
+                linearDamping:1
 
                 
             })            
@@ -87,5 +88,12 @@ export default class Bricks
         this.meshBrick.position.copy(this.body.position)
         this.meshBrick.position.y = this.height / 2
         this.brickBoundingBox.copy(this.meshBrick.geometry.boundingBox).applyMatrix4(this.meshBrick.matrixWorld);
+
+
+        this.center = new THREE.Vector3();
+        this.meshBrick.geometry.computeBoundingBox();
+        this.meshBrick.geometry.boundingBox.getCenter(this.center);
+        this.meshBrick.localToWorld(this.center)
+        // console.log('centre object : ', this.center)
     }
 }
