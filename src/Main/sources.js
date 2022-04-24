@@ -75,7 +75,7 @@ export default[
     {
         name: 'deadTree',
         type: 'gltfModel',
-        path: 'models/lowpoly_tree/scene.gltf'
+        path: 'models/trees/dead_tree/scene.gltf'
     },
 
     {

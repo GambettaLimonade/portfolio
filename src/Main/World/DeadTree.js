@@ -3,12 +3,13 @@ import * as THREE from 'three'
 
 export default class DeadTree
 {
-    constructor(position)
+    constructor(position, hauteur)
     {
         this.main = new Main()
         this.scene = this.main.scene
         this.resources = this.main.resources
         this.position = position
+        this.hauteur = hauteur
         this.resource = this.resources.items.deadTree
         this.setModel()
         
@@ -17,7 +18,7 @@ export default class DeadTree
     setModel()
     {
         this.model = this.resource.scene
-        this.model.scale.set(0.12, 0.12, 0.12)
+        this.model.scale.set(0.01, 0.01, 0.01)
         this.model.position.set(this.position[0],this.position[1], this.position[2])
         this.model.name = "tree"
         // this.model.material.color.setHex( 0Xff0000)
@@ -27,14 +28,14 @@ export default class DeadTree
             {
                 if(child instanceof THREE.Mesh)
                 {   
-                    // child.material.color.setHex( 0xeeecf1 )
+                    child.material.color.setHex( 0xeeecf1 )
                     child.castShadow = true
                 }
             }
         )
 
-        this.model.children[0].children[0].children[0].material.color.setHex(0x00000f)
-        this.model.children[0].children[0].children[1].material.color.setHex(0xC2C2B4)
+        // this.model.children[0].children[0].children[0].material.color.setHex(0x836953)
+        // this.model.children[0].children[0].children[1].material.color.setHex(0xB1907F)
 
 
     }

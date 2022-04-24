@@ -77,6 +77,7 @@ export default class World
 
         this.yellowtreeValues = {
             'position' : [[-10, 0, -40], [-20, 0, -33]],
+            'hauteur' : [0.1, 0.3]
         }
 
 
