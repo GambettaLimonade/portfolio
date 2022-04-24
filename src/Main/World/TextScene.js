@@ -34,7 +34,7 @@ export default class TextScene
         
             } );
 
-            var textGeoProg = new THREE.TextGeometry( "All my Programming skills", {
+            var textGeoProg = new THREE.TextGeometry( "Techno that I know", {
         
                 font: font,        
                 size: 3,

@@ -22,10 +22,13 @@ import Cylindre from './Cylindres.js';
 import Sun from './Sun.js';
 import Path from './Path.js';
 import Python from './Python.js';
-import Trees from './Trees.js';
 import Html from './Html.js';
 import Css from './Css.js';
 import TextScene from './TextScene.js';
+import Blender from './Blender.js';
+import Threejs from './Threejs.js';
+import Windows from './Windows.js';
+import DeadTree from './DeadTree.js';
 
 
 
@@ -42,6 +45,8 @@ export default class World
         this.cylinders = []
         this.bricks = []
         this.path = []
+        this.deadtrees = []
+        
 
         this.ballonsValues = 
         {
@@ -65,6 +70,17 @@ export default class World
             'hauteur' : [0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1, 0.1]
         }
 
+
+        this.deadtreeValues = {
+            'position' : [[-142, 0, 40], [-164, 0, -33]],
+        }
+
+        this.yellowtreeValues = {
+            'position' : [[-10, 0, -40], [-20, 0, -33]],
+        }
+
+
+
         this.bricksPosition = [(0,3,0)]
         
         
@@ -80,6 +96,9 @@ export default class World
             this.soldier = new Soldier()
             this.table = new Table()
             this.python = new Python()
+            this.blender = new Blender()
+            this.threejs = new Threejs()
+            this.windows = new Windows()
             this.html = new Html()
 
             this.css = new Css()
@@ -88,7 +107,6 @@ export default class World
             this.tv = new Tv()
 
             this.room = new Room()
-            this.trees = new Trees()
             this.text3d = new TextScene()
 
             for(var i=0; i<this.ballonsValues['position'].length; i++)
@@ -106,8 +124,14 @@ export default class World
                 this.path.push(new Path(this.pathValues['position'][i], this.pathValues['diametre'][i], this.pathValues['hauteur'][i]))
             }
 
+            this.firstDeadTree = new DeadTree([-36,0,107])
+            for(var i=0; i<this.deadtreeValues['position'].length; i++)
+            {
+                var newDeadTree = this.firstDeadTree.model.clone();
+                newDeadTree.position.set(this.deadtreeValues['position'][i][0],this.deadtreeValues['position'][i][1],this.deadtreeValues['position'][i][2]);                
+                this.scene.add(newDeadTree); 
 
-
+            }
             this.environment = new Environment()
             this.sun = new Sun()            
         })
@@ -134,6 +158,7 @@ export default class World
             for(var ballon of this.ballons)
                 ballon.update()
         }
+
 
         if(this.cylinders)
         {
@@ -165,6 +190,21 @@ export default class World
             this.python.update()
         }
 
+        if(this.blender)
+        {
+            this.blender.update()
+        }
+
+        if(this.threejs)
+        {
+            this.threejs.update()
+        }
+
+        if(this.windows)
+        {
+            this.windows.update()
+        }
+
         if(this.html)
         {
             this.html.update()
@@ -190,12 +230,6 @@ export default class World
         if (this.room)
         {
             this.room.update()
-        }
-
-
-        if (this.trees)
-        {
-            this.trees.update()
         }
 
 

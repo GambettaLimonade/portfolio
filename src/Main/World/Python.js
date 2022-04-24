@@ -72,7 +72,7 @@ export default class Python
                 mass:0.1,
                 shape:this.shape,
                 material:this.main.physics.world.defaultMaterial,
-                linearDamping:0.3
+                linearDamping:1
                 
             })
             

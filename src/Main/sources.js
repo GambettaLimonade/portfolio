@@ -9,14 +9,6 @@ export default[
 
 
     {
-        name: 'trees',
-        type: 'gltfModel',
-        path: 'models/lowpolytrees_pack/scene.gltf'
-
-
-    },
-
-    {
         name : 'python',
         type: 'gltfModel',
         path : 'models/python_programming_language/scene.gltf'
@@ -27,7 +19,7 @@ export default[
     {
         name : 'html',
         type: 'gltfModel',
-        path : 'models/html/html.glb'
+        path : 'models/html/scene.gltf'
 
     },
 
@@ -39,6 +31,27 @@ export default[
 
     },
 
+    {
+        name : 'blender',
+        type: 'gltfModel',
+        path : 'models/blender_logo/scene.gltf'
+
+    },
+
+
+    {
+        name : 'threejs',
+        type: 'gltfModel',
+        path : 'models/threejs/scene.gltf'
+
+    },
+
+    {
+        name : 'windows',
+        type: 'gltfModel',
+        path : 'models/windows/scene.gltf'
+
+    },
 
     {
         name: 'room',
@@ -53,26 +66,16 @@ export default[
     },
 
     {
-        name: 'couch',
-        type: 'gltfModel',
-        path: 'models/soviet_sofa/scene.glb'
-    },
-
-    // {
-    //     name: 'bigcouch',
-    //     type: 'gltfModel',
-    //     path: 'models/bigcouch/scene.glb'
-    // },
-
-    {
-        name: 'tv',
-        type: 'gltfModel',
-        path: 'models/tv/scene.gltf'
-    },
-    {
         name: 'retro_tv',
         type: 'gltfModel',
         path: 'models/crt_tv/scene.gltf'
+    },
+
+
+    {
+        name: 'deadTree',
+        type: 'gltfModel',
+        path: 'models/lowpoly_tree/scene.gltf'
     },
 
     {

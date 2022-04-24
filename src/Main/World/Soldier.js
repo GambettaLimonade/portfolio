@@ -489,16 +489,11 @@ export default class Soldier
                 this.camera.controls.target.set(this.model.position.x,this.model.position.y,this.model.position.z)
             }
 
- 
-
-            // console.log('position personnage : ', this.model.position)
             this.bodyCharacter.position.copy(this.model.position)
             this.changementDambiance()
             // console.log(this.model.position)
-
             // this.camera.controls.update()
 
-            console.log(this.model.position)
         }        
 
     }
