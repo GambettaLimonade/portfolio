@@ -35,7 +35,29 @@ export default class Css
         this.model = this.resource.scene
         this.model.scale.set(3, 3, 3)
         this.model.position.set(0,0,0)
+        this.model.rotation.y = - Math.PI * 0.5
+
         this.model.name = "css"
+        
+        this.model.children[0].children[0].material.color.r = 0
+        this.model.children[0].children[0].material.color.g = 0
+        this.model.children[0].children[0].material.color.b = 255
+        // this.model.children[0].children[0].material.color.setHex( 0x0000ff )
+
+        this.model.children[0].children[1].material.color.r = 255
+        this.model.children[0].children[1].material.color.g = 255
+        this.model.children[0].children[1].material.color.b = 255
+
+        // this.model.children[0].children[0].material.color.setHex( 0x0000ff )
+        // this.model.children[0].children[1].material.color.setHex( 0xffffff )
+
+        // r: 0.0343399, g: 0.171441, b: 0.376262,
+        // const light = new THREE.PointLight( 0xffffff, 1, 100 );
+        // light.position.set( -70, 20, -60  );
+        // const sphereSize = 10;
+        // const pointLightHelper = new THREE.PointLightHelper( light, sphereSize );
+        // this.scene.add( pointLightHelper );
+        // this.scene.add( light );
 
 
 
@@ -50,7 +72,7 @@ export default class Css
                     child.castShadow = true
                     // const material = new THREE.MeshStandardMaterial({ metalness: 0.01, roughness: 0.5, name: 'white' })
                     // child.material = material;
-                    child.name = "python"
+                    child.name = "css"
                     const parameters = {
                         color: 0xff0000,
                     }
@@ -88,7 +110,7 @@ export default class Css
         this.setModel()
         this.setShape()
         this.setBody()
-        this.body.position = new CANNON.Vec3(-100, 0, -30)
+        this.body.position = new CANNON.Vec3(-100, 0, -80)
     }
 
       

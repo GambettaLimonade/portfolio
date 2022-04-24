@@ -33,13 +33,9 @@ export default class Python
     setModel()
     {
         this.model = this.resource.scene
-        this.model.scale.set(3, 3, 3)
+        this.model.scale.set(7, 7, 7)
         this.model.position.set(0,0,0)
         this.model.name = "python"
-
-
-
-
 
         this.scene.add(this.model)
 
@@ -106,7 +102,7 @@ export default class Python
             // this.releaseKey()
             // bloquer la position du character
         }   
-        this.body.position.y = 7
+        this.body.position.y = 20
         
         this.model.position.copy(this.body.position)
 

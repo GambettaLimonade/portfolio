@@ -497,6 +497,8 @@ export default class Soldier
             // console.log(this.model.position)
 
             // this.camera.controls.update()
+
+            console.log(this.model.position)
         }        
 
     }

@@ -25,6 +25,7 @@ import Python from './Python.js';
 import Trees from './Trees.js';
 import Html from './Html.js';
 import Css from './Css.js';
+import TextScene from './TextScene.js';
 
 
 
@@ -88,6 +89,7 @@ export default class World
 
             this.room = new Room()
             this.trees = new Trees()
+            this.text3d = new TextScene()
 
             for(var i=0; i<this.ballonsValues['position'].length; i++)
             {

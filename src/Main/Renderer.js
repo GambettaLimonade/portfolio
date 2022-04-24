@@ -1,5 +1,6 @@
 import Main from "./Main";
 import * as THREE from 'three'
+import { sRGBEncoding } from "three";
 
 export default class Renderer
 {
@@ -21,6 +22,7 @@ export default class Renderer
             canvas: this.canvas,
             antialias: true
         })
+        this.instance.outputEncoding = sRGBEncoding
         this.instance.shadowMap.enabled = true
         this.instance.shadowMap.type = THREE.PCFSoftShadowMap
         this.instance.setSize(this.sizes.width, this.sizes.height)

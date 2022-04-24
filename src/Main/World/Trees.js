@@ -66,10 +66,7 @@ export default class Trees
         this.model.material = new THREE.MeshStandardMaterial({ color: 0xff4400 })
         this.model.material.needsUpdate = true;
 
-        this.model.name = "tree"
-
-        console.log(this.model)
-        
+        this.model.name = "tree"        
         this.scene.add(this.model)
 
         this.model.traverse((child) =>

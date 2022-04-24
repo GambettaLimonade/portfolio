@@ -22,10 +22,6 @@ export default class Html
         this.world2 = this.main.world
         this.sky = this.world2.sky
         this.skyRadius = this.sky.sphereRadius
-
-
-
-
         this.createHtml()
         
     }
@@ -35,11 +31,16 @@ export default class Html
         this.model = this.resource.scene
         this.model.scale.set(3, 3, 3)
         this.model.position.set(0,0,0)
+        this.model.rotation.y = - Math.PI * 0.5
+
+        this.model.children[1].children[0].material.color.r = 255
+        this.model.children[1].children[0].material.color.g = 0
+        this.model.children[1].children[0].material.color.b = 0
+        this.model.children[1].children[1].material.color.r = 255
+        this.model.children[1].children[1].material.color.g = 255
+        this.model.children[1].children[1].material.color.b = 255
+
         this.model.name = "html"
-
-
-
-
 
         this.scene.add(this.model)
 
@@ -50,7 +51,7 @@ export default class Html
                     child.castShadow = true
                     // const material = new THREE.MeshStandardMaterial({ metalness: 0.01, roughness: 0.5, name: 'white' })
                     // child.material = material;
-                    child.name = "python"
+                    child.name = "html"
                     const parameters = {
                         color: 0xff0000,
                     }
@@ -88,7 +89,7 @@ export default class Html
         this.setModel()
         this.setShape()
         this.setBody()
-        this.body.position = new CANNON.Vec3(-100, 0, -60)
+        this.body.position = new CANNON.Vec3(-70, 0, -90)
     }
 
       
