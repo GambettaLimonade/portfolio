@@ -31,6 +31,7 @@ export default class Soldier
 
         this.flooor = this.world2.floor
         this.floorColor = this.flooor.mesh.material.color
+    
         
 
 
@@ -87,7 +88,6 @@ export default class Soldier
                 if(child instanceof THREE.Mesh)
                 {
                     child.castShadow = true
-
                     const parameters = {
                         color: 0xff0000,
                     }
@@ -290,25 +290,25 @@ export default class Soldier
         [
                 {
                     value : distanceCharacterPointA,
-                    key : [255, 218, 193]
+                    key : [10, 10, 10]
                 }
             ,
             {
                 value : distanceCharacterPointB,
-                key : [0, 255, 0]     
+                key : [10, 10, 10]     
             },
             {
                 value : distanceCharacterPointC,
-                key : [0,0,0]   
+                key : [27, 27, 27]   
             },
             {
                 value : distanceCharacterPointD,
-                key : [0,0,0] 
+                key : [27, 27, 27] 
 
             },
             {
                 value : distanceCharacterCentre,
-                key : [0, 0, 255]
+                key : [0, 0, 0]
 
             }
         ]
@@ -330,6 +330,7 @@ export default class Soldier
     
         this.floorColor.set(new THREE.Color(`rgb(${Math.round(Total[0])}, ${Math.round(Total[1])}, ${Math.round(Total[2])})`)) 
         this.sky.mesh.material[0].color.set(new THREE.Color(`rgb(${Math.round(Total[0])}, ${Math.round(Total[1])}, ${Math.round(Total[2])})`))
+
     }
 
 
@@ -347,7 +348,7 @@ export default class Soldier
 
     moveModelArrow()
     {
-        const vitesse = 2;    
+        const vitesse = 3;    
         const rotation = Math.PI/60 ;
         
         if (Object.keys(this.keys).length !== 0)
@@ -404,9 +405,9 @@ export default class Soldier
                         // }
                     // }
                 } );
-                
-                                this.camera.controls.target.set(this.intersectsFocus[0].object.position.x,this.intersectsFocus[0].object.position.y,this.intersectsFocus[0].object.position.z) 
-                this.focused = true
+
+            this.camera.controls.target.set(this.intersectsFocus[0].object.position.x,this.intersectsFocus[0].object.position.y,this.intersectsFocus[0].object.position.z) 
+            this.focused = true
     
                 // document.getElementById("info").style.display = "block";
     
@@ -417,6 +418,19 @@ export default class Soldier
     
                 }, 2500)
             }
+
+            if (this.intersectsFocus[0].object.name == "machinescreen" || this.intersectsFocus[0].object.name == "tvscreen")
+            {
+                console.log('écrans touchés')
+                this.camera.instance.position.lerp(new THREE.Vector3(50, 5, 0), 1)
+                this.camera.controls.target.set(this.intersectsFocus[0].object.position.x,this.intersectsFocus[0].object.position.y,this.intersectsFocus[0].object.position.z) 
+
+
+            }
+
+
+
+
 
             //
             if (this.intersectsFocus[0].object.name == "python")
@@ -455,7 +469,6 @@ export default class Soldier
         } 
         else
         {      
-            
             if (this.world2.bricks[0].center)
             {
                 if (this.model.position.distanceTo(this.world2.bricks[0].center) < 5)
@@ -464,7 +477,27 @@ export default class Soldier
                     this.model.position.x -= Math.sin(this.model.rotation.y) * distance * 5
                     this.model.position.z -= Math.cos(this.model.rotation.y) * distance * 5
                 }
-            }            
+            }       
+            
+
+            // /!\/!\/!\ le (54, 0, 4.4) est relatif à /!\/!\/!\
+            // /!\/!\/!\ la ligne de code : this.model.position.set(50,0,0) dans Room.js /!\/!\/!\
+
+            if(this.model.position.distanceTo(new THREE.Vector3(54, 0, 4.4)) < 5)
+            {
+                var distance = 1
+                this.model.position.x -= Math.sin(this.model.rotation.y) * distance * 5
+                this.model.position.z -= Math.cos(this.model.rotation.y) * distance * 5
+
+
+            }
+
+            // if (this.room.centerRoom)
+            // {
+            //     console.log(this.room.centerRoom)
+            // }
+
+
 
             
     
@@ -494,7 +527,7 @@ export default class Soldier
             this.changementDambiance()
             // console.log(this.model.position)
             // this.camera.controls.update()
-
+            // console.log(this.model.position)
         }        
 
     }

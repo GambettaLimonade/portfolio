@@ -56,7 +56,7 @@ export default[
     {
         name: 'room',
         type: 'gltfModel',
-        path: 'models/gaming_room/scene.gltf'        
+        path: 'models/arcade_room/finale_scene.glb'        
     },
 
     {

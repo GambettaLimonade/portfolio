@@ -32,6 +32,7 @@ export default class Ballon
             {
             metalness: 0.3,
             roughness: 0.4,
+            color : 0xF7F3E7
             // map: this.yarnTexture
             }
         )
@@ -62,7 +63,7 @@ export default class Ballon
                 mass:0.8,
                 shape:this.shape,
                 material:this.main.physics.world.defaultMaterial,
-                linearDamping:0.8
+                linearDamping:1
                 
             })
             

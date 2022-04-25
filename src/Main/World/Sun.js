@@ -16,7 +16,7 @@ export default class Sun
 
     setSun()
     {
-        this.light = new THREE.PointLight( 0xFDB813, 1, 100 );
+        this.light = new THREE.DirectionalLight( 0x0055a5, 0.8, 100 );
         this.light.position.set( 0, 20, 0 );
         this.scene.add( this.light );
     }

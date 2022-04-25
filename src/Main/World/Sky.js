@@ -9,7 +9,7 @@ export default class Sky
         this.main = new Main()
         this.scene = this.main.scene
         this.resources = this.main.resources
-        this.sphereRadius = 200
+        this.sphereRadius = 100
 
         this.setGeometry()
         this.setMaterial()
@@ -30,7 +30,7 @@ export default class Sky
     {
         this.materialSide = new THREE.MeshStandardMaterial(
             {
-                    color: '#ADD8E6',
+                    color: '#000000',
                     side: THREE.BackSide
             })
         this.materialFront = new THREE.MeshStandardMaterial(

@@ -72,13 +72,10 @@ export default class World
 
 
         this.deadtreeValues = {
-            'position' : [[-142, 0, 40], [-164, 0, -33]],
+            'position' : [[-142, 0, 40], [-164, 0, -33], [-64,0,-30], [-37,0,-136], [7,0,-98], [115,0,-137], [141,0,-48], [92,0,11], [122,0,63], [91,0,130]],
+            'angletree' : [10, 3, 1, 2, 3, 1, 3, 8, 2, 10]
         }
 
-        this.yellowtreeValues = {
-            'position' : [[-10, 0, -40], [-20, 0, -33]],
-            'hauteur' : [0.1, 0.3]
-        }
 
 
 
@@ -91,48 +88,47 @@ export default class World
             {
                 this.bricks.push(new Bricks(this.bricksPosition[i]))
             }
-            this.points = new Points()
+            // this.points = new Points()
             this.floor = new Floor()
             this.sky = new Sky()
             this.soldier = new Soldier()
-            this.table = new Table()
-            this.python = new Python()
-            this.blender = new Blender()
-            this.threejs = new Threejs()
-            this.windows = new Windows()
-            this.html = new Html()
-
-            this.css = new Css()
+            // this.table = new Table()
+            // this.python = new Python()
+            // this.blender = new Blender()
+            // this.threejs = new Threejs()
+            // this.windows = new Windows()
+            // this.html = new Html()
+            // this.css = new Css()
 
 
             this.tv = new Tv()
-
             this.room = new Room()
-            this.text3d = new TextScene()
+            // this.text3d = new TextScene()
 
-            for(var i=0; i<this.ballonsValues['position'].length; i++)
-            {
-                this.ballons.push(new Ballon(this.ballonsValues['position'][i], this.ballonsValues['diametre'][i]))
-            }
+            // for(var i=0; i<this.ballonsValues['position'].length; i++)
+            // {
+            //     this.ballons.push(new Ballon(this.ballonsValues['position'][i], this.ballonsValues['diametre'][i]))
+            // }
 
-            for(var i=0; i<this.cylindersValues['position'].length; i++)
-            {
-                this.cylinders.push(new Cylindre(this.cylindersValues['position'][i], this.cylindersValues['diametre'][i], this.cylindersValues['hauteur'][i]))
-            }
+            // for(var i=0; i<this.cylindersValues['position'].length; i++)
+            // {
+            //     this.cylinders.push(new Cylindre(this.cylindersValues['position'][i], this.cylindersValues['diametre'][i], this.cylindersValues['hauteur'][i]))
+            // }
 
-            for(var i=0; i<this.pathValues['position'].length; i++)
-            {
-                this.path.push(new Path(this.pathValues['position'][i], this.pathValues['diametre'][i], this.pathValues['hauteur'][i]))
-            }
+            // for(var i=0; i<this.pathValues['position'].length; i++)
+            // {
+            //     this.path.push(new Path(this.pathValues['position'][i], this.pathValues['diametre'][i], this.pathValues['hauteur'][i]))
+            // }
 
-            this.firstDeadTree = new DeadTree([-36,0,107])
-            for(var i=0; i<this.deadtreeValues['position'].length; i++)
-            {
-                var newDeadTree = this.firstDeadTree.model.clone();
-                newDeadTree.position.set(this.deadtreeValues['position'][i][0],this.deadtreeValues['position'][i][1],this.deadtreeValues['position'][i][2]);                
-                this.scene.add(newDeadTree); 
+            // this.firstDeadTree = new DeadTree([20,0,158], 2)
+            // for(var i=0; i<this.deadtreeValues['position'].length; i++)
+            // {
+            //     var newDeadTree = this.firstDeadTree.model.clone();
+            //     newDeadTree.position.set(this.deadtreeValues['position'][i][0],this.deadtreeValues['position'][i][1],this.deadtreeValues['position'][i][2]);      
+            //     newDeadTree.rotation.x = Math.PI / this.deadtreeValues['angletree'][i]          
+            //     this.scene.add(newDeadTree); 
 
-            }
+            // }
             this.environment = new Environment()
             this.sun = new Sun()            
         })

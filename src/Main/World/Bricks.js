@@ -93,7 +93,7 @@ export default class Bricks
         this.center = new THREE.Vector3();
         this.meshBrick.geometry.computeBoundingBox();
         this.meshBrick.geometry.boundingBox.getCenter(this.center);
-        this.meshBrick.localToWorld(this.center)
+        this.meshBrick.localToWorld(this.center)        
         // console.log('centre object : ', this.center)
     }
 }

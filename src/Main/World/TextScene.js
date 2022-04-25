@@ -81,7 +81,7 @@ export default class TextScene
         
             } );
 
-            var textMaterial = new THREE.MeshPhongMaterial( { color: 0xffffff } );
+            var textMaterial = new THREE.MeshPhongMaterial( { color: 0xB1907F } );
         
             var meshSport = new THREE.Mesh( textGeoFoot, textMaterial );
             var meshProg = new THREE.Mesh( textGeoProg, textMaterial );

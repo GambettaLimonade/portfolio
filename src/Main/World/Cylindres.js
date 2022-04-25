@@ -32,6 +32,7 @@ export default class Cylindre
             {
             metalness: 0.3,
             roughness: 0.4,
+            color : 0xF7F3E7
             // map: this.yarnTexture
             }
         )
@@ -62,7 +63,7 @@ export default class Cylindre
                 mass:0.1,
                 shape:this.shape,
                 material:this.main.physics.world.defaultMaterial,
-                linearDamping:0.9
+                linearDamping:1
                 
             })
             
