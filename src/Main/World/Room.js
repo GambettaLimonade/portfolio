@@ -11,10 +11,12 @@ export default class Room
         this.length = 10
         this.height = 5
         this.resource = this.resources.items.room
-        this.images = [this.resources.items.maths78, this.resources.items.ccd]
+        this.images = [this.resources.items.maths78, this.resources.items.ccd, this.resources.items.dbz]
         this.index = 0
 
+        console.log('In the constructor : ', this.images[0])
         this.createRoom()
+
 
     }
 
@@ -28,17 +30,29 @@ export default class Room
         this.scene.add(this.model)
 
 
-
         this.model.traverse((child) =>
             {
                 if(child instanceof THREE.Mesh)
                     {
-                        child.castShadow = true
-                    }
-            }
-        )
+                        if (child.name == "tvscreen")
+                            {       
+                                child.material = new THREE.MeshStandardMaterial(
+                                        {
+                                            color: 0xffff00
+                                        }
 
-    }
+                                    )
+                                child.material.map = this.images[0]
+                                child.material.needsUpdate = true;
+                                console.log('Image after mapping : ', child.material.map)
+                            }       
+                        }
+                    }
+                )
+            }
+
+
+
 
     setLights()
     {
@@ -58,7 +72,6 @@ export default class Room
     {
         this.setModel()
         this.setLights()
-        console.log(this.model)
 
     }
     

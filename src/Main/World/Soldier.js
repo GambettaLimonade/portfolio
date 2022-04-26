@@ -290,12 +290,12 @@ export default class Soldier
         [
                 {
                     value : distanceCharacterPointA,
-                    key : [10, 10, 10]
+                    key : [27, 27, 27]
                 }
             ,
             {
                 value : distanceCharacterPointB,
-                key : [10, 10, 10]     
+                key : [27, 27, 27]     
             },
             {
                 value : distanceCharacterPointC,
@@ -328,7 +328,7 @@ export default class Soldier
             Total.push(a[i]+b[i]+c[i]+d[i]+e[i]);
         }
     
-        this.floorColor.set(new THREE.Color(`rgb(${Math.round(Total[0])}, ${Math.round(Total[1])}, ${Math.round(Total[2])})`)) 
+        // this.floorColor.set(new THREE.Color(`rgb(${Math.round(Total[0])}, ${Math.round(Total[1])}, ${Math.round(Total[2])})`)) 
         this.sky.mesh.material[0].color.set(new THREE.Color(`rgb(${Math.round(Total[0])}, ${Math.round(Total[1])}, ${Math.round(Total[2])})`))
 
     }

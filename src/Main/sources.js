@@ -56,7 +56,7 @@ export default[
     {
         name: 'room',
         type: 'gltfModel',
-        path: 'models/arcade_room/finale_scene.glb'        
+        path: 'models/arcade_room/finale_finale_scene.glb'        
     },
 
     {
@@ -97,6 +97,11 @@ export default[
         path : 'textures/matcaps/ball.png'
     },
 
+    {
+        name : 'dbz',
+        type : 'texture',
+        path : 'textures/dbz.gif'
+    },
 
 
  ]
