@@ -84,10 +84,10 @@ export default class World
         
         this.resources.on('ready', () =>
         {
-            for(var i=0; i<this.bricksPosition.length; i++)
-            {
-                this.bricks.push(new Bricks(this.bricksPosition[i]))
-            }
+            // for(var i=0; i<this.bricksPosition.length; i++)
+            // {
+            //     this.bricks.push(new Bricks(this.bricksPosition[i]))
+            // }
             // this.points = new Points()
             this.floor = new Floor()
             this.sky = new Sky()

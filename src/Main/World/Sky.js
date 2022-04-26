@@ -50,6 +50,7 @@ export default class Sky
         
         
         this.mesh = new THREE.Mesh(this.geometry, new THREE.MeshFaceMaterial(this.materials))
+        this.mesh.name = "sky"
 
         // this.scene.add( line );
         this.scene.add(this.mesh )

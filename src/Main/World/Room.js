@@ -14,7 +14,6 @@ export default class Room
         this.images = [this.resources.items.maths78, this.resources.items.ccd, this.resources.items.dbz]
         this.index = 0
 
-        console.log('In the constructor : ', this.images[0])
         this.createRoom()
 
 
@@ -44,7 +43,6 @@ export default class Room
                                     )
                                 child.material.map = this.images[0]
                                 child.material.needsUpdate = true;
-                                console.log('Image after mapping : ', child.material.map)
                             }       
                         }
                     }

@@ -5,6 +5,8 @@ import { Raycaster } from "three";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { gsap } from "gsap";
 import Python from "./Python";
+import { TWEEN } from 'three/examples/jsm/libs/tween.module.min'
+
 
 
 export default class Soldier
@@ -47,6 +49,7 @@ export default class Soldier
         this.collisions = []
         this.characterBoundingBox;
         this.focused = false;
+
         //Debug
         if(this.debug.active)
         {
@@ -376,9 +379,6 @@ export default class Soldier
 
             this.height =  this.main.sizes.height
             this.width =  this.main.sizes.width
-            const focusCamera = new THREE.PerspectiveCamera( 45, this.width / this.height, 1, 1000 );
-            this.scene.add( focusCamera );
-
 
             const mouse = new THREE.Vector2();
             
@@ -390,6 +390,11 @@ export default class Soldier
             
             this.raycaster.setFromCamera(mouse, this.camera.instance);
             this.intersectsFocus = this.raycaster.intersectObjects(this.scene.children, true);
+
+
+            // /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ 
+            // /!\ IF POUR LE MOUVEMENT DE LA CAMERA ET LES TWEENS /!\ 
+            // /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ 
 
             if (this.intersectsFocus[0].object.name == "cylindre" || this.intersectsFocus[0].object.name == "ball")
             {
@@ -421,18 +426,25 @@ export default class Soldier
 
             if (this.intersectsFocus[0].object.name == "machinescreen" || this.intersectsFocus[0].object.name == "tvscreen")
             {
-                console.log('écrans touchés')
-                this.camera.instance.position.lerp(new THREE.Vector3(50, 5, 0), 1)
-                this.camera.controls.target.set(this.intersectsFocus[0].object.position.x,this.intersectsFocus[0].object.position.y,this.intersectsFocus[0].object.position.z) 
+                this.focused = true
+                let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(44, 5, 5.75), 3000).easing(TWEEN.Easing.Linear.None).start()
+                let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(this.intersectsFocus[0].point, 1000).easing(TWEEN.Easing.Linear.None).start()
 
+                
+                // this.camera.controls.target.set(this.intersectsFocus[0].point)
+                console.log(this.intersectsFocus[0])
 
+                // let targetChange = new TWEEN.Tween(this.camera.controls.target).to(new THREE.Vector3(30, 80, -10), 3000).easing(TWEEN.Easing.Linear.None).start()
+            } 
+
+            if (this.intersectsFocus[0].object.name == "sky" || this.intersectsFocus[0].object.name == "floor")
+            {
+                this.focused = false
+                console.log(this.intersectsFocus[0].object.name)
             }
 
 
-
-
-
-            //
+            
             if (this.intersectsFocus[0].object.name == "python")
             {
                 console.log(this.world2.python)
@@ -440,6 +452,10 @@ export default class Soldier
 
 
             }
+
+            // /!\ /!\ /!\ /!\ /!\ 
+            // /!\ FIN DES IF  /!\ 
+            // /!\ /!\ /!\ /!\ /!\  
 
         })
         
@@ -454,7 +470,10 @@ export default class Soldier
 
     update()
     {
+
+        // console.log(this.model.position)
         this.animation.mixer.update(this.time.delta * 0.001)
+        TWEEN.update()
 
         // console.log(this.model.position.x, this.model.position.z)
 
@@ -469,15 +488,15 @@ export default class Soldier
         } 
         else
         {      
-            if (this.world2.bricks[0].center)
-            {
-                if (this.model.position.distanceTo(this.world2.bricks[0].center) < 5)
-                {
-                    var distance = 1
-                    this.model.position.x -= Math.sin(this.model.rotation.y) * distance * 5
-                    this.model.position.z -= Math.cos(this.model.rotation.y) * distance * 5
-                }
-            }       
+            // if (this.world2.bricks[0].center)
+            // {
+            //     if (this.model.position.distanceTo(this.world2.bricks[0].center) < 5)
+            //     {
+            //         var distance = 1
+            //         this.model.position.x -= Math.sin(this.model.rotation.y) * distance * 5
+            //         this.model.position.z -= Math.cos(this.model.rotation.y) * distance * 5
+            //     }
+            // }       
             
 
             // /!\/!\/!\ le (54, 0, 4.4) est relatif à /!\/!\/!\
@@ -491,15 +510,7 @@ export default class Soldier
 
 
             }
-
-            // if (this.room.centerRoom)
-            // {
-            //     console.log(this.room.centerRoom)
-            // }
-
-
-
-            
+           
     
                 this.moveModelArrow(this.keys)
                 if (this.movements.length > 0)
@@ -515,7 +526,7 @@ export default class Soldier
             {
                 this.temp.setFromMatrixPosition(this.behind.matrixWorld);
                 
-                this.camera.controls.minDistance = 30
+                this.camera.controls.minDistance = 15
                 this.camera.controls.maxDistance = 400
                 this.camera.instance.position.lerp(this.temp, 0.2);    
                 
