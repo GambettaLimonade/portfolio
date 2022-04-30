@@ -9,7 +9,7 @@ export default class Sky
         this.main = new Main()
         this.scene = this.main.scene
         this.resources = this.main.resources
-        this.sphereRadius = 100
+        this.sphereRadius = 70
 
         this.setGeometry()
         this.setMaterial()

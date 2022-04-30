@@ -29,6 +29,7 @@ import Blender from './Blender.js';
 import Threejs from './Threejs.js';
 import Windows from './Windows.js';
 import DeadTree from './DeadTree.js';
+import CubeRouge from './CubeRouge.js';
 
 
 
@@ -103,6 +104,7 @@ export default class World
 
             this.tv = new Tv()
             this.room = new Room()
+            this.cubeRouge = new CubeRouge()
             // this.text3d = new TextScene()
 
             // for(var i=0; i<this.ballonsValues['position'].length; i++)

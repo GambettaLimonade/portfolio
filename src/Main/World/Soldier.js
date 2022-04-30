@@ -103,7 +103,6 @@ export default class Soldier
                         .name('color')
                         .onChange((c) => 
                         {
-                            console.log(child)
                             child.material.color = new THREE.Color(c)
                             child.material.needsUpdate = true;
                         })
@@ -186,7 +185,6 @@ export default class Soldier
             mouse.x = ( x / this.width ) * 2 - 1;
             mouse.y = - ( y / this.height ) * 2 + 1;
 
-            console.log('mouse origine : ', mouse)
             
             this.raycaster.setFromCamera(mouse, this.camera.instance);
             this.intersects = this.raycaster.intersectObjects(this.scene.children);
@@ -398,7 +396,6 @@ export default class Soldier
 
             if (this.intersectsFocus[0].object.name == "cylindre" || this.intersectsFocus[0].object.name == "ball")
             {
-                console.log("on focus un cylindre ou une balle")
                 gsap.to( this.camera.instance.position, {
                     duration: 2.5,
                     x: this.intersectsFocus[0].object.position.x,
@@ -424,23 +421,82 @@ export default class Soldier
                 }, 2500)
             }
 
-            if (this.intersectsFocus[0].object.name == "machinescreen" || this.intersectsFocus[0].object.name == "tvscreen")
+
+            if (this.intersectsFocus[0].object.name == "Menu")
             {
+                console.log(this.intersectsFocus[0].object.name)
                 this.focused = true
-                let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(44, 5, 5.75), 3000).easing(TWEEN.Easing.Linear.None).start()
+                let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(50, 9, 6.5), 2000).easing(TWEEN.Easing.Linear.None).start()
                 let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(this.intersectsFocus[0].point, 1000).easing(TWEEN.Easing.Linear.None).start()
-
-                
-                // this.camera.controls.target.set(this.intersectsFocus[0].point)
-                console.log(this.intersectsFocus[0])
-
-                // let targetChange = new TWEEN.Tween(this.camera.controls.target).to(new THREE.Vector3(30, 80, -10), 3000).easing(TWEEN.Easing.Linear.None).start()
             } 
 
-            if (this.intersectsFocus[0].object.name == "sky" || this.intersectsFocus[0].object.name == "floor")
+          
+            if(this.intersectsFocus[0].object.name == "DetailsCCD" || this.intersectsFocus[0].object.name == "DetailsIssam" || this.intersectsFocus[0].object.name == "DetailsMaths78")
+            {
+                console.log('on clique sur le detail')
+            }
+
+
+
+            if (this.intersectsFocus[0].object.name == "CardMaths78")
+            {   
+                console.log(this.intersectsFocus[0].object.parent)
+                for (const child of this.intersectsFocus[0].object.parent.children)
+                {
+                    if(child.name != "Sketchfab_model")
+                    {
+                        child.visible = false
+                        if (child.name == "DetailsMaths78")
+                            {
+                                child.visible = true
+                            }
+                    }
+                }
+            } 
+
+            if (this.intersectsFocus[0].object.name == "CardCCD")
+            {   
+                console.log(this.intersectsFocus[0].object.parent)
+                for (const child of this.intersectsFocus[0].object.parent.children)
+                {
+                    if(child.name != "Sketchfab_model")
+                    {
+                        child.visible = false
+                        if (child.name == "DetailsCCD")
+                            {
+                                child.visible = true
+                            }
+                    }
+                }
+            } 
+
+
+            if (this.intersectsFocus[0].object.name == "CardIssam")
+            {   
+                console.log(this.intersectsFocus[0].object.parent)
+                for (const child of this.intersectsFocus[0].object.parent.children)
+                {
+                    if(child.name != "Sketchfab_model")
+                    {
+                        child.visible = false
+                        if (child.name == "DetailsIssam")
+                            {
+                                child.visible = true
+                            }
+                    }
+                }
+            } 
+
+
+            if (this.intersectsFocus[0].object.name == "DetailsIssam")
+            {
+                console.log('details issam')
+            }
+
+
+            if (this.intersectsFocus[0].object.name == "sky" || this.intersectsFocus[0].object.name == "floor" || this.intersectsFocus[0].object.name == "BackSquare")
             {
                 this.focused = false
-                console.log(this.intersectsFocus[0].object.name)
             }
 
 

@@ -28,7 +28,6 @@ export default class Room
         this.model.name = "room"
         this.scene.add(this.model)
 
-
         this.model.traverse((child) =>
             {
                 if(child instanceof THREE.Mesh)
@@ -41,9 +40,13 @@ export default class Room
                                         }
 
                                     )
-                                child.material.map = this.images[0]
-                                child.material.needsUpdate = true;
                             }       
+                        }
+
+                        if(child.name == "machinescreen")
+                        {
+
+
                         }
                     }
                 )

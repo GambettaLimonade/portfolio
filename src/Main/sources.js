@@ -56,7 +56,7 @@ export default[
     {
         name: 'room',
         type: 'gltfModel',
-        path: 'models/arcade_room/finale_finale_scene.glb'        
+        path: 'models/arcade_room/room28.glb'        
     },
 
     {
@@ -101,6 +101,13 @@ export default[
         name : 'dbz',
         type : 'texture',
         path : 'textures/dbz.gif'
+    },
+
+
+    {
+        name : 'cuberouge',
+        type : 'gltfModel',
+        path : 'models/cube_rouge.glb'
     },
 
 
