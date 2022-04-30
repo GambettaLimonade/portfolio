@@ -105,9 +105,9 @@ export default[
 
 
     {
-        name : 'cuberouge',
+        name : 'studyroom',
         type : 'gltfModel',
-        path : 'models/cube_rouge.glb'
+        path : 'models/studyroom.glb'
     },
 
 

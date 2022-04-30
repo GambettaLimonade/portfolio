@@ -558,7 +558,7 @@ export default class Soldier
             // /!\/!\/!\ le (54, 0, 4.4) est relatif à /!\/!\/!\
             // /!\/!\/!\ la ligne de code : this.model.position.set(50,0,0) dans Room.js /!\/!\/!\
 
-            if(this.model.position.distanceTo(new THREE.Vector3(54, 0, 4.4)) < 5)
+            if(this.model.position.distanceTo(new THREE.Vector3(54, 0, 4.4)) < 5 || this.model.position.distanceTo(new THREE.Vector3(-54, 0, 16)) < 5 || this.model.position.distanceTo(new THREE.Vector3(-61, 0, 2)) < 5 || this.model.position.distanceTo(new THREE.Vector3(-60, 0, -13)) < 5)
             {
                 var distance = 1
                 this.model.position.x -= Math.sin(this.model.rotation.y) * distance * 5

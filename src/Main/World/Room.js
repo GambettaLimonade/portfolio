@@ -57,13 +57,23 @@ export default class Room
 
     setLights()
     {
-        this.light = new THREE.PointLight( 0xffff00, 1, 100 );
-        this.light.position.set( 42, 8, 10 );
-        this.scene.add( this.light );
+        this.lightTv = new THREE.PointLight( 0xffff00, 1, 100 );
+        this.lightTv.position.set( 42, 8, 10 );
+        this.scene.add( this.lightTv );
 
-        const sphereSize = 1;
-        const pointLightHelper = new THREE.PointLightHelper( this.light, sphereSize );
-        this.scene.add( pointLightHelper );
+        const sphereSizeTv = 1;
+        const pointLightHelperTv = new THREE.PointLightHelper( this.lightTv, sphereSizeTv );
+        this.scene.add( pointLightHelperTv );
+
+
+
+        // this.light = new THREE.PointLight( 0xffffff, 1, 100 );
+        // this.light.position.set( 0, 8, 0 );
+        // this.scene.add( this.light );
+
+        // const sphereSize = 1;
+        // const pointLightHelper = new THREE.PointLightHelper( this.light, sphereSize );
+        // this.scene.add( pointLightHelper );
 
 
 

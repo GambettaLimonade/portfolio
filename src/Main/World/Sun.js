@@ -18,12 +18,12 @@ export default class Sun
     {
         this.light = new THREE.DirectionalLight( 0x0055a5, 0.8, 100 );
         this.light.position.set( 0, 20, 0 );
-        this.scene.add( this.light );
+        // this.scene.add( this.light );
     }
 
     update()
     {        
-        this.light.position.x = Math.cos(this.time.elapsed * 0.0002) * 100
-        this.light.position.z = Math.sin(this.time.elapsed * 0.0002) * 100
+        this.light.position.x = Math.cos(this.time.elapsed * 0.0002) * 50
+        this.light.position.z = Math.sin(this.time.elapsed * 0.0002) * 50
     }
 }
