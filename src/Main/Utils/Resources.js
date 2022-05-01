@@ -108,6 +108,16 @@ export default class Resources extends EventEmitter
                                 .add(file.center, 'y', -.5, 1.5, .01)
                                 .name(`${source.name}.center.y`);
                             }
+                            
+                            file.encoding = THREE.sRGBEncoding;        
+                            file.flipY = false;
+                            file.rotation = Math.PI / 2
+                            file.wrapS = 10;
+                            file.wrapT = 20;
+                            file.rotate = Math.PI / 2
+                            file.repeat.set( 3,3 );
+
+
                             this.sourceLoaded(source, file)
                         })
                 )

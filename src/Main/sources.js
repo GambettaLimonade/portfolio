@@ -107,8 +107,74 @@ export default[
     {
         name : 'studyroom',
         type : 'gltfModel',
-        path : 'models/studyroom.glb'
+        path : 'models/studyroom9.glb'
     },
+    
+    {
+        name : 'it1',
+        type : 'texture',
+        path : 'images/it1.jpg'
+    },
+    
+    {
+        name : 'it2',
+        type : 'texture',
+        path : 'images/it2.jpg'
+    },
+    
+    {
+        name : 'it3',
+        type : 'texture',
+        path : 'images/it3.jpg'
+    },
+    
+    {
+        name : 'it4',
+        type : 'texture',
+        path : 'images/it4.jpg'
+    },
+    
+    {
+        name : 'it5',
+        type : 'texture',
+        path : 'images/it5.jpg'
+    },
+    
+    {
+        name : 'it6',
+        type : 'texture',
+        path : 'images/it6.jpg'
+    },
+    
+    {
+        name : 'it7',
+        type : 'texture',
+        path : 'images/it7.jpg'
+    },
+    
+    {
+        name : 'it8',
+        type : 'texture',
+        path : 'images/it8.jpg'
+    },
+    
+    {
+        name : 'it9',
+        type : 'texture',
+        path : 'images/it9.jpg'
+    },
+    
+    {
+        name : 'snk',
+        type : 'texture',
+        path : 'images/titancolossal.jpg'
+    },
+    
+    {
+        name : 'vsc',
+        type : 'texture',
+        path : 'images/vsc.png'
+    }
 
 
  ]

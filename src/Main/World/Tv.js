@@ -115,14 +115,17 @@ export default class Tv
 
     changeColor()
     {   
+        console.log(this.screen)
+
         this.index = 0
         setInterval(() => { 
+            // console.log(this.screen)
 
                 this.index = (this.index + 1) % this.images.length
                 this.screen.material.map = this.images[this.index]
 
 
-        }, 10000);
+        }, 1000);
 
     }
 

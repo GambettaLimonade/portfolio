@@ -430,7 +430,34 @@ export default class Soldier
                 let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(this.intersectsFocus[0].point, 1000).easing(TWEEN.Easing.Linear.None).start()
             } 
 
-          
+
+            if (this.intersectsFocus[0].object.name == "iMac")
+            {
+                console.log(this.intersectsFocus[0].object.name)
+                this.focused = true
+                let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(-50, 9, 6.5), 2000).easing(TWEEN.Easing.Linear.None).start()
+                let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(this.intersectsFocus[0].point, 1000).easing(TWEEN.Easing.Linear.None).start()
+            } 
+
+            if (this.intersectsFocus[0].object.name == "MacBook")
+            {
+                console.log(this.intersectsFocus[0].object.name)
+                this.focused = true
+                let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(-50, 9, 10), 2000).easing(TWEEN.Easing.Linear.None).start()
+                let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(this.intersectsFocus[0].point, 1000).easing(TWEEN.Easing.Linear.None).start()
+            } 
+
+            if (this.intersectsFocus[0].object.name == "PetitEcran")
+            {
+                console.log(this.intersectsFocus[0].object.name)
+                this.focused = true
+                let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(-50, 9, -10), 2000).easing(TWEEN.Easing.Linear.None).start()
+                let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(this.intersectsFocus[0].point, 1000).easing(TWEEN.Easing.Linear.None).start()
+            } 
+            
+
+
+
             if(this.intersectsFocus[0].object.name == "DetailsCCD" || this.intersectsFocus[0].object.name == "DetailsIssam" || this.intersectsFocus[0].object.name == "DetailsMaths78")
             {
                 console.log('on clique sur le detail')

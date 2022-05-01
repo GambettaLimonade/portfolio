@@ -12,8 +12,12 @@ export default class StudyRoom
         this.height = 5
         this.resource = this.resources.items.studyroom
         this.index = 0
+        this.images = [this.resources.items.it1, this.resources.items.it2, this.resources.items.it3, this.resources.items.it4, this.resources.items.it5, this.resources.items.it6, this.resources.items.it7, this.resources.items.it8, this.resources.items.it9]
+        this.imagesAnim = [this.resources.items.snk, this.resources.items.vsc]
+        this.index = 0
 
         this.createStudyRoom()
+        this.changeColor()
 
 
     }
@@ -28,31 +32,60 @@ export default class StudyRoom
         this.model.name = "StudyRoom"
         this.scene.add(this.model)
 
-    }
 
+        this.model.traverse((child) =>
+        {
+            if(child.name == "iMac")
+            {
+                this.screen = child
+
+                setInterval(() => { 
+                    this.index = (this.index + 1) % this.images.length
+                    this.screen.material.map = this.images[this.index]
+                    // this.screen.material.repeat.set(1, 0.5);
+                    this.screen.material.needsUpdate = true;
+
+                }, 1000);
+            }
+
+            if (child.name == "PetitEcran")
+            {
+                this.screen = child
+                this.screen.material.map = this.imagesAnim[0]
+                this.screen.material.needsUpdate = true;
+            }
+
+            if (child.name == "MacBook")
+            {
+                this.screen = child
+                this.screen.material.map = this.imagesAnim[1]
+                this.screen.material.needsUpdate = true;
+            }
+
+
+        })
+    }
 
     setLights()
     {
-        this.lightTv = new THREE.PointLight( 0xeedd82, 1, 100 );
-        this.lightTv.position.set( -60, 12, 15 );
-        this.scene.add( this.lightTv );
-
-        const sphereSizeTv = 1;
-        const pointLightHelperTv = new THREE.PointLightHelper( this.lightT, sphereSizeTv );
-        this.scene.add( pointLightHelperTv );
-
+        this.lightiMac = new THREE.PointLight( 0xeedd82, 0.5, 100 );
+        this.lightiMac.position.set( -60, 12, 15 );
+        this.scene.add( this.lightiMac );
+        this.lightEcran = new THREE.PointLight( 0xeedd82, 0.5, 100 );
+        this.lightEcran.position.set( -60, 10, -8 );
+        this.scene.add( this.lightEcran );
 
 
-        // this.light = new THREE.PointLight( 0xffffff, 1, 100 );
-        // this.light.position.set( 0, 8, 0 );
-        // this.scene.add( this.light );
-
-        // const sphereSize = 1;
-        // const pointLightHelper = new THREE.PointLightHelper( this.light, sphereSize );
-        // this.scene.add( pointLightHelper );
+        const LightBug = new THREE.PointLightHelper( this.lightEcran, sphereSizeEcran );
+        this.scene.add(LightBug)
 
 
-
+        const sphereSizeEcran = 1;
+        const pointLightHelperEcran = new THREE.PointLightHelper( this.lightEcran, sphereSizeEcran );
+        this.scene.add( pointLightHelperEcran );
+        const sphereSizeiMac = 1;
+        const pointLightHelperiMac = new THREE.PointLightHelper( this.lightiMac, sphereSizeiMac );
+        this.scene.add( pointLightHelperiMac );
     }
 
 

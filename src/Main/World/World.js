@@ -226,6 +226,13 @@ export default class World
             this.tv.update()
         }
 
+
+        if (this.studyRoom)
+        {
+            this.studyRoom.update()
+        }
+
+
         if (this.room)
         {
             this.room.update()
