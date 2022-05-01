@@ -47,22 +47,6 @@ export default class StudyRoom
 
                 }, 1000);
             }
-
-            if (child.name == "PetitEcran")
-            {
-                this.screen = child
-                this.screen.material.map = this.imagesAnim[0]
-                this.screen.material.needsUpdate = true;
-            }
-
-            if (child.name == "MacBook")
-            {
-                this.screen = child
-                this.screen.material.map = this.imagesAnim[1]
-                this.screen.material.needsUpdate = true;
-            }
-
-
         })
     }
 

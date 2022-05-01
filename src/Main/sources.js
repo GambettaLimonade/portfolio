@@ -107,7 +107,7 @@ export default[
     {
         name : 'studyroom',
         type : 'gltfModel',
-        path : 'models/studyroom9.glb'
+        path : 'models/studyroom10.glb'
     },
     
     {
