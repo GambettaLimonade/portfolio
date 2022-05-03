@@ -17,7 +17,6 @@ export default class StudyRoom
         this.index = 0
 
         this.createStudyRoom()
-        this.changeColor()
 
 
     }
@@ -27,41 +26,41 @@ export default class StudyRoom
     {
         this.model = this.resource.scene
         this.model.scale.set(10, 10, 10)
-        this.model.position.set(-50,0,0)
+        this.model.position.set(-30,0,0)
         this.model.rotation.y = Math.PI/2
         this.model.name = "StudyRoom"
         this.scene.add(this.model)
 
 
-        this.model.traverse((child) =>
-        {
-            if(child.name == "iMac")
-            {
-                this.screen = child
+        // this.model.traverse((child) =>
+        // {
+        //     if(child.name == "iMac")
+        //     {
+        //         this.screen = child
 
-                setInterval(() => { 
-                    this.index = (this.index + 1) % this.images.length
-                    this.screen.material.map = this.images[this.index]
-                    // this.screen.material.repeat.set(1, 0.5);
-                    this.screen.material.needsUpdate = true;
+        //         setInterval(() => { 
+        //             this.index = (this.index + 1) % this.images.length
+        //             this.screen.material.map = this.images[this.index]
+        //             // this.screen.material.repeat.set(1, 0.5);
+        //             this.screen.material.needsUpdate = true;
 
-                }, 1000);
-            }
-        })
+        //         }, 1000);
+        //     }
+        // })
     }
 
     setLights()
     {
         this.lightiMac = new THREE.PointLight( 0xeedd82, 0.5, 100 );
-        this.lightiMac.position.set( -60, 12, 15 );
+        this.lightiMac.position.set( -50, 12, 15 );
         this.scene.add( this.lightiMac );
         this.lightEcran = new THREE.PointLight( 0xeedd82, 0.5, 100 );
         this.lightEcran.position.set( -60, 10, -8 );
         this.scene.add( this.lightEcran );
 
 
-        const LightBug = new THREE.PointLightHelper( this.lightEcran, sphereSizeEcran );
-        this.scene.add(LightBug)
+        // const LightBug = new THREE.PointLightHelper( this.lightEcran, sphereSizeEcran );
+        // this.scene.add(LightBug)
 
 
         const sphereSizeEcran = 1;

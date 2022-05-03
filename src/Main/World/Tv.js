@@ -70,7 +70,7 @@ export default class Tv
         this.model.material.needsUpdate = true;
 
 
-        this.scene.add(this.model)
+        // this.scene.add(this.model)
 
         this.model.traverse((child) =>
             {

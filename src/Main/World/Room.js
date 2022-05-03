@@ -57,7 +57,7 @@ export default class Room
 
     setLights()
     {
-        this.lightTv = new THREE.PointLight( 0xffff00, 0.5, 100 );
+        this.lightTv = new THREE.PointLight( 0xffff00, 1, 100 );
         this.lightTv.position.set( 42, 8, 10 );
         this.scene.add( this.lightTv );
 

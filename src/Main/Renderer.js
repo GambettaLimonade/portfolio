@@ -22,7 +22,11 @@ export default class Renderer
             canvas: this.canvas,
             antialias: true
         })
-        this.instance.outputEncoding = sRGBEncoding
+        // this.instance.outputEncoding = sRGBEncoding
+        this.instance.gammaOutput = true;
+        this.instance.gammaFactor = 2.2;
+
+
         this.instance.shadowMap.enabled = true
         this.instance.shadowMap.type = THREE.PCFSoftShadowMap
         this.instance.setSize(this.sizes.width, this.sizes.height)

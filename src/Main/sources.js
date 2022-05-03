@@ -107,9 +107,14 @@ export default[
     {
         name : 'studyroom',
         type : 'gltfModel',
-        path : 'models/studyroom10.glb'
+        path : 'models/Scene4pieces_2.glb'
     },
-    
+
+    {
+        name : 'livingroom',
+        type : 'gltfModel',
+        path : 'models/livingroom/livingroom.glb'
+    },
     {
         name : 'it1',
         type : 'texture',

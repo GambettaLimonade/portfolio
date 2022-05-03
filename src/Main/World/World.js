@@ -3,16 +3,11 @@ import Main from "../Main.js";
 import Environment from "./Environment.js";
 import Floor from "./Floor.js";
 import Soldier from "./Soldier.js";
-import Couch from './Couch.js';
 import Ballon from './Ballon.js'
 import Bricks from "./Bricks.js";
 import Sky from "./Sky.js";
 import Overlay from "./Overlay.js";
 import Points from './Points.js';
-import Floor1 from './Floor1.js';
-import Floor2 from './Floor2.js';
-import Table from './Table.js';
-
 //Commentaire
 
 // import Bigcouch from './Bigcouch.js';
@@ -30,6 +25,7 @@ import Threejs from './Threejs.js';
 import Windows from './Windows.js';
 import DeadTree from './DeadTree.js';
 import StudyRoom from './StudyRoom.js';
+import LivingRoom from './LivingRoom.js';
 
 
 
@@ -103,8 +99,9 @@ export default class World
 
 
             this.tv = new Tv()
-            this.room = new Room()
+            // this.room = new Room()
             this.studyRoom = new StudyRoom()
+            // this.livingRoom = new LivingRoom()
             // this.text3d = new TextScene()
 
             // for(var i=0; i<this.ballonsValues['position'].length; i++)
@@ -227,9 +224,14 @@ export default class World
         }
 
 
-        if (this.studyRoom)
+        // if (this.studyRoom)
+        // {
+        //     this.studyRoom.update()
+        // }
+
+        if (this.livingRoom)
         {
-            this.studyRoom.update()
+            this.livingRoom.update()
         }
 
 
