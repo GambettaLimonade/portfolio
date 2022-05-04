@@ -32,6 +32,16 @@ export default class StudyRoom
         this.scene.add(this.model)
 
 
+        this.model.traverse((child) =>
+            {
+                if(child instanceof THREE.Mesh)
+                {
+                    child.castShadow = true
+                }
+            }
+        )
+
+
         // this.model.traverse((child) =>
         // {
         //     if(child.name == "iMac")
@@ -79,7 +89,7 @@ export default class StudyRoom
     createStudyRoom()
     {
         this.setModel()
-        this.setLights()
+        // this.setLights()
 
 
     }
