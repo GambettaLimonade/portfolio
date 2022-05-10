@@ -9,6 +9,7 @@ import { TWEEN } from 'three/examples/jsm/libs/tween.module.min'
 
 
 
+
 export default class Soldier
 {
     constructor()
@@ -94,7 +95,6 @@ export default class Soldier
                     const parameters = {
                         color: 0xff0000,
                     }
-
 
                     if(this.debug.active)
                     {
@@ -422,103 +422,35 @@ export default class Soldier
             }
 
 
-            if (this.intersectsFocus[0].object.name == "Menu")
+            if (this.intersectsFocus[0].object.name == "pCube11_lambert21_0" || this.intersectsFocus[0].object.name == "pCube11_lambert10_0")
             {
                 console.log(this.intersectsFocus[0].object.name)
                 this.focused = true
-                let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(50, 9, 6.5), 2000).easing(TWEEN.Easing.Linear.None).start()
+                let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(17, 9, -40), 2000).easing(TWEEN.Easing.Linear.None).start()
                 let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(this.intersectsFocus[0].point, 1000).easing(TWEEN.Easing.Linear.None).start()
             } 
 
 
-            if (this.intersectsFocus[0].object.name == "iMac")
+            if (this.intersectsFocus[0].object.name == "pCube14_lambert25_0" || this.intersectsFocus[0].object.name == "pCube11_lambert10_0")
             {
-                console.log(this.intersectsFocus[0].object.name)
                 this.focused = true
-                let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(-50, 9, 6.5), 2000).easing(TWEEN.Easing.Linear.None).start()
+                let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(45, 9, -4), 2000).easing(TWEEN.Easing.Linear.None).start()
                 let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(this.intersectsFocus[0].point, 1000).easing(TWEEN.Easing.Linear.None).start()
             } 
 
-            if (this.intersectsFocus[0].object.name == "MacBook")
+
+            if (this.intersectsFocus[0].object.name == "pCube15_lambert28_0" || this.intersectsFocus[0].object.name == "pCube11_lambert10_0")
             {
-                console.log(this.intersectsFocus[0].object.name)
                 this.focused = true
-                let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(-50, 9, 10), 2000).easing(TWEEN.Easing.Linear.None).start()
+                let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(45, 6, -10), 2000).easing(TWEEN.Easing.Linear.None).start()
                 let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(this.intersectsFocus[0].point, 1000).easing(TWEEN.Easing.Linear.None).start()
             } 
 
-            if (this.intersectsFocus[0].object.name == "PetitEcran")
-            {
-                console.log(this.intersectsFocus[0].object.name)
-                this.focused = true
-                let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(-50, 9, -10), 2000).easing(TWEEN.Easing.Linear.None).start()
-                let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(this.intersectsFocus[0].point, 1000).easing(TWEEN.Easing.Linear.None).start()
-            } 
+
+            // console.log(this.model.position)
+            // console.log(this.intersectsFocus[0].object.material)
+
             
-
-
-
-            if(this.intersectsFocus[0].object.name == "DetailsCCD" || this.intersectsFocus[0].object.name == "DetailsIssam" || this.intersectsFocus[0].object.name == "DetailsMaths78")
-            {
-                console.log('on clique sur le detail')
-            }
-
-
-
-            if (this.intersectsFocus[0].object.name == "CardMaths78")
-            {   
-                console.log(this.intersectsFocus[0].object.parent)
-                for (const child of this.intersectsFocus[0].object.parent.children)
-                {
-                    if(child.name != "Sketchfab_model")
-                    {
-                        child.visible = false
-                        if (child.name == "DetailsMaths78")
-                            {
-                                child.visible = true
-                            }
-                    }
-                }
-            } 
-
-            if (this.intersectsFocus[0].object.name == "CardCCD")
-            {   
-                console.log(this.intersectsFocus[0].object.parent)
-                for (const child of this.intersectsFocus[0].object.parent.children)
-                {
-                    if(child.name != "Sketchfab_model")
-                    {
-                        child.visible = false
-                        if (child.name == "DetailsCCD")
-                            {
-                                child.visible = true
-                            }
-                    }
-                }
-            } 
-
-
-            if (this.intersectsFocus[0].object.name == "CardIssam")
-            {   
-                console.log(this.intersectsFocus[0].object.parent)
-                for (const child of this.intersectsFocus[0].object.parent.children)
-                {
-                    if(child.name != "Sketchfab_model")
-                    {
-                        child.visible = false
-                        if (child.name == "DetailsIssam")
-                            {
-                                child.visible = true
-                            }
-                    }
-                }
-            } 
-
-
-            if (this.intersectsFocus[0].object.name == "DetailsIssam")
-            {
-                console.log('details issam')
-            }
 
 
             if (this.intersectsFocus[0].object.name == "sky" || this.intersectsFocus[0].object.name == "floor" || this.intersectsFocus[0].object.name == "BackSquare")
@@ -527,14 +459,7 @@ export default class Soldier
             }
 
 
-            
-            if (this.intersectsFocus[0].object.name == "python")
-            {
-                console.log(this.world2.python)
-                this.world2.python.model.scale.set(5, 5, 5)
 
-
-            }
 
             // /!\ /!\ /!\ /!\ /!\ 
             // /!\ FIN DES IF  /!\ 
@@ -585,14 +510,14 @@ export default class Soldier
             // /!\/!\/!\ le (54, 0, 4.4) est relatif à /!\/!\/!\
             // /!\/!\/!\ la ligne de code : this.model.position.set(50,0,0) dans Room.js /!\/!\/!\
 
-            if(this.model.position.distanceTo(new THREE.Vector3(54, 0, 4.4)) < 5 || this.model.position.distanceTo(new THREE.Vector3(-54, 0, 16)) < 5 || this.model.position.distanceTo(new THREE.Vector3(-61, 0, 2)) < 5 || this.model.position.distanceTo(new THREE.Vector3(-60, 0, -13)) < 5)
-            {
-                var distance = 1
-                this.model.position.x -= Math.sin(this.model.rotation.y) * distance * 5
-                this.model.position.z -= Math.cos(this.model.rotation.y) * distance * 5
+            // if(this.model.position.distanceTo(new THREE.Vector3(54, 0, 4.4)) < 5 || this.model.position.distanceTo(new THREE.Vector3(-54, 0, 16)) < 5 || this.model.position.distanceTo(new THREE.Vector3(-61, 0, 2)) < 5 || this.model.position.distanceTo(new THREE.Vector3(-60, 0, -13)) < 5)
+            // {
+            //     var distance = 1
+            //     this.model.position.x -= Math.sin(this.model.rotation.y) * distance * 5
+            //     this.model.position.z -= Math.cos(this.model.rotation.y) * distance * 5
 
 
-            }
+            // }
            
     
                 this.moveModelArrow(this.keys)
@@ -616,10 +541,8 @@ export default class Soldier
                 this.camera.controls.target.set(this.model.position.x,this.model.position.y,this.model.position.z)
             }
 
-            // console.log('position personnage : ', this.model.position)
             this.bodyCharacter.position.copy(this.model.position)
             this.changementDambiance()
-            // console.log(this.model.position)
             // this.camera.controls.update()
             // console.log(this.model.position)
         }        

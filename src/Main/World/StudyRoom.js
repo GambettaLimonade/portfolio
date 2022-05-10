@@ -1,5 +1,8 @@
 import Main from "../Main";
 import * as THREE from 'three'
+import portalVertexShader from '../../shaders/portal/vertex.glsl'
+import portalFragmentShader from '../../shaders/portal/fragment.glsl'
+
 
 export default class StudyRoom
 {
@@ -32,12 +35,64 @@ export default class StudyRoom
         this.scene.add(this.model)
 
 
+        
         this.model.traverse((child) =>
             {
                 if(child instanceof THREE.Mesh)
                 {
                     child.castShadow = true
                 }
+                
+                if (child.name == "Cube036_1")
+                {
+                    child.material = new THREE.ShaderMaterial({
+                        uniforms : 
+                        {
+                            uTime : { value : 0 }
+                        },
+                        vertexShader : portalVertexShader,
+                        fragmentShader : portalFragmentShader
+                    })
+                }
+
+
+                if (child.name == "pCube11_lambert21_0")
+                {
+                    child.material = new THREE.ShaderMaterial({
+                        vertexShader : portalVertexShader,
+                        fragmentShader : portalFragmentShader
+                    })
+                }
+
+                if (child.name == "pCube14_lambert25_0")
+                {
+                    child.material = new THREE.ShaderMaterial({
+                        vertexShader : portalVertexShader,
+                        fragmentShader : portalFragmentShader
+                    })
+                }
+
+
+                
+                if (child.name == "pCube15_lambert28_0")
+                {
+                    child.material = new THREE.ShaderMaterial({
+                        vertexShader : portalVertexShader,
+                        fragmentShader : portalFragmentShader
+                    })
+                }
+
+                
+
+
+
+
+
+
+
+
+
+
             }
         )
 
@@ -61,24 +116,24 @@ export default class StudyRoom
 
     setLights()
     {
-        this.lightiMac = new THREE.PointLight( 0xeedd82, 0.5, 100 );
-        this.lightiMac.position.set( -50, 12, 15 );
-        this.scene.add( this.lightiMac );
-        this.lightEcran = new THREE.PointLight( 0xeedd82, 0.5, 100 );
-        this.lightEcran.position.set( -60, 10, -8 );
+
+        this.lightEcran = new THREE.PointLight( 0xFFFFFF, 0.5, 100 );
+        this.lightEcran.position.set( 56, 12, -13 );
         this.scene.add( this.lightEcran );
-
-
-        // const LightBug = new THREE.PointLightHelper( this.lightEcran, sphereSizeEcran );
-        // this.scene.add(LightBug)
-
-
         const sphereSizeEcran = 1;
         const pointLightHelperEcran = new THREE.PointLightHelper( this.lightEcran, sphereSizeEcran );
         this.scene.add( pointLightHelperEcran );
-        const sphereSizeiMac = 1;
-        const pointLightHelperiMac = new THREE.PointLightHelper( this.lightiMac, sphereSizeiMac );
-        this.scene.add( pointLightHelperiMac );
+
+
+
+        this.lightEcran2 = new THREE.PointLight( 0xFFFFFF, 1, 100 );
+        this.lightEcran2.position.set( 30, 13, 55 );
+        this.scene.add( this.lightEcran2 );
+        const pointLightHelperEcran2 = new THREE.PointLightHelper( this.lightEcran2, sphereSizeEcran );
+        this.scene.add( pointLightHelperEcran2 );
+
+
+
     }
 
 
@@ -96,5 +151,6 @@ export default class StudyRoom
     
     update()
     {
+        
     }
 }

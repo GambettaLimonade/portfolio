@@ -115,8 +115,6 @@ export default class Tv
 
     changeColor()
     {   
-        console.log(this.screen)
-
         this.index = 0
         setInterval(() => { 
             // console.log(this.screen)

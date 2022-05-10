@@ -26,6 +26,7 @@ import Windows from './Windows.js';
 import DeadTree from './DeadTree.js';
 import StudyRoom from './StudyRoom.js';
 import LivingRoom from './LivingRoom.js';
+import Fireflies from './Fireflies.js';
 
 
 
@@ -101,6 +102,7 @@ export default class World
             this.tv = new Tv()
             // this.room = new Room()
             this.studyRoom = new StudyRoom()
+            this.fireflies = new Fireflies()
             // this.livingRoom = new LivingRoom()
             // this.text3d = new TextScene()
 
@@ -245,6 +247,13 @@ export default class World
         {
             this.sun.update()
         }
+
+        if (this.fireflies)
+        {
+            this.fireflies.update()
+        }
+
+
 
     }
     
