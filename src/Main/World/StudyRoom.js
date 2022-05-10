@@ -1,8 +1,9 @@
 import Main from "../Main";
 import * as THREE from 'three'
-import portalVertexShader from '../../shaders/portal/vertex.glsl'
-import portalFragmentShader from '../../shaders/portal/fragment.glsl'
-
+import portalTvVertexShader from '../../shaders/portal/tvBed/vertex.glsl'
+import portalTvFragmentShader from '../../shaders/portal/tvBed/fragment.glsl'
+import portalArcadeVertexShader from '../../shaders/portal/arcadeMachine/vertex.glsl'
+import portalArcadeFragmentShader from '../../shaders/portal/arcadeMachine/fragment.glsl'
 
 export default class StudyRoom
 {
@@ -19,6 +20,8 @@ export default class StudyRoom
         this.imagesAnim = [this.resources.items.snk, this.resources.items.vsc]
         this.index = 0
 
+        this.petitScreenTv;
+        this.time = this.main.time;
         this.createStudyRoom()
 
 
@@ -45,42 +48,56 @@ export default class StudyRoom
                 
                 if (child.name == "Cube036_1")
                 {
-                    child.material = new THREE.ShaderMaterial({
+                    this.petitScreenTv =  child
+
+                    this.petitScreenTv.material = new THREE.ShaderMaterial({
                         uniforms : 
                         {
-                            uTime : { value : 0 }
+                            uTime : { value : 0 },
+                            uColorStart : { value : new THREE.Color(0xff0000) },
+                            uColorEnd : { value : new THREE.Color(0x0000ff) }
+
                         },
-                        vertexShader : portalVertexShader,
-                        fragmentShader : portalFragmentShader
+                        vertexShader : portalTvVertexShader,
+                        fragmentShader : portalTvFragmentShader
                     })
                 }
 
 
                 if (child.name == "pCube11_lambert21_0")
                 {
-                    child.material = new THREE.ShaderMaterial({
-                        vertexShader : portalVertexShader,
-                        fragmentShader : portalFragmentShader
+                    this.arcadeScreen =  child
+
+                    this.arcadeScreen.material = new THREE.ShaderMaterial({
+                        uniforms : 
+                        {
+                            uTime : { value : 0 },
+                            uColorStart : { value : new THREE.Color(0xff00ff) },
+                            uColorEnd : { value : new THREE.Color(0x39ff14) }
+
+                        },
+                        vertexShader : portalArcadeVertexShader,
+                        fragmentShader : portalArcadeFragmentShader
                     })
                 }
 
-                if (child.name == "pCube14_lambert25_0")
-                {
-                    child.material = new THREE.ShaderMaterial({
-                        vertexShader : portalVertexShader,
-                        fragmentShader : portalFragmentShader
-                    })
-                }
+                // if (child.name == "pCube14_lambert25_0")
+                // {
+                //     child.material = new THREE.ShaderMaterial({
+                //         vertexShader : portalVertexShader,
+                //         fragmentShader : portalFragmentShader
+                //     })
+                // }
 
 
                 
-                if (child.name == "pCube15_lambert28_0")
-                {
-                    child.material = new THREE.ShaderMaterial({
-                        vertexShader : portalVertexShader,
-                        fragmentShader : portalFragmentShader
-                    })
-                }
+                // if (child.name == "pCube15_lambert28_0")
+                // {
+                //     child.material = new THREE.ShaderMaterial({
+                //         vertexShader : portalVertexShader,
+                //         fragmentShader : portalFragmentShader
+                //     })
+                // }
 
                 
 
@@ -151,6 +168,13 @@ export default class StudyRoom
     
     update()
     {
-        
+        if (this.petitScreenTv)
+        {
+            // console.log(this.petitScreenTv)
+            this.petitScreenTv.material.uniforms.uTime.value = this.time.elapsed * 0.002
+            this.arcadeScreen.material.uniforms.uTime.value = this.time.elapsed * 0.002
+
+            // console.log("voici ma tv : ", this.petitScreenTv)
+        }
     }
 }

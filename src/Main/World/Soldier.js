@@ -535,7 +535,7 @@ export default class Soldier
                 this.temp.setFromMatrixPosition(this.behind.matrixWorld);
                 
                 this.camera.controls.minDistance = 15
-                this.camera.controls.maxDistance = 400
+                this.camera.controls.maxDistance = 1000
                 this.camera.instance.position.lerp(this.temp, 0.2);    
                 
                 this.camera.controls.target.set(this.model.position.x,this.model.position.y,this.model.position.z)

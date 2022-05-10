@@ -20,7 +20,7 @@ export default class Fireflies
     setGeometry()
     {
         this.firefliesGeometry = new THREE.BufferGeometry()
-        this.firefliesCount = 100
+        this.firefliesCount = 50
         const positionArray = new Float32Array(this.firefliesCount * 3)
         const scaleArray = new Float32Array(this.firefliesCount)
 

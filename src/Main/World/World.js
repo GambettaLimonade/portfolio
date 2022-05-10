@@ -226,10 +226,10 @@ export default class World
         }
 
 
-        // if (this.studyRoom)
-        // {
-        //     this.studyRoom.update()
-        // }
+        if (this.studyRoom)
+        {
+            this.studyRoom.update()
+        }
 
         if (this.livingRoom)
         {
