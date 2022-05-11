@@ -93,8 +93,8 @@ void main()
     float strength = cnoise(vec3(displacedUv * 5.0, uTime * 0.2));
 
     //Outer glow
-    // float outerGlow = distance(vUv, vec2(0.5)) * 5.0 - 1.4;
-    // strength += outerGlow;
+    float outerGlow = distance(vUv, vec2(0.5)) * 5.0 - 1.4;
+    strength += outerGlow;
 
     // Apply Step
     strength += step(- 0.2, strength) * 0.5;

@@ -4,6 +4,12 @@ import portalTvVertexShader from '../../shaders/portal/tvBed/vertex.glsl'
 import portalTvFragmentShader from '../../shaders/portal/tvBed/fragment.glsl'
 import portalArcadeVertexShader from '../../shaders/portal/arcadeMachine/vertex.glsl'
 import portalArcadeFragmentShader from '../../shaders/portal/arcadeMachine/fragment.glsl'
+import portaloldTvVertexShader from '../../shaders/portal/oldTv/vertex.glsl'
+import portaloldTvFragmentShader from '../../shaders/portal/oldTv/fragment.glsl'
+
+import portallittleOldTvVertexShader from '../../shaders/portal/littleOldTv/vertex.glsl'
+import portallittleOldTvFragmentShader from '../../shaders/portal/littleOldTv/fragment.glsl'
+
 
 export default class StudyRoom
 {
@@ -72,43 +78,14 @@ export default class StudyRoom
                         uniforms : 
                         {
                             uTime : { value : 0 },
-                            uColorStart : { value : new THREE.Color(0xff00ff) },
-                            uColorEnd : { value : new THREE.Color(0x39ff14) }
+                            uColorStart : { value : new THREE.Color(0xffbf00) },
+                            uColorEnd : { value : new THREE.Color(0x540a0a) }
 
                         },
                         vertexShader : portalArcadeVertexShader,
                         fragmentShader : portalArcadeFragmentShader
                     })
                 }
-
-                // if (child.name == "pCube14_lambert25_0")
-                // {
-                //     child.material = new THREE.ShaderMaterial({
-                //         vertexShader : portalVertexShader,
-                //         fragmentShader : portalFragmentShader
-                //     })
-                // }
-
-
-                
-                // if (child.name == "pCube15_lambert28_0")
-                // {
-                //     child.material = new THREE.ShaderMaterial({
-                //         vertexShader : portalVertexShader,
-                //         fragmentShader : portalFragmentShader
-                //     })
-                // }
-
-                
-
-
-
-
-
-
-
-
-
 
             }
         )
@@ -170,11 +147,12 @@ export default class StudyRoom
     {
         if (this.petitScreenTv)
         {
-            // console.log(this.petitScreenTv)
             this.petitScreenTv.material.uniforms.uTime.value = this.time.elapsed * 0.002
-            this.arcadeScreen.material.uniforms.uTime.value = this.time.elapsed * 0.002
+        }
 
-            // console.log("voici ma tv : ", this.petitScreenTv)
+        if (this.arcadeScreen)
+        {
+            this.arcadeScreen.material.uniforms.uTime.value = this.time.elapsed * 0.001
         }
     }
 }

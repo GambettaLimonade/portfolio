@@ -447,8 +447,16 @@ export default class Soldier
             } 
 
 
-            // console.log(this.model.position)
-            // console.log(this.intersectsFocus[0].object.material)
+            if (this.intersectsFocus[0].object.name == "Cube036_1" || this.intersectsFocus[0].object.name == "pCube11_lambert10_0")
+            {
+                this.focused = true
+                let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(-36, 2, 64), 2000).easing(TWEEN.Easing.Linear.None).start()
+                let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(this.intersectsFocus[0].point, 1000).easing(TWEEN.Easing.Linear.None).start()
+            } 
+
+
+            console.log(this.model.position)
+            console.log(this.intersectsFocus[0].object.name)
 
             
 
