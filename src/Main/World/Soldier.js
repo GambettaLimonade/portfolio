@@ -4,7 +4,6 @@ import CANNON from 'cannon'
 import { Raycaster } from "three";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { gsap } from "gsap";
-import Python from "./Python";
 import { TWEEN } from 'three/examples/jsm/libs/tween.module.min'
 
 
@@ -455,8 +454,7 @@ export default class Soldier
             } 
 
 
-            console.log(this.model.position)
-            console.log(this.intersectsFocus[0].object.name)
+            console.log(this.intersectsFocus[0].object)
 
             
 
@@ -467,7 +465,7 @@ export default class Soldier
             }
 
 
-
+            console.log('objet : ', this.intersectsFocus[0].object.name)
 
             // /!\ /!\ /!\ /!\ /!\ 
             // /!\ FIN DES IF  /!\ 

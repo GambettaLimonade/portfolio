@@ -1,32 +1,15 @@
-import * as THREE from 'three';
 import Main from "../Main.js";
 import Environment from "./Environment.js";
 import Floor from "./Floor.js";
 import Soldier from "./Soldier.js";
 import Ballon from './Ballon.js'
-import Bricks from "./Bricks.js";
 import Sky from "./Sky.js";
 import Overlay from "./Overlay.js";
 import Points from './Points.js';
-//Commentaire
-
-// import Bigcouch from './Bigcouch.js';
-import Tv from './Tv.js';
-import Room from './Room.js';
-import Cylindre from './Cylindres.js';
-import Sun from './Sun.js';
 import Path from './Path.js';
-import Python from './Python.js';
-import Html from './Html.js';
-import Css from './Css.js';
-import TextScene from './TextScene.js';
-import Blender from './Blender.js';
-import Threejs from './Threejs.js';
-import Windows from './Windows.js';
-import DeadTree from './DeadTree.js';
-import StudyRoom from './StudyRoom.js';
-import LivingRoom from './LivingRoom.js';
 import Fireflies from './Fireflies.js';
+import BlenderScene from "./BlenderScene.js";
+import { Light } from "three";
 
 
 
@@ -90,19 +73,13 @@ export default class World
             this.floor = new Floor()
             this.sky = new Sky()
             this.soldier = new Soldier()
-            // this.table = new Table()
-            // this.python = new Python()
-            // this.blender = new Blender()
-            // this.threejs = new Threejs()
-            // this.windows = new Windows()
-            // this.html = new Html()
-            // this.css = new Css()
 
 
-            this.tv = new Tv()
+
             // this.room = new Room()
-            this.studyRoom = new StudyRoom()
+            this.blenderScene = new BlenderScene()
             this.fireflies = new Fireflies()
+            this.lights = new Light()
             // this.livingRoom = new LivingRoom()
             // this.text3d = new TextScene()
 
@@ -131,7 +108,6 @@ export default class World
 
             // }
             this.environment = new Environment()
-            this.sun = new Sun()            
         })
 
 
@@ -158,94 +134,9 @@ export default class World
         }
 
 
-        if(this.cylinders)
+        if (this.blenderScene)
         {
-            for(var cylinder of this.cylinders)
-                cylinder.update()
-        }
-
-
-
-        if(this.bricks)
-        {
-            for(var brick of this.bricks)
-            brick.update()        
-        }
-
-        if(this.couch)
-        {
-            this.couch.update()
-        }
-
-        if(this.table)
-        {
-            this.table.update()
-        }
-
-
-        if(this.python)
-        {
-            this.python.update()
-        }
-
-        if(this.blender)
-        {
-            this.blender.update()
-        }
-
-        if(this.threejs)
-        {
-            this.threejs.update()
-        }
-
-        if(this.windows)
-        {
-            this.windows.update()
-        }
-
-        if(this.html)
-        {
-            this.html.update()
-        }
-
-        if(this.css)
-        {
-            this.css.update()
-        }
-
-
-
-        // if(this.bigcouch)
-        // {
-        //     this.bigcouch.update()
-        // }
-
-        if (this.tv)
-        {
-            this.tv.update()
-        }
-
-
-        if (this.studyRoom)
-        {
-            this.studyRoom.update()
-        }
-
-        if (this.livingRoom)
-        {
-            this.livingRoom.update()
-        }
-
-
-        if (this.room)
-        {
-            this.room.update()
-        }
-
-
-        if(this.sun)
-        {
-            this.sun.update()
+            this.blenderScene.update()
         }
 
         if (this.fireflies)

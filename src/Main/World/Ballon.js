@@ -13,6 +13,8 @@ export default class Ballon
         this.position = position
         this.yarnTexture = this.resources.items.yarn
 
+        console.log(this.resources.items)
+
         this.world2 = this.main.world
         this.sky = this.world2.sky
         this.skyRadius = this.sky.sphereRadius

@@ -67,7 +67,6 @@ export default class Resources extends EventEmitter
         {
             if (source.type == 'gltfModel')
             {
-                console.log("ok", source.path)
                 this.loaders.gltfLoader.load(
                     source.path,
                     (file =>
@@ -75,7 +74,6 @@ export default class Resources extends EventEmitter
                             this.sourceLoaded(source, file)
                         })
                 )
-                console.log("pas ok")
             }
             else if (source.type == 'texture')
             {
