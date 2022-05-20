@@ -79,10 +79,10 @@ export default class Soldier
     setModel()
     {
         this.model = this.resource.scene
-        this.model.scale.set(2,2,2)
+        this.model.scale.set(2.5,2.5,2.5)
         this.model.position.set(0,0,0)
         this.behind = new THREE.Object3D
-        this.behind.position.set(this.model.position.x, this.model.position.y+10, this.model.position.z - 50)
+        this.behind.position.set(this.model.position.x, this.model.position.y+8, this.model.position.z - 30)
         this.model.add(this.behind)
         this.scene.add(this.model)
 
@@ -348,7 +348,7 @@ export default class Soldier
 
     moveModelArrow()
     {
-        const vitesse = 3;    
+        const vitesse = 2;    
         const rotation = Math.PI/60 ;
         
         if (Object.keys(this.keys).length !== 0)

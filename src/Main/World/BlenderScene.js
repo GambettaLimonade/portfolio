@@ -81,8 +81,8 @@ export default class BlenderScene
                         uniforms : 
                         {
                             uTime : { value : 0 },
-                            uColorStart : { value : new THREE.Color(0xffbf00) },
-                            uColorEnd : { value : new THREE.Color(0x540a0a) }
+                            uColorStart : { value : new THREE.Color(0x000fff) },
+                            uColorEnd : { value : new THREE.Color(0xff9500) }
 
                         },
                         vertexShader : portalArcadeVertexShader,
@@ -106,6 +106,40 @@ export default class BlenderScene
                         fragmentShader : longMiddleScreenFragmentShader
                     })
                 }
+
+                if (child.name == "lightLeftScreen")
+                {
+                    this.lightLeftScreen =  child
+                    console.log(child)
+                    this.lightLeftScreen.material = new THREE.MeshStandardMaterial({
+                        color: 0xffffff
+                    })
+
+                }
+
+
+                if (child.name == "littleMiddleScreen")
+                {
+                    this.littleMiddleScreen =  child
+                    console.log(child)
+                    this.littleMiddleScreen.material = new THREE.MeshStandardMaterial({
+                        color: 0xffffff
+                    })
+
+                }
+
+                
+                if (child.name == "Object_35")
+                {
+                    this.screenCenter =  child
+                    console.log(child)
+                    this.screenCenter.material = new THREE.MeshStandardMaterial({
+                        color: 0xffffff
+                    })
+
+                }
+
+
             }
         )
 
@@ -119,27 +153,27 @@ export default class BlenderScene
         this.lightFusee.position.set( 53, 12, -18 );
         this.scene.add( this.lightFusee );
         const lightFuseeHelper = new THREE.PointLightHelper( this.lightFusee, sphereSizeEcran );
-        this.scene.add( lightFuseeHelper );
+        // this.scene.add( lightFuseeHelper );
 
 
         this.lightLampadaire = new THREE.PointLight( 0xfe019a, 0.8, 60 );
         this.lightLampadaire.position.set( -71.950, 20, 0.005 );
         this.scene.add( this.lightLampadaire );
         const lightLampadaireHelper = new THREE.PointLightHelper( this.lightLampadaire, sphereSizeEcran );
-        this.scene.add( lightLampadaireHelper );
+        // this.scene.add( lightLampadaireHelper );
 
 
         this.lightMultipleScreens = new THREE.PointLight( 0xffffff, 1, 30 );
         this.lightMultipleScreens.position.set( 15, 5, 55 );
         this.scene.add( this.lightMultipleScreens );
         const lightMultipleScreensHelper = new THREE.PointLightHelper( this.lightMultipleScreens, sphereSizeEcran );
-        this.scene.add( lightMultipleScreensHelper );
+        // this.scene.add( lightMultipleScreensHelper );
 
         this.lightArcadeMachine = new THREE.PointLight( 0x39ff14, 1, 40 );
         this.lightArcadeMachine.position.set( 25, 15, -55 );
         this.scene.add( this.lightArcadeMachine );
         const lightArcadeMachineHelper = new THREE.PointLightHelper( this.lightArcadeMachine, 5 );
-        this.scene.add( lightArcadeMachineHelper );
+        // this.scene.add( lightArcadeMachineHelper );
 
 
 
