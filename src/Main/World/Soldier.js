@@ -393,32 +393,32 @@ export default class Soldier
             // /!\ IF POUR LE MOUVEMENT DE LA CAMERA ET LES TWEENS /!\ 
             // /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ 
 
-            if (this.intersectsFocus[0].object.name == "cylindre" || this.intersectsFocus[0].object.name == "ball")
-            {
-                gsap.to( this.camera.instance.position, {
-                    duration: 2.5,
-                    x: this.intersectsFocus[0].object.position.x,
-                    y: -100,
-                    z: this.intersectsFocus[0].object.position.z, // maybe adding even more offset depending on your model
-                    // onUpdate: function()
-                        // {
-                        //     console.log('i : ', i)
-                        // }
-                    // }
-                } );
+            // if (this.intersectsFocus[0].object.name == "cylindre" || this.intersectsFocus[0].object.name == "ball")
+            // {
+            //     gsap.to( this.camera.instance.position, {
+            //         duration: 2.5,
+            //         x: this.intersectsFocus[0].object.position.x,
+            //         y: -100,
+            //         z: this.intersectsFocus[0].object.position.z, // maybe adding even more offset depending on your model
+            //         // onUpdate: function()
+            //             // {
+            //             //     console.log('i : ', i)
+            //             // }
+            //         // }
+            //     } );
 
-            this.camera.controls.target.set(this.intersectsFocus[0].object.position.x,this.intersectsFocus[0].object.position.y,this.intersectsFocus[0].object.position.z) 
-            this.focused = true
+            // this.camera.controls.target.set(this.intersectsFocus[0].object.position.x,this.intersectsFocus[0].object.position.y,this.intersectsFocus[0].object.position.z) 
+            // this.focused = true
     
-                // document.getElementById("info").style.display = "block";
+            //     // document.getElementById("info").style.display = "block";
     
-                setTimeout(() =>
-                 { 
-                    this.focused = false;
-                    // document.getElementById("info").style.display = "none";
+            //     setTimeout(() =>
+            //      { 
+            //         this.focused = false;
+            //         // document.getElementById("info").style.display = "none";
     
-                }, 2500)
-            }
+            //     }, 2500)
+            // }
 
 
             if (this.intersectsFocus[0].object.name == "pCube11_lambert21_0" || this.intersectsFocus[0].object.name == "pCube11_lambert10_0")

@@ -1,4 +1,14 @@
 export default[
+
+
+    {
+        name: 'holo',
+        type: 'gltfModel',
+        path: 'models/hologram/scene.gltf'
+
+
+    },
+
     {
         name: 'soldier',
         type: 'gltfModel',

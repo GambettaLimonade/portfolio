@@ -110,7 +110,6 @@ export default class BlenderScene
                 if (child.name == "lightLeftScreen")
                 {
                     this.lightLeftScreen =  child
-                    console.log(child)
                     this.lightLeftScreen.material = new THREE.MeshStandardMaterial({
                         color: 0xffffff
                     })
@@ -121,7 +120,6 @@ export default class BlenderScene
                 if (child.name == "littleMiddleScreen")
                 {
                     this.littleMiddleScreen =  child
-                    console.log(child)
                     this.littleMiddleScreen.material = new THREE.MeshStandardMaterial({
                         color: 0xffffff
                     })
@@ -132,7 +130,6 @@ export default class BlenderScene
                 if (child.name == "Object_35")
                 {
                     this.screenCenter =  child
-                    console.log(child)
                     this.screenCenter.material = new THREE.MeshStandardMaterial({
                         color: 0xffffff
                     })

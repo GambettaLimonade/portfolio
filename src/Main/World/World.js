@@ -7,9 +7,10 @@ import Sky from "./Sky.js";
 import Overlay from "./Overlay.js";
 import Points from './Points.js';
 import Path from './Path.js';
-import Fireflies from './Fireflies.js';
+// import Fireflies from './Fireflies.js';
 import BlenderScene from "./BlenderScene.js";
 import { Light } from "three";
+import Hologram from "./Hologram.js";
 
 
 
@@ -78,8 +79,9 @@ export default class World
 
             // this.room = new Room()
             this.blenderScene = new BlenderScene()
-            this.fireflies = new Fireflies()
+            // this.fireflies = new Fireflies()
             this.lights = new Light()
+            this.hologram = new Hologram()
             // this.livingRoom = new LivingRoom()
             // this.text3d = new TextScene()
 
@@ -144,6 +146,10 @@ export default class World
             this.fireflies.update()
         }
 
+        if (this.hologram)
+        {
+            this.hologram.update()
+        }
 
 
     }
