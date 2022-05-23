@@ -81,7 +81,7 @@ export default class World
             this.blenderScene = new BlenderScene()
             // this.fireflies = new Fireflies()
             this.lights = new Light()
-            this.hologram = new Hologram()
+            // this.hologram = new Hologram()
             // this.livingRoom = new LivingRoom()
             // this.text3d = new TextScene()
 
@@ -146,10 +146,10 @@ export default class World
             this.fireflies.update()
         }
 
-        if (this.hologram)
-        {
-            this.hologram.update()
-        }
+        // if (this.hologram)
+        // {
+        //     this.hologram.update()
+        // }
 
 
     }
