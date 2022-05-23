@@ -454,9 +454,24 @@ export default class Soldier
             } 
 
 
-            console.log(this.intersectsFocus[0].object)
-
+            // Partie où la camera focus les objet (futurama, hitachi, chapeau de paille...)
+            if (this.intersectsFocus[0].object.name == "pCube2_lambert9_0" || this.intersectsFocus[0].object.name == "pCube3_lambert9_0" ||this.intersectsFocus[0].object.name == "CIMA_verde_claro_0" ||this.intersectsFocus[0].object.name == "BAIXO_verde_claro_0" ||this.intersectsFocus[0].object.name == "Plano_verde_escuro_riscado_0" ||this.intersectsFocus[0].object.name == "Aasa_cima_logo_0" ||this.intersectsFocus[0].object.name == "Object_4" ||this.intersectsFocus[0].object.name == "Object_2002" ||this.intersectsFocus[0].object.name == "Cylinder_Material001_0" ||this.intersectsFocus[0].object.name == "Cube_Material003_0" ||this.intersectsFocus[0].object.name == "pCylinder12_blinn2_0001" ||this.intersectsFocus[0].object.name == "pCylinder12_blinn2_0" ||this.intersectsFocus[0].object.name == "pCube38_lambert36_0" ||this.intersectsFocus[0].object.name == "Straw_Hat_Material002_0" ||this.intersectsFocus[0].object.name == "NMSMultyTool_0010pCube1_NMSMultyTool_0010phong3_0" ||this.intersectsFocus[0].object.name == "Object_47" ||this.intersectsFocus[0].object.name == "Object_46")
+            {
+                this.focused = true
+                let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(45, 10, -2.5), 2000).easing(TWEEN.Easing.Linear.None).start()
+                let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(this.intersectsFocus[0].point, 1000).easing(TWEEN.Easing.Linear.None).start()
+            } 
             
+
+
+            // Partie où la camera focus les écrans avec les projets et les photos
+            if (this.intersectsFocus[0].object.name == "Object_17001" || this.intersectsFocus[0].object.name == "Object_16001" ||this.intersectsFocus[0].object.name == "bottomRightScreen" ||this.intersectsFocus[0].object.name == "bottomLeftScreen" ||this.intersectsFocus[0].object.name == "littleMiddleScreen" ||this.intersectsFocus[0].object.name == "Object_35" ||this.intersectsFocus[0].object.name == "longMiddleScreen" ||this.intersectsFocus[0].object.name == "lightLeftScreen" ||this.intersectsFocus[0].object.name == "middleLeftScreen" ||this.intersectsFocus[0].object.name == "middleMiddleScreen" ||this.intersectsFocus[0].object.name == "middleRightScreen" ||this.intersectsFocus[0].object.name == "topScreen" )
+            {
+                this.focused = true
+                let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(12.8, 10, 42.3), 2000).easing(TWEEN.Easing.Linear.None).start()
+                let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(this.intersectsFocus[0].point, 1000).easing(TWEEN.Easing.Linear.None).start()
+            } 
+
 
 
             if (this.intersectsFocus[0].object.name == "sky" || this.intersectsFocus[0].object.name == "floor" || this.intersectsFocus[0].object.name == "BackSquare")
@@ -550,7 +565,7 @@ export default class Soldier
             this.bodyCharacter.position.copy(this.model.position)
             this.changementDambiance()
             // this.camera.controls.update()
-            // console.log(this.model.position)
+            console.log(this.model.position)
         }        
 
     }

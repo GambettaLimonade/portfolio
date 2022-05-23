@@ -174,7 +174,11 @@ export default class BlenderScene
 
 
 
-
+        this.lighTableau = new THREE.PointLight( 0xffba00, 1, 50 );
+        this.lighTableau.position.set( 58, 13, 35 );
+        this.scene.add( this.lighTableau );
+        const lightTableauHelper = new THREE.PointLightHelper( this.lighTableau, 5 );
+        // this.scene.add( lightTableauHelper );
 
 
 
