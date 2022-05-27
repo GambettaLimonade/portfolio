@@ -7,7 +7,7 @@ import Sky from "./Sky.js";
 import Overlay from "./Overlay.js";
 import Points from './Points.js';
 import Path from './Path.js';
-// import Fireflies from './Fireflies.js';
+import Fireflies from './Fireflies.js';
 import BlenderScene from "./BlenderScene.js";
 import { Light } from "three";
 import Hologram from "./Hologram.js";
@@ -28,12 +28,18 @@ export default class World
         this.bricks = []
         this.path = []
         this.deadtrees = []
-        
+
+        console.log('toutes les textures : ', this.resources.items)
+        console.log('toutes les textures 2 : ', this.resources.items['yarn'])
+
 
         this.ballonsValues = 
         {
-            'position' : [[100,0,-100], [90,0,-105], [103,0,-101], [80,0,-95], [93,0,-104], [99,0,-97]],
-            'diametre' : [3, 1, 2, 1.5, 0.5, 1.2]
+            // , [9,0,-5], [3,0,-1], [8,0,-9.5], [9.3,0,-4], [9.9,0,-9.7]
+            // , 1, 2, 1.5, 0.5, 1.2
+            'position' : [[10,0,-0], [20, 0, 10]],
+            'diametre' : [3, 5],
+            'texture' : ['ballon', 'pokeball']
 
         }
         this.cylindersValues = 
@@ -79,16 +85,16 @@ export default class World
 
             // this.room = new Room()
             this.blenderScene = new BlenderScene()
-            // this.fireflies = new Fireflies()
+            this.fireflies = new Fireflies()
             this.lights = new Light()
             // this.hologram = new Hologram()
             // this.livingRoom = new LivingRoom()
             // this.text3d = new TextScene()
 
-            // for(var i=0; i<this.ballonsValues['position'].length; i++)
-            // {
-            //     this.ballons.push(new Ballon(this.ballonsValues['position'][i], this.ballonsValues['diametre'][i]))
-            // }
+            for(var i=0; i<this.ballonsValues['position'].length; i++)
+            {
+                this.ballons.push(new Ballon(this.ballonsValues['position'][i], this.ballonsValues['diametre'][i], this.ballonsValues['texture'][i]))
+            }
 
             // for(var i=0; i<this.cylindersValues['position'].length; i++)
             // {

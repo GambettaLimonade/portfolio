@@ -35,6 +35,21 @@ export default[
         type : 'texture',
         path : 'images/ccd.png'
     },
+    
+    {
+        name : 'pokeball',
+        type : 'texture',
+        path : 'textures/pokeball.jpg'
+    },
+
+
+    
+    {
+        name : 'ballon',
+        type : 'texture',
+        path : 'textures/ballon.jpg'
+    },
+
 
     {
         name : 'yarn',

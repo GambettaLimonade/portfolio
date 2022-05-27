@@ -565,7 +565,7 @@ export default class Soldier
             this.bodyCharacter.position.copy(this.model.position)
             this.changementDambiance()
             // this.camera.controls.update()
-            console.log(this.model.position)
+            // console.log(this.model.position)
         }        
 
     }

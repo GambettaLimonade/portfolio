@@ -4,16 +4,25 @@ import CANNON from 'cannon'
 
 export default class Ballon
 {
-    constructor(position, diametre)
+    constructor(position, diametre, texture)
     {
         this.main = new Main()
         this.scene = this.main.scene
         this.resources = this.main.resources
         this.diametre = diametre
         this.position = position
-        this.yarnTexture = this.resources.items.yarn
 
-        console.log(this.resources.items)
+        if (texture == "ballon")
+        {
+            this.resource = this.resources.items.ballon
+        }
+
+        else if (texture == "pokeball")
+        {
+            this.resource = this.resources.items.pokeball
+        }
+
+
 
         this.world2 = this.main.world
         this.sky = this.world2.sky
@@ -34,8 +43,8 @@ export default class Ballon
             {
             metalness: 0.3,
             roughness: 0.4,
-            color : 0xF7F3E7
-            // map: this.yarnTexture
+            color : 0xF7F3E7,
+            map: this.resource
             }
         )
     }
@@ -62,10 +71,10 @@ export default class Ballon
     setBody()
     {
         this.body = new CANNON.Body({
-                mass:0.8,
+                mass:1,
                 shape:this.shape,
-                material:this.main.physics.world.defaultMaterial,
-                linearDamping:1
+                // material:this.main.physics.world.defaultMaterial,
+                linearDamping:0.3
                 
             })
             
@@ -87,12 +96,10 @@ export default class Ballon
 
     update()
     {
-        if ((this.meshBallon.position.x - 0)**2 + (this.meshBallon.position.z - 0)**2 > ((this.skyRadius**2) - 1000) )
+        if ((this.meshBallon.position.x - 0)**2 + (this.meshBallon.position.z - 0)**2 > ((this.skyRadius**2) - 30) )
         {
-            this.body.position.x = (this.body.position.x + 0.9) 
-            this.body.position.z = (this.body.position.z + 0.9)
-            // this.releaseKey()
-            // bloquer la position du character
+            this.body.position.x = (this.body.position.x + 1.2) 
+            this.body.position.z = (this.body.position.z + 1.2)
         } 
         this.meshBallon.position.copy(this.body.position)
     }
