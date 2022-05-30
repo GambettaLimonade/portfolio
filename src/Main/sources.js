@@ -39,7 +39,7 @@ export default[
     {
         name : 'pokeball',
         type : 'texture',
-        path : 'textures/pokeball.jpg'
+        path : 'textures/pokeball.png'
     },
 
 

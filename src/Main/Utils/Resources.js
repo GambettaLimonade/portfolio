@@ -110,12 +110,12 @@ export default class Resources extends EventEmitter
                             }
                             
                             file.encoding = THREE.sRGBEncoding;        
-                            file.flipY = false;
-                            file.rotation = Math.PI / 2
-                            file.wrapS = 10;
-                            file.wrapT = 20;
-                            file.rotate = Math.PI / 2
-                            file.repeat.set( 3,3 );
+                            // file.flipY = false;
+                            // file.rotation = Math.PI / 2
+                            // file.wrapS = 10;
+                            // file.wrapT = 20;
+                            file.rotate = 10
+                            // file.repeat.set( 3,3 );
 
 
                             this.sourceLoaded(source, file)

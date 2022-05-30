@@ -21,33 +21,32 @@ export default class Ballon
         {
             this.resource = this.resources.items.pokeball
         }
-
-
-
-        this.world2 = this.main.world
-        this.sky = this.world2.sky
-        this.skyRadius = this.sky.sphereRadius
-
         this.createBall()
-        
     }
+
+    setMaterial()
+    {
+
+        // mettre un matierla different //
+        this.material = new THREE.MeshStandardMaterial(
+            {
+            // metalness: 0.3,
+            // roughness: 0.4,
+            // color : 0xF7F3E7,
+            map: this.resource
+            }
+        )
+    }
+
 
     setGeometry()
     {
         this.geometry = new THREE.SphereBufferGeometry(this.diametre, 20, 20)
     }
 
-    setMaterial()
-    {
-        this.material = new THREE.MeshStandardMaterial(
-            {
-            metalness: 0.3,
-            roughness: 0.4,
-            color : 0xF7F3E7,
-            map: this.resource
-            }
-        )
-    }
+
+
+
 
     setMesh()
     {
