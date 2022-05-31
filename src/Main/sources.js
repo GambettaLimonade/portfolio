@@ -43,6 +43,20 @@ export default[
     },
 
 
+    {
+        name : 'basketball',
+        type : 'texture',
+        path : 'textures/basketball.jpg'
+    },
+
+
+    {
+        name : 'dbz1',
+        type : 'texture',
+        path : 'textures/dbz1.jpg'
+    },
+
+
     
     {
         name : 'ballon',
@@ -56,16 +70,7 @@ export default[
         type : 'texture',
         path : 'textures/matcaps/ball.png'
     },
-
-    {
-        name : 'dbz',
-        type : 'texture',
-        path : 'textures/dbz.gif'
-    },
-
-
-
-    
+   
     {
         name : 'snk',
         type : 'texture',

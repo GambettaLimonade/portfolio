@@ -21,21 +21,50 @@ export default class Ballon
         {
             this.resource = this.resources.items.pokeball
         }
+
+        else if (texture == "basketball")
+        {
+            this.resource = this.resources.items.basketball
+        }
+
+        else if (texture == "dbz1")
+        {
+            this.resource = this.resources.items.dbz1
+        }
+        
         this.createBall()
     }
 
     setMaterial()
     {
 
-        // mettre un matierla different //
-        this.material = new THREE.MeshStandardMaterial(
-            {
-            // metalness: 0.3,
-            // roughness: 0.4,
-            // color : 0xF7F3E7,
-            map: this.resource
-            }
-        )
+        
+        this.material = new THREE.MeshStandardMaterial({ 
+            metalness: 0.9,
+            roughness: 0.4,
+            map: this.resource 
+        })
+        
+        // if (texture == "ballon")
+        // {
+        //     this.material = new THREE.MeshStandardMaterial(
+        //         {
+        //             // metalness: 0.3,
+        //             // roughness: 0.4,
+        //             // color : 0xF7F3E7,
+        //             map: this.resource
+        //         })
+        // }
+
+        // else if (texture == "pokeball")
+        // {
+        //     this.material = new THREE.MeshStandardMaterial(
+        //         {
+        //             metalness: 0.3,
+        //             roughness: 0.4,
+        //             map: this.resource
+        //         })
+        // }
     }
 
 

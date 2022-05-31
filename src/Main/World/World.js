@@ -37,9 +37,9 @@ export default class World
         {
             // , [9,0,-5], [3,0,-1], [8,0,-9.5], [9.3,0,-4], [9.9,0,-9.7]
             // , 1, 2, 1.5, 0.5, 1.2
-            'position' : [[10,0,-0], [20, 0, 10]],
-            'diametre' : [3, 5],
-            'texture' : ['ballon', 'pokeball']
+            'position' : [[10,0,-0], [20, 0, 10], [-55, 0, 25], [-68, 0, 22], [-23, 0, -26], [-35, 0, 48]],
+            'diametre' : [1.5, 1, 1, 1, 1.8, 1],
+            'texture' : ['ballon', 'pokeball', 'pokeball', 'pokeball', 'basketball', 'dbz1']
 
         }
         this.cylindersValues = 
