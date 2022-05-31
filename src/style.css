@@ -62,9 +62,38 @@ li {
     counter-increment: item;
     color: white;
   }
-  li:hover:before {
+  .li-work:hover:before {
     /* color: red; */
     /* font-size: 2em; */
-    content: 'work';
+    content: '01 - work';
+
+  }
+
+
+  .li-bed:hover:before {
+    /* color: red; */
+    /* font-size: 2em; */
+    content: '02 - bed';
+
+  }
+
+  .li-kitchen:hover:before {
+    /* color: red; */
+    /* font-size: 2em; */
+    content: '03 - kitchen';
+
+  }
+
+  .li-games:hover:before {
+    /* color: red; */
+    /* font-size: 2em; */
+    content: '04 - games';
+
+  }
+
+  .li-skills:hover:before {
+    /* color: red; */
+    /* font-size: 2em; */
+    content: '05 - skills';
 
   }
