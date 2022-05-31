@@ -42,3 +42,29 @@ button
     transform-origin: top right;
     transition: transform 1.5s ease-in-out;
 }
+
+
+li {
+    list-style: none;
+  }
+  li:before {
+    content: "•";
+    color: white;
+  }
+  ol {
+    counter-reset: item;
+  }
+  ol li {
+    display: block;
+  }
+  ol li:before {
+    content: counter(item)". ";
+    counter-increment: item;
+    color: white;
+  }
+  li:hover:before {
+    /* color: red; */
+    /* font-size: 2em; */
+    content: 'work';
+
+  }
