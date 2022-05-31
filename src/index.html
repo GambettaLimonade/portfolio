@@ -3,34 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>이삼</title>
+    <title>Issam Merikhi</title>
     </head>
 <body>
     <canvas class="webgl"></canvas>
     <div class="loading-bar"></div>
 
-    <!-- <div>
-        <h1 id="identite">Issam Merikhi</h1>
-    </div> -->
-
-    <div class="point point-0">
-        <div class="label">1</div>
-        <div class="text">Mes projets sont diffusés à la télévision.</div>
+    <div>
+        <h1 id = "msg" style="z-index: 100; color: white; position: absolute;
+        top: 10px;
+        width: 100%;
+        text-align: center;
+        z-index: 100;
+        color: #ffffff;
+        ">BONJOUR A TOUS</h1>
+        <!-- <img src="../static/images/ccd.png" alt=""> -->
     </div>
 
+    <script>
+        setTimeout(function(){
+            var msg = document.getElementById("msg");
+            msg.parentNode.removeChild(msg);
+        }, 10000)
+    </script>
 
-    <div class="point point-1">
-        <div class="label">2</div>
-        <div class="text">Que dites vous de faire une partie de chess ?</div>
+    <div class="paragraph" style="position: absolute; left: 5%; color: white; bottom: 50%;">
+        <ul style="  list-style-type: circle;">
+            <li>skills</li>
+            <li>projet</li>
+            <li>bed</li>
+            <li>kitchen</li>
+            <li>games</li>
+        </ul>
     </div>
-
-    
-    <div class="point point-2">
-        <div class="label">3</div>
-        <div class="text">Retrouvez mes meilleurs skills.</div>
-    </div>
-
-    <div id="info">Description</div>
 
 
 </body>

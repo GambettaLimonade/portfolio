@@ -43,7 +43,7 @@ export default class Soldier
         this.intersectsFocus; 
 
         this.movements = [];
-        this.playerSpeed = 1;
+        this.playerSpeed = 0.1;
         this.resource = this.resources.items.soldier
         this.temp = new THREE.Vector3;
         this.collisions = []
@@ -348,7 +348,7 @@ export default class Soldier
 
     moveModelArrow()
     {
-        const vitesse = 2;    
+        const vitesse = 1.2;    
         const rotation = Math.PI/60 ;
         
         if (Object.keys(this.keys).length !== 0)
