@@ -50,6 +50,10 @@ export default class Soldier
         this.characterBoundingBox;
         this.focused = false;
 
+
+        
+
+
         //Debug
         if(this.debug.active)
         {
@@ -70,6 +74,7 @@ export default class Soldier
 
         this.changementDambiance()
         this.focusedObject()
+        this.etapierFocusObject()
     }
 
     /**
@@ -374,6 +379,7 @@ export default class Soldier
     {
         document.addEventListener('click', (event) => {
 
+
             this.height =  this.main.sizes.height
             this.width =  this.main.sizes.width
 
@@ -477,7 +483,7 @@ export default class Soldier
             if (this.intersectsFocus[0].object.name == "sky" || this.intersectsFocus[0].object.name == "floor" || this.intersectsFocus[0].object.name == "BackSquare")
             {
                 this.focused = false
-            }
+            }           
 
 
             console.log('objet : ', this.intersectsFocus[0].object.name)
@@ -491,7 +497,25 @@ export default class Soldier
     }
 
 
-    
+    etapierFocusObject()
+    {
+        this.intersectsFocus = this.raycaster.intersectObjects(this.scene.children, true);
+        var testElements = document.getElementsByClassName('li-work')
+
+
+        testElements[0].addEventListener('click', (event) => 
+        {
+            // Permet de cliquer sur du HTML sans que Raycasting du sol ou de la sphère s'active
+            // https://stackoverflow.com/questions/39435334/how-can-i-block-a-three-js-raycast-with-html-elements
+            event.stopPropagation()
+            this.focused = true
+            let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(12, 10, 25), 2000).easing(TWEEN.Easing.Linear.None).start()
+            let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(new THREE.Vector3(15, 10, 60), 1000).easing(TWEEN.Easing.Linear.None).start()
+
+        })
+        
+
+    }
 
     /**
      * UPDATE PART
