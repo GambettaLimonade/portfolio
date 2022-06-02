@@ -478,7 +478,21 @@ export default class Soldier
                 let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(this.intersectsFocus[0].point, 1000).easing(TWEEN.Easing.Linear.None).start()
             } 
 
+            // Partie où la camera focus la partie TESTING
+            if (this.intersectsFocus[0].object.name == "Object_8")
+            {
+                this.focused = true
+                let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(50, 10, 35), 2000).easing(TWEEN.Easing.Linear.None).start()
+                let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(this.intersectsFocus[0].point, 1000).easing(TWEEN.Easing.Linear.None).start()
+            } 
 
+            // Partie où la camera focus la partie PROGRAMMATION
+            if (this.intersectsFocus[0].object.name == "Object_9")
+            {
+                this.focused = true
+                let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(50, 10, 40), 2000).easing(TWEEN.Easing.Linear.None).start()
+                let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(this.intersectsFocus[0].point, 1000).easing(TWEEN.Easing.Linear.None).start()
+            } 
 
             if (this.intersectsFocus[0].object.name == "sky" || this.intersectsFocus[0].object.name == "floor" || this.intersectsFocus[0].object.name == "BackSquare")
             {
@@ -500,10 +514,13 @@ export default class Soldier
     etapierFocusObject()
     {
         this.intersectsFocus = this.raycaster.intersectObjects(this.scene.children, true);
-        var testElements = document.getElementsByClassName('li-work')
+        var workBullet = document.getElementsByClassName('li-work')
+        var bedBullet = document.getElementsByClassName('li-bed')
+        var kitchenBullet = document.getElementsByClassName('li-kitchen')
+        var gamesBullet = document.getElementsByClassName('li-games')
+        var skillsBullet = document.getElementsByClassName('li-skills')
 
-
-        testElements[0].addEventListener('click', (event) => 
+        workBullet[0].addEventListener('click', (event) => 
         {
             // Permet de cliquer sur du HTML sans que Raycasting du sol ou de la sphère s'active
             // https://stackoverflow.com/questions/39435334/how-can-i-block-a-three-js-raycast-with-html-elements
@@ -513,6 +530,51 @@ export default class Soldier
             let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(new THREE.Vector3(15, 10, 60), 1000).easing(TWEEN.Easing.Linear.None).start()
 
         })
+
+        bedBullet[0].addEventListener('click', (event) => 
+        {
+            // Permet de cliquer sur du HTML sans que Raycasting du sol ou de la sphère s'active
+            // https://stackoverflow.com/questions/39435334/how-can-i-block-a-three-js-raycast-with-html-elements
+            event.stopPropagation()
+            this.focused = true
+            let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(-16, 10, 16), 2000).easing(TWEEN.Easing.Linear.None).start()
+            let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(new THREE.Vector3(-50, 5, 50), 1000).easing(TWEEN.Easing.Linear.None).start()
+
+        })
+
+        kitchenBullet[0].addEventListener('click', (event) => 
+        {
+            // Permet de cliquer sur du HTML sans que Raycasting du sol ou de la sphère s'active
+            // https://stackoverflow.com/questions/39435334/how-can-i-block-a-three-js-raycast-with-html-elements
+            event.stopPropagation()
+            this.focused = true
+            let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(0, 10, 0), 2000).easing(TWEEN.Easing.Linear.None).start()
+            let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(new THREE.Vector3(-50, 5, -40), 1000).easing(TWEEN.Easing.Linear.None).start()
+
+        })
+
+        gamesBullet[0].addEventListener('click', (event) => 
+        {
+            // Permet de cliquer sur du HTML sans que Raycasting du sol ou de la sphère s'active
+            // https://stackoverflow.com/questions/39435334/how-can-i-block-a-three-js-raycast-with-html-elements
+            event.stopPropagation()
+            this.focused = true
+            let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(-50, 10, 40), 2000).easing(TWEEN.Easing.Linear.None).start()
+            let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(new THREE.Vector3(13, 10, -1), 1000).easing(TWEEN.Easing.Linear.None).start()
+
+        })
+
+        skillsBullet[0].addEventListener('click', (event) => 
+        {
+            // Permet de cliquer sur du HTML sans que Raycasting du sol ou de la sphère s'active
+            // https://stackoverflow.com/questions/39435334/how-can-i-block-a-three-js-raycast-with-html-elements
+            event.stopPropagation()
+            this.focused = true
+            let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(20, 10, 19), 2000).easing(TWEEN.Easing.Linear.None).start()
+            let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(new THREE.Vector3(52, 10, 40), 1000).easing(TWEEN.Easing.Linear.None).start()
+
+        })
+
         
 
     }
@@ -589,7 +651,6 @@ export default class Soldier
             this.bodyCharacter.position.copy(this.model.position)
             this.changementDambiance()
             // this.camera.controls.update()
-            // console.log(this.model.position)
         }        
 
     }
