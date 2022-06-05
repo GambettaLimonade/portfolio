@@ -75,6 +75,7 @@ export default class Soldier
         this.changementDambiance()
         this.focusedObject()
         this.etapierFocusObject()
+        this.socialMedias()
     }
 
     /**
@@ -379,6 +380,7 @@ export default class Soldier
     {
         document.addEventListener('click', (event) => {
 
+            var cubeRouge = document.getElementsByClassName('cube-rouge')
 
             this.height =  this.main.sizes.height
             this.width =  this.main.sizes.width
@@ -497,6 +499,8 @@ export default class Soldier
             if (this.intersectsFocus[0].object.name == "sky" || this.intersectsFocus[0].object.name == "floor" || this.intersectsFocus[0].object.name == "BackSquare")
             {
                 this.focused = false
+                cubeRouge[0].style.visibility = 'hidden';
+
             }           
 
 
@@ -519,6 +523,8 @@ export default class Soldier
         var kitchenBullet = document.getElementsByClassName('li-kitchen')
         var gamesBullet = document.getElementsByClassName('li-games')
         var skillsBullet = document.getElementsByClassName('li-skills')
+        var cubeRouge = document.getElementsByClassName('cube-rouge')
+
 
         workBullet[0].addEventListener('click', (event) => 
         {
@@ -527,8 +533,8 @@ export default class Soldier
             event.stopPropagation()
             this.focused = true
             let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(12, 10, 25), 2000).easing(TWEEN.Easing.Linear.None).start()
-            let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(new THREE.Vector3(15, 10, 60), 1000).easing(TWEEN.Easing.Linear.None).start()
-
+            let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(new THREE.Vector3(15, 10, 60), 1000).easing(TWEEN.Easing.Linear.None).start()            
+            cubeRouge[0].style.visibility = 'visible';
         })
 
         bedBullet[0].addEventListener('click', (event) => 
@@ -574,8 +580,31 @@ export default class Soldier
             let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(new THREE.Vector3(52, 10, 40), 1000).easing(TWEEN.Easing.Linear.None).start()
 
         })
+    }
 
-        
+    socialMedias()    
+    {
+        console.log('socials medias !!!')
+        var githubIcon = document.getElementsByClassName('github-icon')
+        githubIcon[0].addEventListener('click', (event) => 
+        {
+            // Permet de cliquer sur du HTML sans que Raycasting du sol ou de la sphère s'active
+            // https://stackoverflow.com/questions/39435334/how-can-i-block-a-three-js-raycast-with-html-elements
+            event.stopPropagation()
+            this.focused = true
+            window.open("https://github.com/IssamMerikhi", '_blank').focus();
+        })
+
+        var linkedinIcon = document.getElementsByClassName('linkedin-icon')
+        linkedinIcon[0].addEventListener('click', (event) => 
+        {
+            // Permet de cliquer sur du HTML sans que Raycasting du sol ou de la sphère s'active
+            // https://stackoverflow.com/questions/39435334/how-can-i-block-a-three-js-raycast-with-html-elements
+            event.stopPropagation()
+            this.focused = true
+            window.open("https://www.linkedin.com/in/issam-merikhi/", '_blank').focus();
+        })
+
 
     }
 
