@@ -43,6 +43,10 @@ button
     transition: transform 1.5s ease-in-out;
 }
 
+/* --------------------------------------------------------------------------------------- */
+/* ----------------------------- PARTIE ETAPIER ------------------------------------------ */
+/* --------------------------------------------------------------------------------------- */
+
 
 li {
     list-style: none;
@@ -66,6 +70,8 @@ li {
     /* color: red; */
     /* font-size: 2em; */
     content: '01 - work';
+    cursor: pointer;
+
 
   }
 
@@ -74,6 +80,8 @@ li {
     /* color: red; */
     /* font-size: 2em; */
     content: '02 - bed';
+    cursor: pointer;
+
 
   }
 
@@ -81,6 +89,8 @@ li {
     /* color: red; */
     /* font-size: 2em; */
     content: '03 - kitchen';
+    cursor: pointer;
+
 
   }
 
@@ -88,6 +98,8 @@ li {
     /* color: red; */
     /* font-size: 2em; */
     content: '04 - games';
+    cursor: pointer;
+
 
   }
 
@@ -95,6 +107,8 @@ li {
     /* color: red; */
     /* font-size: 2em; */
     content: '05 - skills';
+    cursor: pointer;
+
 
   }
 
@@ -113,3 +127,24 @@ li {
     margin-left: -1.3em; /* same as padding-left set on li */
     width: 1.3em; /* same as padding-left set on li */
   }
+
+
+/* --------------------------------------------------------------------------------------- */
+/* ----------------------------- PARTIE MEDIAS ------------------------------------------- */
+/* --------------------------------------------------------------------------------------- */
+
+
+.media
+{
+  display : flex;
+  position: absolute;
+  bottom: 10%;
+  right: 20%;
+  /* background-color: yellow; */
+  width: 30%;
+}
+
+lottie-player:hover
+{
+  cursor: pointer;
+}
