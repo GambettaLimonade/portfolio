@@ -9,25 +9,31 @@
     <canvas class="webgl"></canvas>
     <div class="loading-bar"></div>
 
-    <div>
-        <h1 id = "msg" style="z-index: 100; color: white; position: absolute;
-        top: 10px;
-        width: 100%;
-        text-align: center;
-        z-index: 100;
-        color: #ffffff;
-        ">BONJOUR A TOUS</h1>
-        <!-- <img src="../static/images/ccd.png" alt=""> -->
+    <div id="divBienvenu" 
+    style="z-index: 100; color: white; position: absolute;
+    top: 10px;
+    width: 100%;
+    text-align: center;
+    z-index: 100;
+    color: #ffffff;
+    ">
+        <h1 id = "msg">BONJOUR A TOUS</h1>
+        <lottie-player autoplay loop class="home-icon" style = "width : 200px; top: 40%;" src="https://assets5.lottiefiles.com/packages/lf20_v9zyr76w.json">
+        </lottie-player>
     </div>
-
+    
     <script>
         setTimeout(function(){
-            var msg = document.getElementById("msg");
+            var msg = document.getElementById("divBienvenu");
             msg.parentNode.removeChild(msg);
         }, 10000)
     </script>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@1.5.7/dist/lottie-player.js"></script>
     
+    <div style="position: absolute; left: 4%; color: white; top: 29%;">
+        <lottie-player autoplay hover class="home-icon" style = "width : 30px" src="https://assets5.lottiefiles.com/packages/lf20_miw0dqoi.json">
+        </lottie-player>
+    </div>
     <div class="paragraph" style="position: absolute; left: 5%; color: white; bottom: 50%;">
         <ul style="list-style-position: inside;">
             <li class="li-work"></li>
@@ -36,24 +42,23 @@
             <li class="li-games"></li>
             <li class="li-skills"></li>
         </ul>
-
     </div>
 
     <div class="media">  
         
         <div class="github-icon">
-            <lottie-player autoplay hover speed=2 style = "width : 40px;" src="https://assets3.lottiefiles.com/packages/lf20_S6vWEd.json">
+            <lottie-player autoplay hover speed=2 style = "width : 20px;" src="https://assets9.lottiefiles.com/packages/lf20_uurbtty4.json">
             </lottie-player>
         </div> 
 
         <div class="linkedin-icon">
-            <lottie-player autoplay hover class="linkedin-icon" style = "width : 40px;" src="https://assets3.lottiefiles.com/packages/lf20_atjsyyed.json">
+            <lottie-player autoplay hover class="linkedin-icon" style = "width : 35px;" src="https://assets7.lottiefiles.com/packages/lf20_ofzhxhem.json">
             </lottie-player>
         </div>
     </div>
-    <div class="cube-rouge" style = "height: 80%; width : 30%; position: absolute; right: 1%; top : 1%; bottom : 10%; visibility: hidden; "> 
+    <div class="descriptionScreens" style = "height: 80%; width : 30%; position: absolute; right: 1%; top : 1%; bottom : 10%; visibility: hidden; "> 
         <h1 class="description titre" style="color: white;">
-            Hi there !
+            01 / Work
         </h1> 
         <p class="description paragraphe" style="color: white;">
             I'm Issam. I m currently working for Capgemini as a software tester / QA. <br>
@@ -62,6 +67,60 @@
         </p>
     </div>
 
+
+
+    
+    <div class="descriptionBedroom" style = "height: 80%; width : 30%; position: absolute; right: 1%; top : 1%; bottom : 10%; visibility: hidden; "> 
+        <h1 class="description titre" style="color: white;">
+            02 / Bed
+        </h1> 
+        <p class="description paragraphe" style="color: white;">
+            This is just a functionnality to display some features of my site. <br>
+            Nothing sexy, just my room with a regular bed and regular pillows <br>
+            I mean in real life most of the time my bed is not made...
+        </p>
+    </div>
+
+
+    <div class="descriptionKitchen" style = "height: 80%; width : 30%; position: absolute; right: 1%; top : 1%; bottom : 10%; visibility: hidden; "> 
+        <h1 class="description titre" style="color: white;">
+            03 / Kitchen
+        </h1> 
+        <p class="description paragraphe" style="color: white;">
+            You are almost done. <br>
+            Welcome to my kitchen, this is where I pois... I feed my guests. <br>
+            Not gonna lie, I m not the best cook ever but I can cook some good and nourishing food
+        </p>
+    </div>
+
+    <div class="descriptionGames" style = "height: 80%; width : 30%; position: absolute; right: 1%; top : 1%; bottom : 10%; visibility: hidden; "> 
+        <h1 class="description titre" style="color: white;">
+            04 / Games
+        </h1> 
+        <p class="description paragraphe" style="color: white;">
+            So far so good. <br>
+            Here you can find all the things that I love. <br>
+            From my sweet childhood to current days, I grow up with all the objects you'll see.
+            I let you discover and I hope you'll get all the references 
+        </p>
+    </div>
+
+
+    <div class="descriptionSkills" style = "height: 80%; width : 30%; position: absolute; right: 1%; top : 1%; bottom : 10%; visibility: hidden; "> 
+        <h1 class="description titre" style="color: white;">
+            04 / Skills
+        </h1> 
+        <p class="description paragraphe" style="color: white;">
+            Technical. <br>
+            I work in the software - testing fields. <br>
+            If you are looking for a geeky technical profile,
+            who likes to popularize technic to customers, I will be very happy to meet you. <br>
+            I m very confortable with Python, HTML, CSS, JavaScript as programmation tools.
+            On the testing side, I m currently working with RobotFramework, Python, Postman
+            There also a lot of secondary tools that I used to work with but thy're more analysis tools 
+            such as Kibana, Jira, ElasticSearch, DBeaver. The list is long...
+        </p>
+    </div>
 
     
 </body>
