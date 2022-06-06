@@ -17,16 +17,17 @@
     z-index: 100;
     color: #ffffff;
     ">
-        <h1 id = "msg">BONJOUR A TOUS</h1>
-        <lottie-player autoplay loop class="home-icon" style = "width : 200px; top: 40%;" src="https://assets5.lottiefiles.com/packages/lf20_v9zyr76w.json">
+        <h1 id = "msg">Welcome</h1>
+        <lottie-player autoplay loop style = "width : 200px; margin: auto;" src="https://assets5.lottiefiles.com/packages/lf20_v9zyr76w.json">
         </lottie-player>
+        <p>Use your keyboard arrows to move your avatar</p>
     </div>
     
     <script>
         setTimeout(function(){
             var msg = document.getElementById("divBienvenu");
             msg.parentNode.removeChild(msg);
-        }, 10000)
+        }, 15000)
     </script>
     <script src="https://unpkg.com/@lottiefiles/lottie-player@1.5.7/dist/lottie-player.js"></script>
     
