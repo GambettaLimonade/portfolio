@@ -47,7 +47,7 @@ export default class Resources extends EventEmitter
             {
                 const progressRatio = itemsLoaded / itemsTotal
                 this.loadingNumber.innerHTML= Math.round(`${progressRatio}` * 100) / 100 
-                console.log("progression : ", progressRatio)
+                // console.log("progression : ", progressRatio)
                 this.loadingBarElement.style.transform = `scaleX(${progressRatio})`
                 // this.loadingNumber.write(progressRatio)
 
