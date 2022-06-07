@@ -5,6 +5,10 @@
     overflow: hidden;
 }
 
+body
+{
+  font-family: 'Shadows Into Light', cursive;
+}
 
 button
 {

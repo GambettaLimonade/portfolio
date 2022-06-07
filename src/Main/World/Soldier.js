@@ -499,6 +499,11 @@ export default class Soldier
             if (this.intersectsFocus[0].object.name == "sky" || this.intersectsFocus[0].object.name == "floor" || this.intersectsFocus[0].object.name == "BackSquare")
             {
                 this.focused = false
+                descriptionScreens[0].style.visibility = 'hidden';
+                descriptionBedroom[0].style.visibility = 'hidden';
+                descriptionKitchen[0].style.visibility = 'hidden';
+                descriptionGames[0].style.visibility = 'hidden';
+                descriptionSkills[0].style.visibility = 'hidden';
 
             }           
 
@@ -614,6 +619,18 @@ export default class Soldier
 
     socialMedias()    
     {
+
+        var stackoverflowIcon = document.getElementsByClassName('stackoverflow-icon')
+        stackoverflowIcon[0].addEventListener('click', (event) => 
+        {
+            // Permet de cliquer sur du HTML sans que Raycasting du sol ou de la sphère s'active
+            // https://stackoverflow.com/questions/39435334/how-can-i-block-a-three-js-raycast-with-html-elements
+            event.stopPropagation()
+            this.focused = true
+            window.open("https://stackoverflow.com/users/17044605/issam-merikhi", '_blank').focus();
+        })
+
+        
         var githubIcon = document.getElementsByClassName('github-icon')
         githubIcon[0].addEventListener('click', (event) => 
         {

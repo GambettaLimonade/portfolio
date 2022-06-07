@@ -4,13 +4,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Issam Merikhi</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Shadows+Into+Light&display=swap" rel="stylesheet">
     </head>
 <body>
     <canvas class="webgl"></canvas>
     <div class="loading-bar"></div>
-
-
-
 
     <div id="divBienvenu" 
     style="z-index: 100; color: white; position: absolute;
@@ -19,28 +19,33 @@
     text-align: center;
     z-index: 100;
     color: #ffffff;
+    font-family: 'Amatic SC', cursive;
     ">
-        <h1 id = "msg">Welcome</h1>
+        <h1 id = "msg">Welcome it's me Sami !</h1>
         <lottie-player autoplay loop style = "width : 200px; margin: auto;" src="https://assets5.lottiefiles.com/packages/lf20_v9zyr76w.json">
         </lottie-player>
-        <h3>This is my portfolio. Feel free to take a walk. Learn more about myself</h3>
-        <p>Use your keyboard arrows to move your avatar</p>
+        <h2>This is my portfolio. Feel free to take a walk. Learn more about myself.</h2>
+        <h2>Use your keyboard arrows to move your avatar.</h2>
+        <h2>You can also use the left side menu to discover my world.</h2>
+
         <p class="pourcentage" style="color: black;">POURCENTAGE</p>
     </div>
     
     <script>
-        setTimeout(function(){
+        setTimeout(function()
+        {
             var msg = document.getElementById("divBienvenu");
             msg.parentNode.removeChild(msg);
-        }, 15000)
+        }, 20000)
     </script>
+
     <script src="https://unpkg.com/@lottiefiles/lottie-player@1.5.7/dist/lottie-player.js"></script>
     
     <div style="position: absolute; left: 4%; color: white; top: 29%;">
         <lottie-player autoplay hover class="home-icon" style = "width : 30px" src="https://assets10.lottiefiles.com/packages/lf20_9xgavwck.json">
         </lottie-player>
     </div>
-    <div class="paragraph" style="position: absolute; left: 5%; color: white; bottom: 50%;">
+    <div class="paragraph" style="position: absolute; left: 5%; color: white; bottom: 42%;">
         <ul style="list-style-position: inside;">
             <li class="li-work"></li>
             <li class="li-bed"></li>
@@ -63,7 +68,7 @@
         </div>
 
         <div class="stackoverflow-icon">
-            <lottie-player autoplay hover class="linkedin-icon" style = "width : 23px;" src="https://assets5.lottiefiles.com/packages/lf20_6wezjmww.json">
+            <lottie-player autoplay hover class="stackoverflow-icon" style = "width : 23px;" src="https://assets5.lottiefiles.com/packages/lf20_6wezjmww.json">
             </lottie-player>
         </div>
 

@@ -37,6 +37,7 @@ export default class Resources extends EventEmitter
                     gsap.to(this.main.world.overlay.material.uniforms.uAlpha, { duration: 3, value : 0})
                     this.loadingBarElement.classList.add('ended')
                     this.loadingBarElement.style.transform = ''
+
                 })
                 gsap.delayedCall(2, () => {
                     this.sceneReady = true
@@ -46,7 +47,13 @@ export default class Resources extends EventEmitter
             (itemUrl, itemsLoaded, itemsTotal) =>
             {
                 const progressRatio = itemsLoaded / itemsTotal
-                this.loadingNumber.innerHTML= Math.round(`${progressRatio}` * 100) / 100 
+                this.loadingNumber.innerHTML= Math.round(`${progressRatio}` * 100) 
+                console.log('type de loader : ', typeof(this.loadingNumber.innerHTML))
+                if(this.loadingNumber.innerHTML >= "100")
+                {
+                    this.loadingNumber.style.visibility = 'hidden';
+                    console.log("100% loading")
+                }
                 // console.log("progression : ", progressRatio)
                 this.loadingBarElement.style.transform = `scaleX(${progressRatio})`
                 // this.loadingNumber.write(progressRatio)
