@@ -16,7 +16,8 @@ export default class Resources extends EventEmitter
         this.overlay = this.main.overlay
         this.sources = sources
         this.debug = this.main.debug
-
+        this.loadingNumber = document.querySelector('.pourcentage')
+        
         if(this.debug.active)
         {
             this.debugFolder = this.debug.ui.addFolder('Textures')
@@ -45,7 +46,11 @@ export default class Resources extends EventEmitter
             (itemUrl, itemsLoaded, itemsTotal) =>
             {
                 const progressRatio = itemsLoaded / itemsTotal
+                this.loadingNumber.innerHTML= Math.round(`${progressRatio}` * 100) / 100 
+                console.log("progression : ", progressRatio)
                 this.loadingBarElement.style.transform = `scaleX(${progressRatio})`
+                // this.loadingNumber.write(progressRatio)
+
             }
         )
 
