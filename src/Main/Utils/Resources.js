@@ -47,9 +47,10 @@ export default class Resources extends EventEmitter
             (itemUrl, itemsLoaded, itemsTotal) =>
             {
                 const progressRatio = itemsLoaded / itemsTotal
-                this.loadingNumber.innerHTML= Math.round(`${progressRatio}` * 100) 
+                this.loadingNumber.innerHTML= `${Math.round(`${progressRatio}` * 100)}` + ' ' + '%' 
+
                 console.log('type de loader : ', typeof(this.loadingNumber.innerHTML))
-                if(this.loadingNumber.innerHTML >= "100")
+                if(this.loadingNumber.innerHTML == "100 %")
                 {
                     this.loadingNumber.style.visibility = 'hidden';
                     console.log("100% loading")
