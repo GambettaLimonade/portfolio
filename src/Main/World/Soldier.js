@@ -43,7 +43,7 @@ export default class Soldier
         this.intersectsFocus; 
 
         this.movements = [];
-        this.playerSpeed = 0.1;
+        this.playerSpeed = 1;
         this.resource = this.resources.items.soldier
         this.temp = new THREE.Vector3;
         this.collisions = []
