@@ -3,14 +3,11 @@ import Environment from "./Environment.js";
 import Floor from "./Floor.js";
 import Soldier from "./Soldier.js";
 import Ballon from './Ballon.js'
-import Sky from "./Sky.js";
 import Overlay from "./Overlay.js";
 import Points from './Points.js';
-import Path from './Path.js';
 import Fireflies from './Fireflies.js';
 import BlenderScene from "./BlenderScene.js";
 import { Light } from "three";
-import Hologram from "./Hologram.js";
 import Queen from "./Queen.js";
 import King from "./King.js";
 
@@ -80,7 +77,7 @@ export default class World
             // }
             // this.points = new Points()
             this.floor = new Floor()
-            this.sky = new Sky()
+            // this.sky = new Sky()
             this.soldier = new Soldier()
 
 

@@ -83,7 +83,6 @@ export default class Ballon
         this.meshBallon.rotation.x = - Math.PI * 0.5
         this.meshBallon.castShadow = true
         this.meshBallon.name = "ball"
-
         this.scene.add(this.meshBallon)
     }
 
@@ -101,7 +100,6 @@ export default class Ballon
         this.body = new CANNON.Body({
                 mass:1,
                 shape:this.shape,
-                // material:this.main.physics.world.defaultMaterial,
                 linearDamping:0.3
                 
             })

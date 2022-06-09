@@ -27,8 +27,8 @@ export default class Soldier
         this.canvas = this.main.canvas
 
 
-        this.sky = this.world2.sky
-        this.skyRadius = this.sky.sphereRadius
+        // this.sky = this.world2.sky
+        // this.skyRadius = this.sky.sphereRadius
 
 
         this.flooor = this.world2.floor
@@ -72,7 +72,7 @@ export default class Soldier
         this.setBody()
 
 
-        this.changementDambiance()
+        // this.changementDambiance()
         this.focusedObject()
         this.etapierFocusObject()
         this.socialMedias()
@@ -277,67 +277,67 @@ export default class Soldier
 
 
 
-    changementDambiance()
-    {
-        var centreScene = new THREE.Vector3( 0, 0, 0 );
-        var pointA = new THREE.Vector3(123,0,153);
-        var pointB = new THREE.Vector3(-153,0,123);
-        var pointC = new THREE.Vector3(153,0,-123);
-        var pointD = new THREE.Vector3(-153,0,-123);
+    // changementDambiance()
+    // {
+    //     var centreScene = new THREE.Vector3( 0, 0, 0 );
+    //     var pointA = new THREE.Vector3(123,0,153);
+    //     var pointB = new THREE.Vector3(-153,0,123);
+    //     var pointC = new THREE.Vector3(153,0,-123);
+    //     var pointD = new THREE.Vector3(-153,0,-123);
 
-        var distanceCharacterPointA = this.model.position.distanceTo( pointA );
-        var distanceCharacterPointB = this.model.position.distanceTo( pointB );
-        var distanceCharacterPointC = this.model.position.distanceTo( pointC );
-        var distanceCharacterPointD = this.model.position.distanceTo( pointD );
-        var distanceCharacterCentre = this.model.position.distanceTo( centreScene );
-        var distTotal = distanceCharacterPointA+distanceCharacterPointB+distanceCharacterPointC+distanceCharacterPointD+distanceCharacterCentre
+    //     var distanceCharacterPointA = this.model.position.distanceTo( pointA );
+    //     var distanceCharacterPointB = this.model.position.distanceTo( pointB );
+    //     var distanceCharacterPointC = this.model.position.distanceTo( pointC );
+    //     var distanceCharacterPointD = this.model.position.distanceTo( pointD );
+    //     var distanceCharacterCentre = this.model.position.distanceTo( centreScene );
+    //     var distTotal = distanceCharacterPointA+distanceCharacterPointB+distanceCharacterPointC+distanceCharacterPointD+distanceCharacterCentre
 
-        var colorDistance = 
-        [
-                {
-                    value : distanceCharacterPointA,
-                    key : [27, 27, 27]
-                }
-            ,
-            {
-                value : distanceCharacterPointB,
-                key : [27, 27, 27]     
-            },
-            {
-                value : distanceCharacterPointC,
-                key : [27, 27, 27]   
-            },
-            {
-                value : distanceCharacterPointD,
-                key : [27, 27, 27] 
+    //     var colorDistance = 
+    //     [
+    //             {
+    //                 value : distanceCharacterPointA,
+    //                 key : [27, 27, 27]
+    //             }
+    //         ,
+    //         {
+    //             value : distanceCharacterPointB,
+    //             key : [27, 27, 27]     
+    //         },
+    //         {
+    //             value : distanceCharacterPointC,
+    //             key : [27, 27, 27]   
+    //         },
+    //         {
+    //             value : distanceCharacterPointD,
+    //             key : [27, 27, 27] 
 
-            },
-            {
-                value : distanceCharacterCentre,
-                key : [0, 0, 0]
+    //         },
+    //         {
+    //             value : distanceCharacterCentre,
+    //             key : [0, 0, 0]
 
-            }
-        ]
+    //         }
+    //     ]
 
 
 
-        var pourcentage = [ (distanceCharacterPointA/distTotal),(distanceCharacterPointB/distTotal),(distanceCharacterPointC/distTotal),(distanceCharacterPointD/distTotal),(distanceCharacterCentre/distTotal)]
-        var a = colorDistance[0].key.map(function(x) {return x * pourcentage[0]; })
-        var b = colorDistance[1].key.map(function(x) {return x * pourcentage[1]; })
-        var c = colorDistance[2].key.map(function(x) {return x * pourcentage[2]; })
-        var d = colorDistance[3].key.map(function(x) {return x * pourcentage[3]; })
-        var e = colorDistance[4].key.map(function(x) {return x * pourcentage[4]; })
-        var Total = []
+    //     var pourcentage = [ (distanceCharacterPointA/distTotal),(distanceCharacterPointB/distTotal),(distanceCharacterPointC/distTotal),(distanceCharacterPointD/distTotal),(distanceCharacterCentre/distTotal)]
+    //     var a = colorDistance[0].key.map(function(x) {return x * pourcentage[0]; })
+    //     var b = colorDistance[1].key.map(function(x) {return x * pourcentage[1]; })
+    //     var c = colorDistance[2].key.map(function(x) {return x * pourcentage[2]; })
+    //     var d = colorDistance[3].key.map(function(x) {return x * pourcentage[3]; })
+    //     var e = colorDistance[4].key.map(function(x) {return x * pourcentage[4]; })
+    //     var Total = []
 
-        for( var i = 0; i < a.length; i++)
-        {
-            Total.push(a[i]+b[i]+c[i]+d[i]+e[i]);
-        }
+    //     for( var i = 0; i < a.length; i++)
+    //     {
+    //         Total.push(a[i]+b[i]+c[i]+d[i]+e[i]);
+    //     }
     
-        // this.floorColor.set(new THREE.Color(`rgb(${Math.round(Total[0])}, ${Math.round(Total[1])}, ${Math.round(Total[2])})`)) 
-        this.sky.mesh.material[0].color.set(new THREE.Color(`rgb(${Math.round(Total[0])}, ${Math.round(Total[1])}, ${Math.round(Total[2])})`))
+    //     // this.floorColor.set(new THREE.Color(`rgb(${Math.round(Total[0])}, ${Math.round(Total[1])}, ${Math.round(Total[2])})`)) 
+    //     this.sky.mesh.material[0].color.set(new THREE.Color(`rgb(${Math.round(Total[0])}, ${Math.round(Total[1])}, ${Math.round(Total[2])})`))
 
-    }
+    // }
 
 
     releaseKey()
@@ -678,7 +678,7 @@ export default class Soldier
 
         // console.log(this.model.position.x, this.model.position.z)
 
-        if ((this.model.position.x - 0)**2 + (this.model.position.z - 0)**2 > ((this.skyRadius**2) - 1000) )
+        if ((this.model.position.x - 0)**2 + (this.model.position.z - 0)**2 > 10000 )
         {
             console.log('on sort bientot de la sphere')
             var distance = 1
@@ -735,7 +735,7 @@ export default class Soldier
             }
 
             this.bodyCharacter.position.copy(this.model.position)
-            this.changementDambiance()
+            // this.changementDambiance()
             // this.camera.controls.update()
         }        
 

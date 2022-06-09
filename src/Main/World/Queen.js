@@ -17,15 +17,6 @@ export default class Queen
         this.position = (0, 0, 0)
         this.raycaster = new Raycaster()
         this.camera = this.main.camera
-
-
-        this.world2 = this.main.world
-        this.sky = this.world2.sky
-        this.skyRadius = this.sky.sphereRadius
-
-
-
-
         this.createQueen()
         
     }
@@ -35,7 +26,7 @@ export default class Queen
         this.model = this.resource.scene
         this.model.scale.set(1, 1, 1)
         this.model.position.set(0,0,0)
-        this.model.name = "python"
+        this.model.name = "queen"
 
         this.scene.add(this.model)
 
@@ -44,8 +35,6 @@ export default class Queen
                 if(child instanceof THREE.Mesh)
                 {
                     child.castShadow = true
-                    // const material = new THREE.MeshStandardMaterial({ metalness: 0.01, roughness: 0.5, name: 'white' })
-                    // child.material = material;
                     child.name = "queen"
                     const parameters = {
                         color: 0xff0000,
@@ -61,7 +50,6 @@ export default class Queen
     setShape()
     {
         this.shape = new CANNON.Box(new CANNON.Vec3(this.length, 2, this.height))
-
     }
 
 
@@ -73,7 +61,6 @@ export default class Queen
                 shape:this.shape,
                 material:this.main.physics.world.defaultMaterial,
                 linearDamping:0.8
-                
             })
             
         this.main.physics.world.addBody(this.body)
@@ -90,9 +77,7 @@ export default class Queen
       
     update()
     {
-        
         this.body.position.y = 0
         this.model.position.copy(this.body.position)
-
     }
 }

@@ -1,6 +1,7 @@
 import EventEmitter from "./EventEmitter";
 import * as THREE from 'three'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader.js'
+import { DRACOLoader } from 'three/examples/jsm/loaders/DRACOLoader.js'
 import { gsap } from 'gsap'
 import Main from "../Main";
 
@@ -9,6 +10,7 @@ export default class Resources extends EventEmitter
 {
     constructor(sources)
     {
+        console.log(GLTFLoader)
         super()
 
         // Options
@@ -48,16 +50,12 @@ export default class Resources extends EventEmitter
             {
                 const progressRatio = itemsLoaded / itemsTotal
                 this.loadingNumber.innerHTML= `${Math.round(`${progressRatio}` * 100)}` + ' ' + '%' 
-
-                console.log('type de loader : ', typeof(this.loadingNumber.innerHTML))
                 if(this.loadingNumber.innerHTML == "100 %")
                 {
                     this.loadingNumber.style.visibility = 'hidden';
                     console.log("100% loading")
                 }
-                // console.log("progression : ", progressRatio)
                 this.loadingBarElement.style.transform = `scaleX(${progressRatio})`
-                // this.loadingNumber.write(progressRatio)
 
             }
         )
@@ -69,7 +67,12 @@ export default class Resources extends EventEmitter
     setLoaders()
     {
         this.loaders = {}
+        this.loaders.dracoLoader = new DRACOLoader(this.loadingManager)
+        this.loaders.dracoLoader.setDecoderPath('/draco/')
         this.loaders.gltfLoader = new GLTFLoader(this.loadingManager)
+
+        console.log(this.loaders.gltfLoader)
+        this.loaders.gltfLoader.setDRACOLoader(this.loaders.dracoLoader)
         this.loaders.textureLoader = new THREE.TextureLoader(this.loadingManager)
     }
 
@@ -94,43 +97,8 @@ export default class Resources extends EventEmitter
                     source.path,
                     (file =>
                         {
-                            if(this.debug.active)
-                            {       
-                                file.encoding = THREE.sRGBEncoding;        
-                                file.flipY = false;
-                                file.rotation = Math.PI / 2
-                                file.wrapS = 10;
-                                file.wrapT = 20;
-                                file.repeat.set( 3,3 );
-                                this.debugFolder
-                                .add(file.repeat, 'x', 0, 5)
-                                .name(`${source.name}.repeat.x`);
-                                this.debugFolder
-                                .add(file.repeat, 'y', 0, 5)
-                                .name(`${source.name}.repeat.y`);
-                                this.debugFolder
-                                .add(file.offset, 'x', -2, 2)
-                                .name(`${source.name}.offset.x`);
-                                this.debugFolder
-                                .add(file.offset, 'y', -2, 2)
-                                .name(`${source.name}.offset.y`);
-                                this.debugFolder
-                                .add(file.center, 'x', -.5, 1.5, .01)
-                                .name(`${source.name}.center.x`);
-                                this.debugFolder
-                                .add(file.center, 'y', -.5, 1.5, .01)
-                                .name(`${source.name}.center.y`);
-                            }
-                            
                             file.encoding = THREE.sRGBEncoding;        
-                            // file.flipY = false;
-                            // file.rotation = Math.PI / 2
-                            // file.wrapS = 10;
-                            // file.wrapT = 20;
                             file.rotate = 10
-                            // file.repeat.set( 3,3 );
-
-
                             this.sourceLoaded(source, file)
                         })
                 )

@@ -17,15 +17,6 @@ export default class King
         this.position = (0, 0, 0)
         this.raycaster = new Raycaster()
         this.camera = this.main.camera
-
-
-        this.world2 = this.main.world
-        this.sky = this.world2.sky
-        this.skyRadius = this.sky.sphereRadius
-
-
-
-
         this.createKing()
         
     }

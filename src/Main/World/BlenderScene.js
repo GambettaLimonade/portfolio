@@ -23,10 +23,7 @@ export default class BlenderScene
         this.images = [this.resources.items.it1, this.resources.items.it2, this.resources.items.it3, this.resources.items.it4, this.resources.items.it5, this.resources.items.it6, this.resources.items.it7, this.resources.items.it8, this.resources.items.it9]
         this.imagesAnim = [this.resources.items.snk, this.resources.items.vsc]
         this.index = 0
-
-        // this.redTexture = this.resources.items.red
-        this.red = this.resources.items.red
-
+        this.fog = new THREE.Fog('#000000', 1, 300)
 
 
         this.petitScreenTv;
@@ -45,6 +42,7 @@ export default class BlenderScene
         this.model.rotation.y = Math.PI/2
         this.model.name = "Scene"
         this.scene.add(this.model)
+        this.scene.fog = this.fog
 
 
         
@@ -193,22 +191,6 @@ export default class BlenderScene
     {
         this.setModel()
         this.setLights()
-
-        // const spotLight = new THREE.SpotLight( 0xffffff );
-        // spotLight.position.set( 63, 10, -6 );
-
-        // spotLight.castShadow = true;
-
-        // spotLight.shadow.mapSize.width = 1024;
-        // spotLight.shadow.mapSize.height = 1024;
-
-        // spotLight.shadow.camera.near = 500;
-        // spotLight.shadow.camera.far = 4000;
-        // spotLight.shadow.camera.fov = 30;
-
-        // this.scene.add( spotLight );
-
-
     }
     
     update()
