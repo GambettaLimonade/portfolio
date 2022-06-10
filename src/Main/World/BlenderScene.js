@@ -23,7 +23,7 @@ export default class BlenderScene
         this.images = [this.resources.items.it1, this.resources.items.it2, this.resources.items.it3, this.resources.items.it4, this.resources.items.it5, this.resources.items.it6, this.resources.items.it7, this.resources.items.it8, this.resources.items.it9]
         this.imagesAnim = [this.resources.items.snk, this.resources.items.vsc]
         this.index = 0
-        // this.fog = new THREE.Fog('#000000', 1, 300)
+        // this.fog = new THREE.Fog('#ff0000', 50, 100)
 
 
         this.petitScreenTv;
