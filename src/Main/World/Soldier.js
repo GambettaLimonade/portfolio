@@ -637,7 +637,7 @@ export default class Soldier
         this.animation.mixer.update(this.time.delta * 0.001)
         TWEEN.update()
 
-        // console.log(this.model.position.x, this.model.position.z)
+        console.log(this.model.position.x, this.model.position.z)
 
         if ((this.model.position.x - 0)**2 + (this.model.position.z - 0)**2 > 10000 )
         {
@@ -664,14 +664,48 @@ export default class Soldier
             // /!\/!\/!\ le (54, 0, 4.4) est relatif à /!\/!\/!\
             // /!\/!\/!\ la ligne de code : this.model.position.set(50,0,0) dans Room.js /!\/!\/!\
 
-            // if(this.model.position.distanceTo(new THREE.Vector3(54, 0, 4.4)) < 5 || this.model.position.distanceTo(new THREE.Vector3(-54, 0, 16)) < 5 || this.model.position.distanceTo(new THREE.Vector3(-61, 0, 2)) < 5 || this.model.position.distanceTo(new THREE.Vector3(-60, 0, -13)) < 5)
-            // {
-            //     var distance = 1
-            //     this.model.position.x -= Math.sin(this.model.rotation.y) * distance * 5
-            //     this.model.position.z -= Math.cos(this.model.rotation.y) * distance * 5
+            if(
+
+                // TABLE
+               this.model.position.distanceTo(new THREE.Vector3(-40, 0, 48)) < 1.5 || 
+               this.model.position.distanceTo(new THREE.Vector3(46, 0, -17)) < 1.5 ||
+               this.model.position.distanceTo(new THREE.Vector3(52, 0, -20)) < 1.5 ||
+               this.model.position.distanceTo(new THREE.Vector3(46, 0, -13)) < 1.5 ||
+               this.model.position.distanceTo(new THREE.Vector3(53, 0, -9)) < 1.5 ||
+               this.model.position.distanceTo(new THREE.Vector3(57, 0, -8)) < 1.5 ||
+               this.model.position.distanceTo(new THREE.Vector3(55, 0, -3)) < 1.5 ||
+               this.model.position.distanceTo(new THREE.Vector3(50, 0, -6.74)) < 1.5 ||
+               this.model.position.distanceTo(new THREE.Vector3(46, 0, 10)) < 1.5 ||
+               this.model.position.distanceTo(new THREE.Vector3(53, 0, 12)) < 1.5 ||
+               this.model.position.distanceTo(new THREE.Vector3(57, 0, 10)) < 1.5 ||
+               this.model.position.distanceTo(new THREE.Vector3(65, 0, -3)) < 1.5 ||
+               this.model.position.distanceTo(new THREE.Vector3(65.8, 0, -10)) < 1.5 ||
+               this.model.position.distanceTo(new THREE.Vector3(59, 0, -16)) < 1.5 ||
+               this.model.position.distanceTo(new THREE.Vector3(55, 0, -19)) < 1.5 ||
+
+               //CAPSULE CORP
+               this.model.position.distanceTo(new THREE.Vector3(23.6, 0, 32.8)) < 1.5 || 
+               this.model.position.distanceTo(new THREE.Vector3(34.3, 0, -31.7)) < 1.5 ||
+               this.model.position.distanceTo(new THREE.Vector3(38.7, 0, -25)) < 1.5 ||
+               this.model.position.distanceTo(new THREE.Vector3(43.3, 0, -28.7)) < 1.5 ||
+               this.model.position.distanceTo(new THREE.Vector3(53.2, 0, -33.1)) < 1.5 ||
+               this.model.position.distanceTo(new THREE.Vector3(58.8, 0, -37.8)) < 1.5 ||
+               this.model.position.distanceTo(new THREE.Vector3(53.5, 0, -44.4)) < 1.5 ||
+               this.model.position.distanceTo(new THREE.Vector3(50, 0, -50.6)) < 1.5 ||
+               this.model.position.distanceTo(new THREE.Vector3(48.5, 0, -57.8)) < 1.5 ||
+               this.model.position.distanceTo(new THREE.Vector3(42.2, 0, -54.6)) < 1.5 ||
+               this.model.position.distanceTo(new THREE.Vector3(36, 0, -51)) < 1.5 ||
+               this.model.position.distanceTo(new THREE.Vector3(26, 0, -48.6)) < 1.5 ||
+               this.model.position.distanceTo(new THREE.Vector3(25.7, 0, -40.3)) < 1.5 ||
+               this.model.position.distanceTo(new THREE.Vector3(20.8, 0, -35.7)) < 1.5
+               )
+            {
+                var distance = 1
+                this.model.position.x -= Math.sin(this.model.rotation.y) * distance * 3
+                this.model.position.z -= Math.cos(this.model.rotation.y) * distance * 3
 
 
-            // }
+            }
            
     
                 this.moveModelArrow(this.keys)
