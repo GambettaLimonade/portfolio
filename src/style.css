@@ -58,6 +58,7 @@ li {
   li:before {
     content: "•";
     color: white;
+    font-family: 'Amatic SC', cursive;
     /* font-size:20px; */
   }
   ol {

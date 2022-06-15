@@ -21,7 +21,7 @@ export default class Floor
 
     setGeometry()
     {
-        this.geometry = new THREE.PlaneBufferGeometry(200, 200)
+        this.geometry = new THREE.PlaneBufferGeometry(3000, 3000)
     }
 
     setMaterial()

@@ -637,7 +637,7 @@ export default class Soldier
         this.animation.mixer.update(this.time.delta * 0.001)
         TWEEN.update()
 
-        console.log(this.model.position.x, this.model.position.z)
+        // console.log(this.model.position.x, this.model.position.z)
 
         if ((this.model.position.x - 0)**2 + (this.model.position.z - 0)**2 > 10000 )
         {
@@ -684,20 +684,20 @@ export default class Soldier
                this.model.position.distanceTo(new THREE.Vector3(55, 0, -19)) < 1.5 ||
 
                //CAPSULE CORP
-               this.model.position.distanceTo(new THREE.Vector3(23.6, 0, 32.8)) < 1.5 || 
-               this.model.position.distanceTo(new THREE.Vector3(34.3, 0, -31.7)) < 1.5 ||
-               this.model.position.distanceTo(new THREE.Vector3(38.7, 0, -25)) < 1.5 ||
-               this.model.position.distanceTo(new THREE.Vector3(43.3, 0, -28.7)) < 1.5 ||
-               this.model.position.distanceTo(new THREE.Vector3(53.2, 0, -33.1)) < 1.5 ||
-               this.model.position.distanceTo(new THREE.Vector3(58.8, 0, -37.8)) < 1.5 ||
-               this.model.position.distanceTo(new THREE.Vector3(53.5, 0, -44.4)) < 1.5 ||
-               this.model.position.distanceTo(new THREE.Vector3(50, 0, -50.6)) < 1.5 ||
-               this.model.position.distanceTo(new THREE.Vector3(48.5, 0, -57.8)) < 1.5 ||
-               this.model.position.distanceTo(new THREE.Vector3(42.2, 0, -54.6)) < 1.5 ||
-               this.model.position.distanceTo(new THREE.Vector3(36, 0, -51)) < 1.5 ||
-               this.model.position.distanceTo(new THREE.Vector3(26, 0, -48.6)) < 1.5 ||
-               this.model.position.distanceTo(new THREE.Vector3(25.7, 0, -40.3)) < 1.5 ||
-               this.model.position.distanceTo(new THREE.Vector3(20.8, 0, -35.7)) < 1.5
+               this.model.position.distanceTo(new THREE.Vector3(23.6, 0, 32.8)) < 3 || 
+               this.model.position.distanceTo(new THREE.Vector3(34.3, 0, -31.7)) < 3 ||
+               this.model.position.distanceTo(new THREE.Vector3(38.7, 0, -25)) < 3 ||
+               this.model.position.distanceTo(new THREE.Vector3(43.3, 0, -28.7)) < 3 ||
+               this.model.position.distanceTo(new THREE.Vector3(53.2, 0, -33.1)) < 3 ||
+               this.model.position.distanceTo(new THREE.Vector3(58.8, 0, -37.8)) < 3 ||
+               this.model.position.distanceTo(new THREE.Vector3(53.5, 0, -44.4)) < 3 ||
+               this.model.position.distanceTo(new THREE.Vector3(50, 0, -50.6)) < 3 ||
+               this.model.position.distanceTo(new THREE.Vector3(48.5, 0, -57.8)) < 3 ||
+               this.model.position.distanceTo(new THREE.Vector3(42.2, 0, -54.6)) < 3 ||
+               this.model.position.distanceTo(new THREE.Vector3(36, 0, -51)) < 3 ||
+               this.model.position.distanceTo(new THREE.Vector3(26, 0, -48.6)) < 3 ||
+               this.model.position.distanceTo(new THREE.Vector3(25.7, 0, -40.3)) < 3 ||
+               this.model.position.distanceTo(new THREE.Vector3(20.8, 0, -35.7)) < 3
                )
             {
                 var distance = 1
@@ -723,7 +723,7 @@ export default class Soldier
                 this.temp.setFromMatrixPosition(this.behind.matrixWorld);
                 
                 this.camera.controls.minDistance = 15
-                this.camera.controls.maxDistance = 1000
+                this.camera.controls.maxDistance = 100
                 this.camera.instance.position.lerp(this.temp, 0.2);    
                 
                 this.camera.controls.target.set(this.model.position.x,this.model.position.y,this.model.position.z)

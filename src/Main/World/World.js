@@ -10,6 +10,7 @@ import BlenderScene from "./BlenderScene.js";
 import { Light } from "three";
 import Queen from "./Queen.js";
 import King from "./King.js";
+import Sky from "./Sky.js";
 
 
 
@@ -27,10 +28,6 @@ export default class World
         this.bricks = []
         this.path = []
         this.deadtrees = []
-
-        console.log('toutes les textures : ', this.resources.items)
-        console.log('toutes les textures 2 : ', this.resources.items['yarn'])
-
 
         this.ballonsValues = 
         {
@@ -77,6 +74,8 @@ export default class World
             // }
             // this.points = new Points()
             this.floor = new Floor()
+            this.sky = new Sky()
+            console.log(this.sky)
             // this.sky = new Sky()
             this.soldier = new Soldier()
 

@@ -20,7 +20,7 @@ export default[
     {
         name : 'scene',
         type : 'gltfModel',
-        path : 'models/scene-v2/scene.gltf'
+        path : 'models/scene/scene.glb'
     },
 
     {

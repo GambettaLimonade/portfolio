@@ -10,7 +10,6 @@ export default class Resources extends EventEmitter
 {
     constructor(sources)
     {
-        console.log(GLTFLoader)
         super()
 
         // Options
@@ -53,7 +52,6 @@ export default class Resources extends EventEmitter
                 if(this.loadingNumber.innerHTML == "100 %")
                 {
                     this.loadingNumber.style.visibility = 'hidden';
-                    console.log("100% loading")
                 }
                 this.loadingBarElement.style.transform = `scaleX(${progressRatio})`
 
@@ -70,8 +68,6 @@ export default class Resources extends EventEmitter
         this.loaders.dracoLoader = new DRACOLoader(this.loadingManager)
         this.loaders.dracoLoader.setDecoderPath('/draco/')
         this.loaders.gltfLoader = new GLTFLoader(this.loadingManager)
-
-        console.log(this.loaders.gltfLoader)
         this.loaders.gltfLoader.setDRACOLoader(this.loaders.dracoLoader)
         this.loaders.textureLoader = new THREE.TextureLoader(this.loadingManager)
     }
