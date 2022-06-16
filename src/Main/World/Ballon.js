@@ -122,7 +122,7 @@ export default class Ballon
 
     update()
     {
-        if ((this.meshBallon.position.x - 0)**2 + (this.meshBallon.position.z - 0)**2 > ((this.skyRadius**2) - 30) )
+        if ((this.meshBallon.position.x - 0)**2 + (this.meshBallon.position.z - 0)**2 > 30 )
         {
             this.body.position.x = (this.body.position.x + 1.2) 
             this.body.position.z = (this.body.position.z + 1.2)

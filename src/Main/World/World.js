@@ -75,8 +75,6 @@ export default class World
             // this.points = new Points()
             this.floor = new Floor()
             this.sky = new Sky()
-            console.log(this.sky)
-            // this.sky = new Sky()
             this.soldier = new Soldier()
 
 
@@ -161,9 +159,10 @@ export default class World
         {
             this.king.update()
         }
-        // if (this.hologram)
+
+        // if (this.ballons)
         // {
-        //     this.hologram.update()
+        //     this.ballons.update()
         // }
 
 

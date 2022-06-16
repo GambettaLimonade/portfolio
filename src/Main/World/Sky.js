@@ -19,14 +19,14 @@ export default class Sky
 
     setGeometry()
     {
-        this.geometry = new THREE.SphereBufferGeometry(200)
+        this.geometry = new THREE.SphereBufferGeometry(170)
     }
 
     setMaterial()
     {
-        this.material = new THREE.MeshStandardMaterial({
-                    color: '#000000',
-                    side: THREE.BackSide
+        this.material = new THREE.MeshBasicMaterial({
+                    color: '#020203',
+                    
                 })
     }
 
@@ -36,7 +36,10 @@ export default class Sky
         this.mesh.receiveShadow = true
         this.mesh.name = "sky"
         this.scene.add(this.mesh)
-        this.mesh.position.set(0, 10, 0)
+        this.mesh.position.set(0, 0, 0)
+        this.mesh.rotation.x = Math.PI 
+        this.mesh.material.side = THREE.DoubleSide;
+
     }
 
 }
