@@ -1,7 +1,7 @@
 import Main from "../Main";
 import * as THREE from 'three'
 import CANNON from 'cannon'
-import { Raycaster } from "three";
+import { Color, Raycaster } from "three";
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { gsap } from "gsap";
 import { TWEEN } from 'three/examples/jsm/libs/tween.module.min'
@@ -24,24 +24,10 @@ export default class Soldier
         this.distance = 100
         this.world = this.main.physics.world
         this.world2 = this.main.world
-        this.canvas = this.main.canvas
-
-
-        // this.sky = this.world2.sky
-        // this.skyRadius = this.sky.sphereRadius
-
-
-        // this.flooor = this.world2.floor
-        // this.floorColor = this.flooor.mesh.material.color
-    
-        
-
-
-        
+        this.canvas = this.main.canvas      
         this.raycaster = new Raycaster()
         this.intersects; 
         this.intersectsFocus; 
-
         this.movements = [];
         this.playerSpeed = 1;
         this.resource = this.resources.items.soldier
@@ -50,37 +36,16 @@ export default class Soldier
         this.characterBoundingBox;
         this.focused = false;
 
-
-        
-
-
-        //Debug
-        if(this.debug.active)
-        {
-            this.debugFolder = this.debug.ui.addFolder('soldier')
-        }
-        
-
         this.setModel()
         this.setAnimation()
-       
         this.pressKey()
         this.releaseKey()
         this.onTouch()
-
         this.setShape()
         this.setBody()
-
-
-        // this.changementDambiance()
         this.focusedObject()
         this.etapierFocusObject()
-        this.socialMedias()
     }
-
-    /**
-     * CREATE MODEL AND PHYSICS PART
-     */
 
     setModel()
     {
@@ -97,21 +62,6 @@ export default class Soldier
                 if(child instanceof THREE.Mesh)
                 {
                     child.castShadow = true
-                    const parameters = {
-                        color: 0xff0000,
-                    }
-
-                    if(this.debug.active)
-                    {
-                        this.debugFolder
-                        .addColor(parameters, 'color')
-                        .name('color')
-                        .onChange((c) => 
-                        {
-                            child.material.color = new THREE.Color(c)
-                            child.material.needsUpdate = true;
-                        })
-                    }
                 }
             }
         )
@@ -124,28 +74,10 @@ export default class Soldier
     {
         this.animation = {}
         this.animation.mixer = new THREE.AnimationMixer(this.model)
-        
         this.animation.actions = {}
-
         this.animation.actions.stand = this.animation.mixer.clipAction(this.resource.animations[0])
         this.animation.actions.running = this.animation.mixer.clipAction(this.resource.animations[1])
-        
         this.animation.actions.stand.play()
-        
-
-        //Debug
-        if(this.debug.active)
-        {
-            const debugObject = 
-            {
-                playstand : () => { this.animation.play('idle')},
-                playRunning : () => { this.animation.play('running')}
-            }
-
-            // this.debugFolder.add(debugObject, 'playidle')
-            // this.debugFolder.add(debugObject, 'playRunning')
-        }
-
     }
 
     setShape()
@@ -168,10 +100,7 @@ export default class Soldier
         this.main.physics.world.addBody(this.bodyCharacter)
     }
 
-
-    /**
-     * MOVING WITH FINGERS PART
-     */
+    // Finger Part
 
     onTouch()
     {   
@@ -261,10 +190,7 @@ export default class Soldier
         }
     }
 
-
-    /**
-     * MOVING WITH ARROW PART
-     */
+    // Arrows Part
 
     pressKey()
     {
@@ -309,6 +235,9 @@ export default class Soldier
     }
 
     
+
+
+    // TIPHAINE
 
     focusedObject()
     {
@@ -363,6 +292,15 @@ export default class Soldier
             // }
 
 
+            if (this.intersectsFocus[0].object.name == "ball" )
+            {
+                this.focused = true
+                console.log(this.intersectsFocus[0].point)
+                let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(this.intersectsFocus[0].point.x - 10, 10, this.intersectsFocus[0].point.z - 10) , 3000).easing(TWEEN.Easing.Linear.None).start()
+                let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(this.intersectsFocus[0].point, 1000).easing(TWEEN.Easing.Linear.None).start()
+            } 
+
+
             if (this.intersectsFocus[0].object.name == "pCube11_lambert21_0" || this.intersectsFocus[0].object.name == "pCube11_lambert10_0")
             {
                 console.log(this.intersectsFocus[0].object.name)
@@ -394,16 +332,7 @@ export default class Soldier
                 let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(-36, 2, 64), 2000).easing(TWEEN.Easing.Linear.None).start()
                 let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(this.intersectsFocus[0].point, 1000).easing(TWEEN.Easing.Linear.None).start()
             } 
-
-
-            // Partie où la camera focus les objet (futurama, hitachi, chapeau de paille...)
-            if (this.intersectsFocus[0].object.name == "pCube2_lambert9_0" || this.intersectsFocus[0].object.name == "pCube3_lambert9_0" ||this.intersectsFocus[0].object.name == "CIMA_verde_claro_0" ||this.intersectsFocus[0].object.name == "BAIXO_verde_claro_0" ||this.intersectsFocus[0].object.name == "Plano_verde_escuro_riscado_0" ||this.intersectsFocus[0].object.name == "Aasa_cima_logo_0" ||this.intersectsFocus[0].object.name == "Object_4" ||this.intersectsFocus[0].object.name == "Object_2002" ||this.intersectsFocus[0].object.name == "Cylinder_Material001_0" ||this.intersectsFocus[0].object.name == "Cube_Material003_0" ||this.intersectsFocus[0].object.name == "pCylinder12_blinn2_0001" ||this.intersectsFocus[0].object.name == "pCylinder12_blinn2_0" ||this.intersectsFocus[0].object.name == "pCube38_lambert36_0" ||this.intersectsFocus[0].object.name == "Straw_Hat_Material002_0" ||this.intersectsFocus[0].object.name == "NMSMultyTool_0010pCube1_NMSMultyTool_0010phong3_0" ||this.intersectsFocus[0].object.name == "Object_47" ||this.intersectsFocus[0].object.name == "Object_46")
-            {
-                this.focused = true
-                let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(45, 10, -2.5), 2000).easing(TWEEN.Easing.Linear.None).start()
-                let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(this.intersectsFocus[0].point, 1000).easing(TWEEN.Easing.Linear.None).start()
-            } 
-            
+         
 
 
             // Partie où la camera focus les écrans avec les projets et les photos
@@ -578,66 +507,16 @@ export default class Soldier
         })
     }
 
-    socialMedias()    
-    {
-
-        var stackoverflowIcon = document.getElementsByClassName('stackoverflow-icon')
-        stackoverflowIcon[0].addEventListener('click', (event) => 
-        {
-            // Permet de cliquer sur du HTML sans que Raycasting du sol ou de la sphère s'active
-            // https://stackoverflow.com/questions/39435334/how-can-i-block-a-three-js-raycast-with-html-elements
-            event.stopPropagation()
-            this.focused = true
-            window.open("https://stackoverflow.com/users/17044605/issam-merikhi", '_blank').focus();
-        })
-
-        
-        var githubIcon = document.getElementsByClassName('github-icon')
-        githubIcon[0].addEventListener('click', (event) => 
-        {
-            // Permet de cliquer sur du HTML sans que Raycasting du sol ou de la sphère s'active
-            // https://stackoverflow.com/questions/39435334/how-can-i-block-a-three-js-raycast-with-html-elements
-            event.stopPropagation()
-            this.focused = true
-            window.open("https://github.com/IssamMerikhi", '_blank').focus();
-        })
-
-        var linkedinIcon = document.getElementsByClassName('linkedin-icon')
-        linkedinIcon[0].addEventListener('click', (event) => 
-        {
-            // Permet de cliquer sur du HTML sans que Raycasting du sol ou de la sphère s'active
-            // https://stackoverflow.com/questions/39435334/how-can-i-block-a-three-js-raycast-with-html-elements
-            event.stopPropagation()
-            this.focused = true
-            window.open("https://www.linkedin.com/in/issam-merikhi/", '_blank').focus();
-        })
-
-        var homeIcon = document.getElementsByClassName('home-icon')
-        homeIcon[0].addEventListener('click', (event) => 
-        {
-            // Permet de cliquer sur du HTML sans que Raycasting du sol ou de la sphère s'active
-            // https://stackoverflow.com/questions/39435334/how-can-i-block-a-three-js-raycast-with-html-elements
-            event.stopPropagation()
-            this.focused = false
-        })
-
-
-
-
-    }
-
-    /**
-     * UPDATE PART
-     */
+    // Update
 
     update()
     {
 
-        // console.log(this.model.position)
+        
+
+
         this.animation.mixer.update(this.time.delta * 0.001)
         TWEEN.update()
-
-        // console.log(this.model.position.x, this.model.position.z)
 
         if ((this.model.position.x - 0)**2 + (this.model.position.z - 0)**2 > 10000 )
         {
@@ -645,68 +524,9 @@ export default class Soldier
             var distance = 1
             this.model.position.x -= Math.sin(this.model.rotation.y) * distance
             this.model.position.z -= Math.cos(this.model.rotation.y) * distance
-            // this.releaseKey()
-            // bloquer la position du character
         } 
         else
-        {      
-            // if (this.world2.bricks[0].center)
-            // {
-            //     if (this.model.position.distanceTo(this.world2.bricks[0].center) < 5)
-            //     {
-            //         var distance = 1
-            //         this.model.position.x -= Math.sin(this.model.rotation.y) * distance * 5
-            //         this.model.position.z -= Math.cos(this.model.rotation.y) * distance * 5
-            //     }
-            // }       
-            
-
-            // /!\/!\/!\ le (54, 0, 4.4) est relatif à /!\/!\/!\
-            // /!\/!\/!\ la ligne de code : this.model.position.set(50,0,0) dans Room.js /!\/!\/!\
-
-            if(
-
-                // TABLE
-               this.model.position.distanceTo(new THREE.Vector3(-40, 0, 48)) < 1.5 || 
-               this.model.position.distanceTo(new THREE.Vector3(46, 0, -17)) < 1.5 ||
-               this.model.position.distanceTo(new THREE.Vector3(52, 0, -20)) < 1.5 ||
-               this.model.position.distanceTo(new THREE.Vector3(46, 0, -13)) < 1.5 ||
-               this.model.position.distanceTo(new THREE.Vector3(53, 0, -9)) < 1.5 ||
-               this.model.position.distanceTo(new THREE.Vector3(57, 0, -8)) < 1.5 ||
-               this.model.position.distanceTo(new THREE.Vector3(55, 0, -3)) < 1.5 ||
-               this.model.position.distanceTo(new THREE.Vector3(50, 0, -6.74)) < 1.5 ||
-               this.model.position.distanceTo(new THREE.Vector3(46, 0, 10)) < 1.5 ||
-               this.model.position.distanceTo(new THREE.Vector3(53, 0, 12)) < 1.5 ||
-               this.model.position.distanceTo(new THREE.Vector3(57, 0, 10)) < 1.5 ||
-               this.model.position.distanceTo(new THREE.Vector3(65, 0, -3)) < 1.5 ||
-               this.model.position.distanceTo(new THREE.Vector3(65.8, 0, -10)) < 1.5 ||
-               this.model.position.distanceTo(new THREE.Vector3(59, 0, -16)) < 1.5 ||
-               this.model.position.distanceTo(new THREE.Vector3(55, 0, -19)) < 1.5 ||
-
-               //CAPSULE CORP
-               this.model.position.distanceTo(new THREE.Vector3(23.6, 0, 32.8)) < 3 || 
-               this.model.position.distanceTo(new THREE.Vector3(34.3, 0, -31.7)) < 3 ||
-               this.model.position.distanceTo(new THREE.Vector3(38.7, 0, -25)) < 3 ||
-               this.model.position.distanceTo(new THREE.Vector3(43.3, 0, -28.7)) < 3 ||
-               this.model.position.distanceTo(new THREE.Vector3(53.2, 0, -33.1)) < 3 ||
-               this.model.position.distanceTo(new THREE.Vector3(58.8, 0, -37.8)) < 3 ||
-               this.model.position.distanceTo(new THREE.Vector3(53.5, 0, -44.4)) < 3 ||
-               this.model.position.distanceTo(new THREE.Vector3(50, 0, -50.6)) < 3 ||
-               this.model.position.distanceTo(new THREE.Vector3(48.5, 0, -57.8)) < 3 ||
-               this.model.position.distanceTo(new THREE.Vector3(42.2, 0, -54.6)) < 3 ||
-               this.model.position.distanceTo(new THREE.Vector3(36, 0, -51)) < 3 ||
-               this.model.position.distanceTo(new THREE.Vector3(26, 0, -48.6)) < 3 ||
-               this.model.position.distanceTo(new THREE.Vector3(25.7, 0, -40.3)) < 3 ||
-               this.model.position.distanceTo(new THREE.Vector3(20.8, 0, -35.7)) < 3
-               )
-            {
-                var distance = 1
-                this.model.position.x -= Math.sin(this.model.rotation.y) * distance * 3
-                this.model.position.z -= Math.cos(this.model.rotation.y) * distance * 3
-
-
-            }
-           
+        {              
     
                 this.moveModelArrow(this.keys)
                 if (this.movements.length > 0)
@@ -723,16 +543,13 @@ export default class Soldier
                 this.temp.setFromMatrixPosition(this.behind.matrixWorld);
                 
                 this.camera.controls.minDistance = 15
-                this.camera.controls.maxDistance = 10000
+                this.camera.controls.maxDistance = 100
                 this.camera.instance.position.lerp(this.temp, 0.2);    
                 
                 this.camera.controls.target.set(this.model.position.x,this.model.position.y,this.model.position.z)
             }
 
             this.bodyCharacter.position.copy(this.model.position)
-            // this.changementDambiance()
-            // this.camera.controls.update()
         }        
-
     }
 }

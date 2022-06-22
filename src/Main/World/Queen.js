@@ -59,7 +59,6 @@ export default class Queen
         this.body = new CANNON.Body({
                 mass:0.1,
                 shape:this.shape,
-                material:this.main.physics.world.defaultMaterial,
                 linearDamping:0.8
             })
             

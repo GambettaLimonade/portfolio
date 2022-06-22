@@ -45,7 +45,6 @@ export default class Physics
 
         this.world.defaultContactMaterial = this.defautContactMaterial
 
-        this.update()
     }
 
     update()

@@ -4,13 +4,14 @@ import CANNON from 'cannon'
 
 export default class Ballon
 {
-    constructor(position, diametre, texture)
+    constructor(position, diametre, texture, metalness)
     {
         this.main = new Main()
         this.scene = this.main.scene
         this.resources = this.main.resources
         this.diametre = diametre
         this.position = position
+        this.metalness = metalness
 
         if (texture == "ballon")
         {
@@ -40,7 +41,7 @@ export default class Ballon
 
         
         this.material = new THREE.MeshStandardMaterial({ 
-            metalness: 0.9,
+            metalness: this.metalness,
             roughness: 0.4,
             map: this.resource 
         })
@@ -56,7 +57,7 @@ export default class Ballon
         //         })
         // }
 
-        // else if (texture == "pokeball")
+        // if (texture == "pokeball")
         // {
         //     this.material = new THREE.MeshStandardMaterial(
         //         {
@@ -98,9 +99,9 @@ export default class Ballon
     setBody()
     {
         this.body = new CANNON.Body({
-                mass:1,
+                mass:0.8,
                 shape:this.shape,
-                linearDamping:0.3
+                linearDamping:0.1,
                 
             })
             
@@ -122,11 +123,7 @@ export default class Ballon
 
     update()
     {
-        if ((this.meshBallon.position.x - 0)**2 + (this.meshBallon.position.z - 0)**2 > 30 )
-        {
-            this.body.position.x = (this.body.position.x + 1.2) 
-            this.body.position.z = (this.body.position.z + 1.2)
-        } 
-        this.meshBallon.position.copy(this.body.position)
+        this.meshBallon.position.copy(this.body.position)  
+        
     }
 }
