@@ -292,63 +292,29 @@ export default class Soldier
             // }
 
 
+            // Partie focus Ballons
             if (this.intersectsFocus[0].object.name == "ball" )
             {
                 this.focused = true
                 console.log(this.intersectsFocus[0].point)
-                let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(this.intersectsFocus[0].point.x - 10, 10, this.intersectsFocus[0].point.z - 10) , 3000).easing(TWEEN.Easing.Linear.None).start()
-                let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(this.intersectsFocus[0].point, 1000).easing(TWEEN.Easing.Linear.None).start()
+                let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(this.intersectsFocus[0].point.x - 10, 10, this.intersectsFocus[0].point.z - 10) , 3000).easing(TWEEN.Easing.Quartic.InOut).start()
+                let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(this.intersectsFocus[0].point, 1000).easing(TWEEN.Easing.Quartic.InOut).start()
             } 
 
-
-            if (this.intersectsFocus[0].object.name == "pCube11_lambert21_0" || this.intersectsFocus[0].object.name == "pCube11_lambert10_0")
-            {
-                console.log(this.intersectsFocus[0].object.name)
-                this.focused = true
-                let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(17, 9, -40), 2000).easing(TWEEN.Easing.Linear.None).start()
-                let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(this.intersectsFocus[0].point, 1000).easing(TWEEN.Easing.Linear.None).start()
-            } 
-
-
-            if (this.intersectsFocus[0].object.name == "pCube14_lambert25_0" || this.intersectsFocus[0].object.name == "pCube11_lambert10_0")
-            {
-                this.focused = true
-                let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(45, 9, -4), 2000).easing(TWEEN.Easing.Linear.None).start()
-                let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(this.intersectsFocus[0].point, 1000).easing(TWEEN.Easing.Linear.None).start()
-            } 
-
-
-            if (this.intersectsFocus[0].object.name == "pCube15_lambert28_0" || this.intersectsFocus[0].object.name == "pCube11_lambert10_0")
-            {
-                this.focused = true
-                let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(45, 6, -10), 2000).easing(TWEEN.Easing.Linear.None).start()
-                let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(this.intersectsFocus[0].point, 1000).easing(TWEEN.Easing.Linear.None).start()
-            } 
-
-
-            if (this.intersectsFocus[0].object.name == "Cube036_1" || this.intersectsFocus[0].object.name == "pCube11_lambert10_0")
-            {
-                this.focused = true
-                let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(-36, 2, 64), 2000).easing(TWEEN.Easing.Linear.None).start()
-                let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(this.intersectsFocus[0].point, 1000).easing(TWEEN.Easing.Linear.None).start()
-            } 
-         
-
-
-            // Partie où la camera focus les écrans avec les projets et les photos
+            // Partie focus PROJET
             if (this.intersectsFocus[0].object.name == "Object_17001" || this.intersectsFocus[0].object.name == "Object_16001" ||this.intersectsFocus[0].object.name == "bottomRightScreen" ||this.intersectsFocus[0].object.name == "bottomLeftScreen" ||this.intersectsFocus[0].object.name == "littleMiddleScreen" ||this.intersectsFocus[0].object.name == "Object_35" ||this.intersectsFocus[0].object.name == "longMiddleScreen" ||this.intersectsFocus[0].object.name == "lightLeftScreen" ||this.intersectsFocus[0].object.name == "middleLeftScreen" ||this.intersectsFocus[0].object.name == "middleMiddleScreen" ||this.intersectsFocus[0].object.name == "middleRightScreen" ||this.intersectsFocus[0].object.name == "topScreen" )
             {
                 this.focused = true
-                let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(12.8, 10, 42.3), 2000).easing(TWEEN.Easing.Linear.None).start()
-                let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(this.intersectsFocus[0].point, 1000).easing(TWEEN.Easing.Linear.None).start()
+                let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(12.8, 10, 42.3), 2000).easing(TWEEN.Easing.Back.Out).start()
+                let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(this.intersectsFocus[0].point, 1000).easing(TWEEN.Easing.Back.Out).start()
             } 
 
-            // Partie où la camera focus la partie TESTING
+            // Partie focus TESTING
             if (this.intersectsFocus[0].object.name == "Object_8")
             {
                 this.focused = true
-                let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(50, 10, 35), 2000).easing(TWEEN.Easing.Linear.None).start()
-                let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(this.intersectsFocus[0].point, 1000).easing(TWEEN.Easing.Linear.None).start()
+                let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(50, 10, 35), 2000).easing(TWEEN.Easing.Circular.In).start()
+                let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(this.intersectsFocus[0].point, 1000).easing(TWEEN.Easing.Circular.In).start()
             } 
 
             // Partie où la camera focus la partie PROGRAMMATION
