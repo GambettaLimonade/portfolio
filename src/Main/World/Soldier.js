@@ -329,28 +329,16 @@ export default class Soldier
             {
                 this.focused = false
                 var descriptionScreens = document.getElementsByClassName('descriptionScreens')
-                var descriptionBedroom = document.getElementsByClassName('descriptionBedroom')
-                var descriptionKitchen = document.getElementsByClassName('descriptionKitchen')
                 var descriptionGames = document.getElementsByClassName('descriptionGames')
                 var descriptionSkills = document.getElementsByClassName('descriptionSkills')
 
                 console.log(descriptionScreens)
                 
                 descriptionScreens[0].style.visibility = 'hidden';
-                descriptionBedroom[0].style.visibility = 'hidden';
-                descriptionKitchen[0].style.visibility = 'hidden';
                 descriptionGames[0].style.visibility = 'hidden';
                 descriptionSkills[0].style.visibility = 'hidden';
 
             }           
-
-
-            console.log('objet : ', this.intersectsFocus[0].object.name)
-
-            // /!\ /!\ /!\ /!\ /!\ 
-            // /!\ FIN DES IF  /!\ 
-            // /!\ /!\ /!\ /!\ /!\  
-
         })
         
     }
@@ -361,14 +349,10 @@ export default class Soldier
         this.intersectsFocus = this.raycaster.intersectObjects(this.scene.children, true);
         var homeBullet = document.getElementsByClassName('home-icon')
         var workBullet = document.getElementsByClassName('li-work')
-        var bedBullet = document.getElementsByClassName('li-bed')
-        var kitchenBullet = document.getElementsByClassName('li-kitchen')
         var gamesBullet = document.getElementsByClassName('li-games')
         var skillsBullet = document.getElementsByClassName('li-skills')
 
         var descriptionScreens = document.getElementsByClassName('descriptionScreens')
-        var descriptionBedroom = document.getElementsByClassName('descriptionBedroom')
-        var descriptionKitchen = document.getElementsByClassName('descriptionKitchen')
         var descriptionGames = document.getElementsByClassName('descriptionGames')
         var descriptionSkills = document.getElementsByClassName('descriptionSkills')
 
@@ -380,8 +364,6 @@ export default class Soldier
             event.stopPropagation()
             this.focused = false
             descriptionScreens[0].style.visibility = 'hidden';
-            descriptionBedroom[0].style.visibility = 'hidden';
-            descriptionKitchen[0].style.visibility = 'hidden';
             descriptionGames[0].style.visibility = 'hidden';
             descriptionSkills[0].style.visibility = 'hidden';
 
@@ -399,44 +381,9 @@ export default class Soldier
             let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(12, 10, 25), 2000).easing(TWEEN.Easing.Linear.None).start()
             let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(new THREE.Vector3(15, 10, 60), 1000).easing(TWEEN.Easing.Linear.None).start()            
             descriptionScreens[0].style.visibility = 'visible';
-            descriptionBedroom[0].style.visibility = 'hidden';
-            descriptionKitchen[0].style.visibility = 'hidden';
             descriptionGames[0].style.visibility = 'hidden';
             descriptionSkills[0].style.visibility = 'hidden';
 
-
-        })
-
-        bedBullet[0].addEventListener('click', (event) => 
-        {
-            // Permet de cliquer sur du HTML sans que Raycasting du sol ou de la sphère s'active
-            // https://stackoverflow.com/questions/39435334/how-can-i-block-a-three-js-raycast-with-html-elements
-            event.stopPropagation()
-            this.focused = true
-            let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(-16, 10, 16), 2000).easing(TWEEN.Easing.Linear.None).start()
-            let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(new THREE.Vector3(-50, 5, 50), 1000).easing(TWEEN.Easing.Linear.None).start()
-            descriptionScreens[0].style.visibility = 'hidden';
-            descriptionBedroom[0].style.visibility = 'visible';
-            descriptionKitchen[0].style.visibility = 'hidden';
-            descriptionGames[0].style.visibility = 'hidden';
-            descriptionSkills[0].style.visibility = 'hidden';
-
-
-        })
-
-        kitchenBullet[0].addEventListener('click', (event) => 
-        {
-            // Permet de cliquer sur du HTML sans que Raycasting du sol ou de la sphère s'active
-            // https://stackoverflow.com/questions/39435334/how-can-i-block-a-three-js-raycast-with-html-elements
-            event.stopPropagation()
-            this.focused = true
-            let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(0, 10, 0), 2000).easing(TWEEN.Easing.Linear.None).start()
-            let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(new THREE.Vector3(-50, 5, -40), 1000).easing(TWEEN.Easing.Linear.None).start()
-            descriptionKitchen[0].style.visibility = 'visible';
-            descriptionScreens[0].style.visibility = 'hidden';
-            descriptionBedroom[0].style.visibility = 'hidden';
-            descriptionGames[0].style.visibility = 'hidden';
-            descriptionSkills[0].style.visibility = 'hidden';
 
         })
 
@@ -450,8 +397,6 @@ export default class Soldier
             let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(new THREE.Vector3(13, 10, -1), 1000).easing(TWEEN.Easing.Linear.None).start()
             descriptionGames[0].style.visibility = 'visible';
             descriptionScreens[0].style.visibility = 'hidden';
-            descriptionBedroom[0].style.visibility = 'hidden';
-            descriptionKitchen[0].style.visibility = 'hidden';
             descriptionSkills[0].style.visibility = 'hidden';
 
 
@@ -467,8 +412,6 @@ export default class Soldier
             let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(new THREE.Vector3(52, 10, 40), 1000).easing(TWEEN.Easing.Linear.None).start()
             descriptionSkills[0].style.visibility = 'visible';
             descriptionScreens[0].style.visibility = 'hidden';
-            descriptionBedroom[0].style.visibility = 'hidden';
-            descriptionKitchen[0].style.visibility = 'hidden';
             descriptionGames[0].style.visibility = 'hidden';
         })
     }
@@ -478,7 +421,7 @@ export default class Soldier
     update()
     {
 
-        
+        console.log(this.model.position)
 
 
         this.animation.mixer.update(this.time.delta * 0.001)

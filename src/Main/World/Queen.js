@@ -1,8 +1,6 @@
 import Main from "../Main";
 import * as THREE from 'three'
 import CANNON from 'cannon'
-import { Raycaster } from "three";
-
 
 export default class Queen
 {
@@ -11,11 +9,9 @@ export default class Queen
         this.main = new Main()
         this.scene = this.main.scene
         this.resources = this.main.resources
-        this.length = 10
-        this.height = 5
+        this.diametreQueen = 1
         this.resource = this.resources.items.queen
         this.position = (0, 0, 0)
-        this.raycaster = new Raycaster()
         this.camera = this.main.camera
         this.createQueen()
         
@@ -27,7 +23,6 @@ export default class Queen
         this.model.scale.set(1, 1, 1)
         this.model.position.set(0,0,0)
         this.model.name = "queen"
-
         this.scene.add(this.model)
 
         this.model.traverse((child) =>
@@ -36,23 +31,15 @@ export default class Queen
                 {
                     child.castShadow = true
                     child.name = "queen"
-                    const parameters = {
-                        color: 0xff0000,
-                    }
-
                 }
             }
         )
-
     }
-
 
     setShape()
     {
-        this.shape = new CANNON.Box(new CANNON.Vec3(this.length, 2, this.height))
+        this.shape = new CANNON.Box(new CANNON.Vec3(this.diametreQueen, this.diametreQueen, this.diametreQueen))
     }
-
-
 
     setBody()
     {
@@ -61,7 +48,7 @@ export default class Queen
                 shape:this.shape,
                 linearDamping:0.8
             })
-            
+
         this.main.physics.world.addBody(this.body)
     }
 
@@ -73,7 +60,6 @@ export default class Queen
         this.body.position = new CANNON.Vec3(-10, 0, 50)
     }
 
-      
     update()
     {
         this.body.position.y = 0
