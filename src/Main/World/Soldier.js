@@ -7,8 +7,6 @@ import { gsap } from "gsap";
 import { TWEEN } from 'three/examples/jsm/libs/tween.module.min'
 
 
-
-
 export default class Soldier
 {
     constructor()
@@ -35,6 +33,7 @@ export default class Soldier
         this.collisions = []
         this.characterBoundingBox;
         this.focused = false;
+        this.allScene = this.resources.items.scene
 
         this.setModel()
         this.setAnimation()
@@ -45,15 +44,16 @@ export default class Soldier
         this.setBody()
         this.focusedObject()
         this.etapierFocusObject()
+        this.detectCollision()
     }
 
     setModel()
     {
         this.model = this.resource.scene
         this.model.scale.set(2.5,2.5,2.5)
-        this.model.position.set(0,0,0)
+        this.model.position.set(-10,0,0)
         this.behind = new THREE.Object3D
-        this.behind.position.set(this.model.position.x, this.model.position.y+8, this.model.position.z - 30)
+        this.behind.position.set(this.model.position.x , this.model.position.y+8, this.model.position.z - 30)
         this.model.add(this.behind)
         this.scene.add(this.model)
 
@@ -122,13 +122,13 @@ export default class Soldier
             
             this.raycaster.setFromCamera(mouse, this.camera.instance);
             this.intersects = this.raycaster.intersectObjects(this.scene.children);
-
             this.direction = new THREE.Vector3(this.intersects[ 0 ].point.x, 0, this.intersects[ 0 ].point.z)
 
-            if (this.intersects.length > 0 ) {
-                this.movements.push(this.intersects[ 0 ].point);
-                
-              }
+            if (this.intersects.length > 0 )
+            {
+                this.movements.push(this.intersects[ 0 ].point);    
+            }
+
 
             }
         );
@@ -243,8 +243,6 @@ export default class Soldier
     {
         document.addEventListener('click', (event) => {
 
-            var cubeRouge = document.getElementsByClassName('cube-rouge')
-
             this.height =  this.main.sizes.height
             this.width =  this.main.sizes.width
 
@@ -258,39 +256,7 @@ export default class Soldier
             
             this.raycaster.setFromCamera(mouse, this.camera.instance);
             this.intersectsFocus = this.raycaster.intersectObjects(this.scene.children, true);
-
-
-            // /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ 
-            // /!\ IF POUR LE MOUVEMENT DE LA CAMERA ET LES TWEENS /!\ 
-            // /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ /!\ 
-
-            // if (this.intersectsFocus[0].object.name == "cylindre" || this.intersectsFocus[0].object.name == "ball")
-            // {
-            //     gsap.to( this.camera.instance.position, {
-            //         duration: 2.5,
-            //         x: this.intersectsFocus[0].object.position.x,
-            //         y: -100,
-            //         z: this.intersectsFocus[0].object.position.z, // maybe adding even more offset depending on your model
-            //         // onUpdate: function()
-            //             // {
-            //             //     console.log('i : ', i)
-            //             // }
-            //         // }
-            //     } );
-
-            // this.camera.controls.target.set(this.intersectsFocus[0].object.position.x,this.intersectsFocus[0].object.position.y,this.intersectsFocus[0].object.position.z) 
-            // this.focused = true
-    
-            //     // document.getElementById("info").style.display = "block";
-    
-            //     setTimeout(() =>
-            //      { 
-            //         this.focused = false;
-            //         // document.getElementById("info").style.display = "none";
-    
-            //     }, 2500)
-            // }
-
+            console.log(this.intersectsFocus)
 
             // Partie focus Ballons
             if (this.intersectsFocus[0].object.name == "ball" )
@@ -302,7 +268,7 @@ export default class Soldier
             } 
 
             // Partie focus PROJET
-            if (this.intersectsFocus[0].object.name == "Object_17001" || this.intersectsFocus[0].object.name == "Object_16001" ||this.intersectsFocus[0].object.name == "bottomRightScreen" ||this.intersectsFocus[0].object.name == "bottomLeftScreen" ||this.intersectsFocus[0].object.name == "littleMiddleScreen" ||this.intersectsFocus[0].object.name == "Object_35" ||this.intersectsFocus[0].object.name == "longMiddleScreen" ||this.intersectsFocus[0].object.name == "lightLeftScreen" ||this.intersectsFocus[0].object.name == "middleLeftScreen" ||this.intersectsFocus[0].object.name == "middleMiddleScreen" ||this.intersectsFocus[0].object.name == "middleRightScreen" ||this.intersectsFocus[0].object.name == "topScreen" )
+            if (this.intersectsFocus[0].object.name == "bottomRightScreen" ||this.intersectsFocus[0].object.name == "bottomLeftScreen" ||this.intersectsFocus[0].object.name == "littleMiddleScreen" ||this.intersectsFocus[0].object.name == "Object_35" ||this.intersectsFocus[0].object.name == "longMiddleScreen" ||this.intersectsFocus[0].object.name == "lightLeftScreen" ||this.intersectsFocus[0].object.name == "middleLeftScreen" ||this.intersectsFocus[0].object.name == "middleMiddleScreen" ||this.intersectsFocus[0].object.name == "middleRightScreen" ||this.intersectsFocus[0].object.name == "topScreen" )
             {
                 this.focused = true
                 let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(12.8, 10, 42.3), 2000).easing(TWEEN.Easing.Back.Out).start()
@@ -332,7 +298,6 @@ export default class Soldier
                 var descriptionGames = document.getElementsByClassName('descriptionGames')
                 var descriptionSkills = document.getElementsByClassName('descriptionSkills')
 
-                console.log(descriptionScreens)
                 
                 descriptionScreens[0].style.visibility = 'hidden';
                 descriptionGames[0].style.visibility = 'hidden';
@@ -416,14 +381,35 @@ export default class Soldier
         })
     }
 
+
+    detectCollision()
+    {
+        // this.raycasterFromCharacter = new THREE.Raycaster(this.model.position);
+        // this.intersectsFromCharacter = this.raycasterFromCharacter.intersectObjects(this.scene.children);
+
+        // for (var i = 0; i < this.intersectsFromCharacter.length; i++)
+        // {
+        //     // console.log('2 : ', this.intersectsFromCharacter[i].object.name);
+        // }
+
+
+    }
+
     // Update
 
     update()
     {
 
+        // this.raycasterFromCharacter = new THREE.Raycaster(this.model.position);
+        // this.intersectsFromCharacter = this.raycasterFromCharacter.intersectObjects(this.scene.children);
+
+        // for (var i = 0; i < this.intersectsFromCharacter.length; i++)
+        // {
+        //     console.log(this.intersectsFromCharacter[i].object.name);
+        // }
+
+
         console.log(this.model.position)
-
-
         this.animation.mixer.update(this.time.delta * 0.001)
         TWEEN.update()
 
@@ -436,6 +422,12 @@ export default class Soldier
         } 
         else
         {              
+
+            if(this.model.position.distanceTo(new THREE.Vector3(-39.85, 0, 68.01)) < 10)
+            {
+                this.model.position.x = 2
+                this.model.position.z = 2
+            }
     
                 this.moveModelArrow(this.keys)
                 if (this.movements.length > 0)
