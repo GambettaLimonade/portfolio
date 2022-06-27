@@ -400,16 +400,27 @@ export default class Soldier
     update()
     {
 
-        // this.raycasterFromCharacter = new THREE.Raycaster(this.model.position);
-        // this.intersectsFromCharacter = this.raycasterFromCharacter.intersectObjects(this.scene.children);
+        this.raycasterFromCharacter = new THREE.Raycaster(this.model.position);
+        this.intersectsFromCharacter = this.raycasterFromCharacter.intersectObjects(this.scene.children);
 
-        // for (var i = 0; i < this.intersectsFromCharacter.length; i++)
-        // {
-        //     console.log(this.intersectsFromCharacter[i].object.name);
-        // }
+        for (var i = 0; i < this.intersectsFromCharacter.length; i++)
+        {
+            // console.log('je raycast : ', this.intersectsFromCharacter[i].object.name);
+            if ( this.intersectsFromCharacter[i].object.name == "pCube11_lambert1_0" )
+            {
+                console.log('intersection ok')
+                console.log('distance : ', this.intersectsFromCharacter[i].point.distanceTo(this.model.position))
+                // console.log('position point : ', this.intersectsFromCharacter[i].point)
+                // console.log('position model : ', this.model.position)
+                if(this.intersectsFromCharacter[i].point.distanceTo(this.model.position) < 20)
+                {
+                    console.log('je suis super proche')
+                }
+            }
+        }
 
 
-        console.log(this.model.position)
+        // console.log('ma position : ', this.model.position)
         this.animation.mixer.update(this.time.delta * 0.001)
         TWEEN.update()
 
