@@ -279,16 +279,16 @@ export default class Soldier
             if (this.intersectsFocus[0].object.name == "Object_8")
             {
                 this.focused = true
-                let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(50, 10, 35), 2000).easing(TWEEN.Easing.Circular.In).start()
-                let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(this.intersectsFocus[0].point, 1000).easing(TWEEN.Easing.Circular.In).start()
+                let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(50, 10, 35), 2000).easing(TWEEN.Easing.Back.Out).start()
+                let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(this.intersectsFocus[0].point, 1000).easing(TWEEN.Easing.Back.Out).start()
             } 
 
             // Partie où la camera focus la partie PROGRAMMATION
             if (this.intersectsFocus[0].object.name == "Object_9")
             {
                 this.focused = true
-                let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(50, 10, 40), 2000).easing(TWEEN.Easing.Linear.None).start()
-                let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(this.intersectsFocus[0].point, 1000).easing(TWEEN.Easing.Linear.None).start()
+                let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(50, 10, 40), 2000).easing(TWEEN.Easing.Back.Out).start()
+                let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(this.intersectsFocus[0].point, 1000).easing(TWEEN.Easing.Back.Out).start()
             } 
 
             if (this.intersectsFocus[0].object.name == "sky" || this.intersectsFocus[0].object.name == "floor" || this.intersectsFocus[0].object.name == "BackSquare")
@@ -308,7 +308,7 @@ export default class Soldier
         
     }
 
-
+    
     etapierFocusObject()
     {
         this.intersectsFocus = this.raycaster.intersectObjects(this.scene.children, true);

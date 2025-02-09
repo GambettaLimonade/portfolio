@@ -27,9 +27,9 @@ export default class World
 
         this.ballonsValues = 
         {
-            'position' : [[5,0,-0], [-4, 0, 10], [7, 0, 25], [3, 0, 22], [0, 0, -8], [-10, 0, 0]],
+            'position' : [[5,0,-0], [-4, 0, 10], [7, 0, 25], [3, 0, 22], [0, 0, -8], [-5, 0, 0]],
             'diametre' : [1.5, 1, 1, 1, 1.8, 1],
-            'texture' : ['ballon', 'pokeball', 'pokeball', 'pokeball', 'basketball', 'dbz1'],
+            'texture' : ['basketball', 'pokeball', 'pokeball', 'pokeball', 'basketball', 'dbz1'],
             'metalness' : [0.1, 0.9, 0.9, 0.9, 0.1, 0.9]
 
 

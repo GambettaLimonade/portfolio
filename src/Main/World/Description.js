@@ -25,49 +25,21 @@ export default class Description
         this.focused = this.main.world.soldier.focused;
         this.temp = new THREE.Vector3;
 
-        this.socialMedias()
+        //this.focusCharacter()
 
     }
 
-    socialMedias()    
+    
+    focusCharacter()    
     {
-
-        var stackoverflowIcon = document.getElementsByClassName('stackoverflow-icon')
-        stackoverflowIcon[0].addEventListener('click', (event) => 
-        {
-            // Permet de cliquer sur du HTML sans que Raycasting du sol ou de la sphère s'active
-            // https://stackoverflow.com/questions/39435334/how-can-i-block-a-three-js-raycast-with-html-elements
-            event.stopPropagation()
-            this.focused = true
-            window.open("https://stackoverflow.com/users/17044605/issam-merikhi", '_blank').focus();
-        })
-
-        
-        var githubIcon = document.getElementsByClassName('github-icon')
-        githubIcon[0].addEventListener('click', (event) => 
-        {
-            // Permet de cliquer sur du HTML sans que Raycasting du sol ou de la sphère s'active
-            // https://stackoverflow.com/questions/39435334/how-can-i-block-a-three-js-raycast-with-html-elements
-            event.stopPropagation()
-            this.focused = true
-            window.open("https://github.com/IssamMerikhi", '_blank').focus();
-        })
-
-        var linkedinIcon = document.getElementsByClassName('linkedin-icon')
-        linkedinIcon[0].addEventListener('click', (event) => 
-        {
-            // Permet de cliquer sur du HTML sans que Raycasting du sol ou de la sphère s'active
-            // https://stackoverflow.com/questions/39435334/how-can-i-block-a-three-js-raycast-with-html-elements
-            event.stopPropagation()
-            this.focused = true
-            window.open("https://www.linkedin.com/in/issam-merikhi/", '_blank').focus();
-        })
 
         var homeIcon = document.getElementsByClassName('home-icon')
         homeIcon[0].addEventListener('click', (event) => 
         {
             // Permet de cliquer sur du HTML sans que Raycasting du sol ou de la sphère s'active
             // https://stackoverflow.com/questions/39435334/how-can-i-block-a-three-js-raycast-with-html-elements
+
+            console.log("focus chara")
             event.stopPropagation()
             this.focused = false
         })

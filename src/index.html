@@ -3,48 +3,80 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Issam Merikhi</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Shadows+Into+Light&display=swap" rel="stylesheet">
-    </head>
+    <title>GambettaLimo - Portfolio</title>
+    <link rel="icon" type="image/png" href="https://static.vecteezy.com/system/resources/previews/026/518/012/non_2x/furious-look-of-a-man-in-manga-and-anime-style-vector.jpg">
+    <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Shadows+Into+Light&family=Press+Start+2P&display=swap" rel="stylesheet">
+</head>
 <body>
+    <style>
+        @keyframes slide-left-to-right {
+            0% {
+                transform: translateX(-100%); /* Commence à gauche */
+            }
+            100% {
+                transform: translateX(100%); /* Termine à droite */
+            }
+        }
+    
+        @keyframes slide-right-to-left {
+            0% {
+                transform: translateX(100%); /* Commence à droite */
+            }
+            100% {
+                transform: translateX(-100%); /* Termine à gauche */
+            }
+        }
+    
+        .sliding-text-left-to-right {
+            animation: slide-left-to-right 20s linear infinite; /* Durée de 5 secondes, mouvement linéaire, répète à l'infini */
+        }
+    
+        .sliding-text-right-to-left {
+            animation: slide-right-to-left 20s linear infinite; /* Durée de 5 secondes, mouvement linéaire, répète à l'infini */
+        }
+    </style>
+    
+    <div id="error-screen" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: black; color: white; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; font-size: 24px;">
+        <div style="transform: rotate(-10deg);">
+            <!-- Texte supplémentaire en haut -->
+            <div class="sliding-text-right-to-left" style="color: white;">404 ERROR</div>
+            <div style="position: relative; display: inline-block; transform: skew(-10deg);">
+                <div class="sliding-text-left-to-right" style="color: black; position: absolute; top: 0; left: 0; z-index: -1; font-size: 24px; -webkit-text-stroke: 1px white;">OOPS! MOBILE NOT ALLOWED</div>
+                <div class="sliding-text-left-to-right" style="color: transparent; -webkit-text-stroke: 1px white; font-size: 24px;">OOPS! MOBILE NOT ALLOWED</div>
+            </div>
+            <!-- Texte principal -->
+            <div class="sliding-text-right-to-left" style="color: white;">404 ERROR</div>
+            <div style="position: relative; display: inline-block; transform: skew(-10deg);">
+                <div class="sliding-text-left-to-right" style="color: black; position: absolute; top: 0; left: 0; z-index: -1; font-size: 24px; -webkit-text-stroke: 1px white;">OOPS! MOBILE NOT ALLOWED</div>
+                <div class="sliding-text-left-to-right" style="color: transparent; -webkit-text-stroke: 1px white; font-size: 24px;">OOPS! MOBILE NOT ALLOWED</div>
+            </div>
+            <!-- Texte supplémentaire en bas -->
+            <div class="sliding-text-right-to-left" style="color: white;">404 ERROR</div>
+            <div style="position: relative; display: inline-block; transform: skew(-10deg);">
+                <div class="sliding-text-left-to-right" style="color: black; position: absolute; top: 0; left: 0; z-index: -1; font-size: 24px; -webkit-text-stroke: 1px white;">OOPS! MOBILE NOT ALLOWED</div>
+                <div class="sliding-text-left-to-right" style="color: transparent; -webkit-text-stroke: 1px white; font-size: 24px;">OOPS! MOBILE NOT ALLOWED</div>
+            </div>
+        </div>
+    </div>
     <canvas class="webgl"></canvas>
     <div class="loading-bar"></div>
 
-    <div id="divBienvenu" 
-    style="z-index: 100; color: white; position: absolute;
-    top: 10px;
-    width: 100%;
-    text-align: center;
-    z-index: 100;
-    color: #ffffff;
-    font-family: 'Amatic SC', cursive;
-    ">
-        <h1 id = "msg">Welcome, it's me Sami !!!</h1>
-        <lottie-player style = "width : 200px; margin: auto; cursor: default;" src="https://assets5.lottiefiles.com/packages/lf20_v9zyr76w.json">
-        </lottie-player>
-        <h2>This is my portfolio. Feel free to take a walk. Learn more about myself.</h2>
-        <h2>Use your keyboard arrows to move your avatar.</h2>
-        <h2>You can also use the left side menu to discover my world.</h2>
-        <h2>If you lose control, you can click on the character icon to get back.</h2>
-
-
-        <p class="pourcentage" style="color: black; font-size: 100px"></p>
+    <div id="divBienvenu">
+        <p class="pourcentage" style="color: grey; font-size: 100px"></p>
+        <script>
+            setTimeout(function() {
+                var msg = document.getElementById("divBienvenu");
+                msg.parentNode.removeChild(msg);
+            }, 10000);
+        </script>
     </div>
     
-    <script>
-        setTimeout(function()
-        {
-            var msg = document.getElementById("divBienvenu");
-            msg.parentNode.removeChild(msg);
-        }, 10000)
-    </script>
+
 
     <script src="https://unpkg.com/@lottiefiles/lottie-player@1.5.7/dist/lottie-player.js"></script>
     
     <div style="position: absolute; left: 4%; color: white; top: 29%;">
-        <lottie-player autoplay loop class="home-icon" style = "width : 30px" src="https://assets10.lottiefiles.com/packages/lf20_9xgavwck.json">
+        <lottie-player autoplay loop class="home-icon" style="width: 30px" src="https://assets10.lottiefiles.com/packages/lf20_9xgavwck.json">
         </lottie-player>
     </div>
     <div class="paragraph" style="position: absolute; left: 5%; color: white; bottom: 42%;">
@@ -55,86 +87,31 @@
         </ul>
     </div>
 
-    <div class="media">  
-        
-        <div class="github-icon">
-            <lottie-player autoplay loop speed=2 style = "width : 20px;" src="https://assets9.lottiefiles.com/packages/lf20_uurbtty4.json">
-            </lottie-player>
-        </div> 
-
-        <div class="linkedin-icon">
-            <lottie-player autoplay loop class="linkedin-icon" style = "width : 35px;" src="https://assets7.lottiefiles.com/packages/lf20_ofzhxhem.json">
-            </lottie-player>
-        </div>
-
-        <div class="stackoverflow-icon">
-            <lottie-player autoplay loop class="stackoverflow-icon" style = "width : 23px;" src="https://assets5.lottiefiles.com/packages/lf20_6wezjmww.json">
-            </lottie-player>
-        </div>
-
-
-    </div>
-    <div class="descriptionScreens" style = "height: 80%; width : 40%; position: absolute; right: 1%; top : 1%; bottom : 10%; visibility: hidden; "> 
+    <div class="descriptionScreens" style="height: 80%; width: 40%; position: absolute; right: 1%; top: 1%; bottom: 10%; visibility: hidden;"> 
         <h1 class="description titre" style="color: white;">
             01 / Work
         </h1> 
         <p class="description paragraphe" style="color: white;">
-            I'm Issam. I m currently working for Capgemini as a software tester / QA.
-            I'm very confortable with all development and testing tools, and everything in between. <br>
-            I was also Python Developer for KIT and BETA Economics Research Laboratory.
-            I'm currently working in an agile Dev team. <br>
-            You will find 3 web applications I designed alone or in a team.
-            <br>
-            > Climate Change Dashboard : Dashboard tackling environmental issues around the globe though multiples topics. 
-            Dashboard made with KIT.
-            <br>
-            > Maths78 : a little application that provides maths teachers simple exercises and high school students to understand some basics and fundamentals mathematics concepts.
-            Designed by my own for my students.
-            <br>
-            > PibeOro : a project to predict result of a football Games using classification algorithms such as SVM or random forest.
+            Digital nomad as they say
         </p>
     </div>
 
-    <div class="descriptionGames" style = "height: 80%; width : 40%; position: absolute; right: 1%; top : 1%; bottom : 10%; visibility: hidden; "> 
+    <div class="descriptionGames" style="height: 80%; width: 40%; position: absolute; right: 1%; top: 1%; bottom: 10%; visibility: hidden;"> 
         <h1 class="description titre" style="color: white;">
-            04 / Games
+            02 / Life
         </h1> 
         <p class="description paragraphe" style="color: white;">
-            So far so good. <br>
-            Here you can find all the things that I love. <br>
-            From my sweet childhood to current days, I grow up with all the objects you'll see.
-            You'll my futurama favourite character Bender Bending Rodriguez as known as Bender 
-            along with its SpaceShip. There is also Minato famous Kunaï and Itachi, the most talented Konoha 
-            ninja. Last but not least the well known CAPSULE CORP. built by Dr. Brief to bought Goku on Earth. <br>
-            So much memories, I feel like a child again. <br>
-            You'll find others items that describe my personnality and who I am, brief recap of myself ! <br>
+            Items that have build my inner self
         </p>
-        <div class="description-end" style="color: white ;">
-            > Association : Globale, Source Etudiante <br>
-            > Sports : Football, Futsal, Volley, Ping pong <br>
-            > Top 3 Travel : South Korea, Brazil, Canada <br>
-        </div>
     </div>
 
-
-    <div class="descriptionSkills" style = "height: 80%; width : 40%; position: absolute; right: 1%; top : 1%; bottom : 10%; visibility: hidden; "> 
+    <div class="descriptionSkills" style="height: 80%; width: 40%; position: absolute; right: 1%; top: 1%; bottom: 10%; visibility: hidden;"> 
         <h1 class="description titre" style="color: white;">
-            05 / Skills
+            03 / Stack
         </h1> 
         <p class="description paragraphe" style="color: white;">
-            As you may know I work in the software - testing fields. <br>
-            If you are looking for a geeky technical profile,
-            who likes to popularize technic to customers, I will be very happy to meet you. <br>
-            I come from a Mathematics formation oriented in Data Science. <br>
-            I was able to finish my Data Master's Degree in Strasbourg, my hometown. <br>
-            I'm also a proud owner of the ISTQB Foundation Testing Certificate and I also have 
-            TMAP and the AQ4 Selenium Tester Certification. <br>
-            > Testing : Python, RobotFramework, Git, Jenkins, Postman, Kibana, Gherkin, XRay, Katalon <br>
-            > Programming : Python, HTML, CSS, JavaScript, SQL, MongoDB, RStudio, Git <br>
-            > Others Tools : SQL, ElasticSearch,  DBeaver, MongoDB, JIRA, PowerBI, Trello
+            What's your stack ?
         </p>
     </div>
-
-    
 </body>
 </html>
