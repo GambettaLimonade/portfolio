@@ -51,21 +51,21 @@ ol li:before {
 .li-work:hover:before {
   content: '01 - work';
   cursor: pointer;
-  color: red; /* Change color on hover */
+  color: whitesmoke;
   transform: scale(1.2); /* Scale up on hover */
 }
 
 .li-games:hover:before {
   content: '02 - life';
   cursor: pointer;
-  color: green; /* Change color on hover */
+  color: whitesmoke;
   transform: scale(1.2); /* Scale up on hover */
 }
 
 .li-skills:hover:before {
   content: '03 - stack';
   cursor: pointer;
-  color: blue; /* Change color on hover */
+  color: whitesmoke;
   transform: scale(1.2); /* Scale up on hover */
 }
 
