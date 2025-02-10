@@ -96,4 +96,161 @@ ol li:before {
   color: black;
 }
 
+.bonhomme {
+  position: absolute;
+  width: 20vh;
+  height: 20vh;
+  cursor: pointer;
+  bottom: 0%;
+  left: 5%;
+}
 
+.tete, .corps, .bras-gauche, .bras-droit, .jambe-gauche, .jambe-droit {
+  position: absolute;
+  background-color: white;
+  border: 3px solid #333;
+  border-radius: 5px;
+  box-shadow: 4px 4px 0 #333, 8px 8px 0 #666;
+  transition: transform 0.5s ease, background-color 0.5s ease;
+}
+
+.tete {
+  width: 20%;
+  height: 10%;
+  top: 5%;
+  left: 40%;
+}
+
+.corps {
+  width: 10%;
+  height: 20%;
+  top: 15%;
+  left: 45%;
+}
+
+.bras-gauche {
+  width: 10%;
+  height: 15%;
+  top: 15%;
+  left: 35%;
+  animation: lever-bras-gauche 0.3s infinite alternate;
+}
+
+.bras-droit {
+  width: 10%;
+  height: 15%;
+  top: 15%;
+  right: 35%;
+  animation: lever-bras-droit 0.3s infinite alternate;
+}
+
+.jambe-gauche {
+  width: 10%;
+  height: 15%;
+  top: 35%;
+  left: 40%;
+}
+
+.jambe-droit {
+  width: 10%;
+  height: 15%;
+  top: 35%;
+  right: 40%;
+}
+
+.bonhomme.home-icon:hover .corps,
+.bonhomme:hover .tete,
+.bonhomme:hover .bras-gauche,
+.bonhomme:hover .bras-droit,
+.bonhomme:hover .jambe-gauche,
+.bonhomme:hover .jambe-droit {
+  background-color: #a4f644;
+}
+
+.bonhomme:hover .tete {
+  transform: translateY(-5%);
+}
+
+.bonhomme:hover .bras-gauche {
+  transform: translateX(-5%);
+  animation: none;
+}
+
+.bonhomme:hover .bras-droit {
+  transform: translateX(5%);
+  animation: none;
+}
+
+.bonhomme:hover .jambe-gauche {
+  transform: translate(-15%, 25%);
+}
+
+.bonhomme:hover .jambe-droit {
+  transform: translate(15%, 25%);
+}
+
+@keyframes lever-bras-droit {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(-45deg);
+  }
+}
+
+@keyframes lever-bras-gauche {
+  0% {
+      transform: rotate(0deg);
+  }
+  100% {
+      transform: rotate(45deg);
+  }
+}
+
+
+.portfolio {
+  position: absolute;
+  bottom: 5%;
+  left: 50%;
+  transform: translateX(-50%);
+  text-align: center;
+  font-size: 24px;
+  color: white;
+}
+
+
+
+
+.arrow-keys {
+  position: absolute;
+  bottom: 5%;
+  right: 10%;
+  display: grid;
+  grid-template-columns: repeat(3, 2vh);
+  grid-template-rows: repeat(3, 2vh);
+  gap: 10px;
+}
+
+.key {
+  width: 2vh;
+  height: 2vh;
+  background-color: #ffcc00;
+  border: 3px solid #333;
+  border-radius: 5px;
+  box-shadow: 4px 4px 0 #333, 8px 8px 0 #666;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: transform 0.1s;
+}
+
+.key:active {
+  transform: translate(4px, 4px);
+  box-shadow: 2px 2px 0 #333, 4px 4px 0 #666;
+}
+
+.key.empty {
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
+}
