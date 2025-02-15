@@ -62,18 +62,5 @@ export default[
         name : 'ballon',
         type : 'texture',
         path : 'textures/ballon.jpg'
-    },
-
-    {
-        name : 'fry',
-        type : 'texture',
-        path : 'images/fry.png'
-    },
-
-
-    {
-        name : 'gojo',
-        type : 'texture',
-        path : 'images/gojo.webp'
-    },
+    }
  ]

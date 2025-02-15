@@ -291,7 +291,7 @@ export default class Soldier
                 let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(this.intersectsFocus[0].point, 1000).easing(TWEEN.Easing.Back.Out).start()
             } 
 
-            if (this.intersectsFocus[0].object.name == "sky" || this.intersectsFocus[0].object.name == "floor" || this.intersectsFocus[0].object.name == "BackSquare")
+            if (this.intersectsFocus[0].object.name == "floor" || this.intersectsFocus[0].object.name == "BackSquare")
             {
                 this.focused = false
                 var descriptionScreens = document.getElementsByClassName('descriptionScreens')
@@ -309,77 +309,136 @@ export default class Soldier
     }
 
     
-    etapierFocusObject()
-    {
-        this.intersectsFocus = this.raycaster.intersectObjects(this.scene.children, true);
-        var homeBullet = document.getElementsByClassName('home-icon')
-        var workBullet = document.getElementsByClassName('li-work')
-        var gamesBullet = document.getElementsByClassName('li-games')
-        var skillsBullet = document.getElementsByClassName('li-skills')
+    // Fonction pour gérer les sous-titres
+    setupAudioWithSubtitles(audio, subtitles) {
+        const subtitleDiv = document.getElementById('subtitles');
+        audio.addEventListener('timeupdate', () => {
+            const currentTime = audio.currentTime;
+            const currentSubtitle = subtitles.find(sub => currentTime >= sub.start && currentTime <= sub.end);
+            if (currentSubtitle) {
+                console.log(currentSubtitle.text); // Affiche dans la console
+                subtitleDiv.textContent = currentSubtitle.text; // Affiche sur le front-end
+                subtitleDiv.style.display = 'block'; // Affiche le bandeau
+            } else {
+                subtitleDiv.style.display = 'none'; // Cache le bandeau
+            }
+        });
+    }
 
-        var descriptionScreens = document.getElementsByClassName('descriptionScreens')
-        var descriptionGames = document.getElementsByClassName('descriptionGames')
-        var descriptionSkills = document.getElementsByClassName('descriptionSkills')
 
 
-        homeBullet[0].addEventListener('click', (event) => 
-        {
-            // Permet de cliquer sur du HTML sans que Raycasting du sol ou de la sphère s'active
-            // https://stackoverflow.com/questions/39435334/how-can-i-block-a-three-js-raycast-with-html-elements
-            event.stopPropagation()
-            this.focused = false
+    etapierFocusObject() {
+        const audioWork = new Audio('son/work.mp3');
+        audioWork.loop = false;
+        audioWork.volume = 0.5;
+
+        const audioLife = new Audio('son/life.mp3');
+        audioLife.loop = false;
+        audioLife.volume = 0.5;
+
+        const audioStack = new Audio('son/stack.mp3');
+        audioStack.loop = false;
+        audioStack.volume = 0.5;
+
+        function toggleSound() {
+            const isMuted = audioWork.muted; // Vérifie l'état actuel du son
+            audioWork.muted = !isMuted;
+            audioLife.muted = !isMuted;
+            audioStack.muted = !isMuted;
+        
+            // Met à jour le texte du bouton en fonction de l'état du son
+            const button = document.getElementById('sound-toggle');
+            button.textContent = isMuted ? 'SOUND: OFF' : 'SOUND: ON';
+        }
+
+        document.getElementById('sound-toggle').addEventListener('click', toggleSound);
+
+
+
+        const subtitlesWork = [
+            { start: 0, end: 4, text: "Welcome, I'm Issam but you can call me Sami." },
+            { start: 4, end: 9, text: "I am a QA tester and I want to showcase a blend of my life." },
+            { start: 9, end: 16, text: "I always wanted to be a professional football player, but the real world pushed me to give up on that dream."},
+            { start: 16, end: 22, text: "As time flew and the need for money arises, I needed to come up with a different piece of skills to grow income."},
+            { start: 23, end: 27, text: "I started to learn mathematics and computer science. I graduated during covid and landed my first job right away."},
+            { start: 27, end: 30, text: "Since that day, I've had fun testing applications"},
+            { start: 30, end: 34, text: "and discovering the new technologies that this world has to offer."}      
+        
+        ];
+
+
+        const subtitlesLife = [
+            { start: 0, end: 10, text: "Well, well, well I hope you guys recognized some of the items on that table. I mean yeah I am that kind of guy. I grew up watching Dragon Ball Z and naruto. I followed Luffy on his One piece quest. I am that nerdy guy always looking for Pokémon cards. I mean im pretty decent in chess, maybe 2000 elo on chesscom. Anyway it doesnt matter" }
+        ];
+
+        const subtitlesStack = [
+            { start: 0, end: 10, text: "If you're curious about my technical side, let me give you a quick tour. I'm quite the tech enthusiast, with a strong command of Python and Java. I love diving into automation with tools like the Selenium library and frameworks such as SerenityBDD and Robot Framework. I also delve into the world of CI/CD development, using Git and Jenkins to optimize processes. Additionally, I'm proud to be ISTQB and Selenium certified." }
+        ];
+
+        // Appliquez les sous-titres à chaque audio
+        this.setupAudioWithSubtitles(audioWork, subtitlesWork);
+        this.setupAudioWithSubtitles(audioLife, subtitlesLife);
+        this.setupAudioWithSubtitles(audioStack, subtitlesStack);
+
+        // Votre code existant pour les événements de clic
+        var homeBullet = document.getElementsByClassName('home-icon');
+        var workBullet = document.getElementsByClassName('li-work');
+        var gamesBullet = document.getElementsByClassName('li-games');
+        var skillsBullet = document.getElementsByClassName('li-skills');
+
+        var descriptionScreens = document.getElementsByClassName('descriptionScreens');
+        var descriptionGames = document.getElementsByClassName('descriptionGames');
+        var descriptionSkills = document.getElementsByClassName('descriptionSkills');
+
+        homeBullet[0].addEventListener('click', (event) => {
+            event.stopPropagation();
+            this.focused = false;
             descriptionScreens[0].style.visibility = 'hidden';
             descriptionGames[0].style.visibility = 'hidden';
             descriptionSkills[0].style.visibility = 'hidden';
+            console.log("partie 1");
+        });
 
-
-        })
-
-
-
-        workBullet[0].addEventListener('click', (event) => 
-        {
-            // Permet de cliquer sur du HTML sans que Raycasting du sol ou de la sphère s'active
-            // https://stackoverflow.com/questions/39435334/how-can-i-block-a-three-js-raycast-with-html-elements
-            event.stopPropagation()
-            this.focused = true
-            let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(12, 10, 25), 2000).easing(TWEEN.Easing.Linear.None).start()
-            let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(new THREE.Vector3(15, 10, 60), 1000).easing(TWEEN.Easing.Linear.None).start()            
+        workBullet[0].addEventListener('click', (event) => {
+            event.stopPropagation();
+            this.focused = true;
+            let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(12, 10, 25), 2000).easing(TWEEN.Easing.Linear.None).start();
+            let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(new THREE.Vector3(15, 10, 60), 1000).easing(TWEEN.Easing.Linear.None).start();
             descriptionScreens[0].style.visibility = 'visible';
             descriptionGames[0].style.visibility = 'hidden';
             descriptionSkills[0].style.visibility = 'hidden';
+            audioWork.play().catch(error => {
+                console.error('Erreur lors de la lecture de l\'audio du work:', error);
+            });
+        });
 
-
-        })
-
-        gamesBullet[0].addEventListener('click', (event) => 
-        {
-            // Permet de cliquer sur du HTML sans que Raycasting du sol ou de la sphère s'active
-            // https://stackoverflow.com/questions/39435334/how-can-i-block-a-three-js-raycast-with-html-elements
-            event.stopPropagation()
-            this.focused = true
-            let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(-50, 10, 40), 2000).easing(TWEEN.Easing.Linear.None).start()
-            let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(new THREE.Vector3(13, 10, -1), 1000).easing(TWEEN.Easing.Linear.None).start()
+        gamesBullet[0].addEventListener('click', (event) => {
+            event.stopPropagation();
+            this.focused = true;
+            let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(-50, 10, 40), 2000).easing(TWEEN.Easing.Linear.None).start();
+            let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(new THREE.Vector3(13, 10, -1), 1000).easing(TWEEN.Easing.Linear.None).start();
             descriptionGames[0].style.visibility = 'visible';
             descriptionScreens[0].style.visibility = 'hidden';
             descriptionSkills[0].style.visibility = 'hidden';
+            audioLife.play().catch(error => {
+                console.error('Erreur lors de la lecture de l\'audio life:', error);
+            });
+        });
 
-
-        })
-
-        skillsBullet[0].addEventListener('click', (event) => 
-        {
-            // Permet de cliquer sur du HTML sans que Raycasting du sol ou de la sphère s'active
-            // https://stackoverflow.com/questions/39435334/how-can-i-block-a-three-js-raycast-with-html-elements
-            event.stopPropagation()
-            this.focused = true
-            let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(20, 10, 19), 2000).easing(TWEEN.Easing.Linear.None).start()
-            let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(new THREE.Vector3(52, 10, 40), 1000).easing(TWEEN.Easing.Linear.None).start()
+        skillsBullet[0].addEventListener('click', (event) => {
+            event.stopPropagation();
+            this.focused = true;
+            let positionChange = new TWEEN.Tween(this.camera.instance.position).to(new THREE.Vector3(20, 10, 19), 2000).easing(TWEEN.Easing.Linear.None).start();
+            let positionTarget = new TWEEN.Tween(this.camera.controls.target).to(new THREE.Vector3(52, 10, 40), 1000).easing(TWEEN.Easing.Linear.None).start();
             descriptionSkills[0].style.visibility = 'visible';
             descriptionScreens[0].style.visibility = 'hidden';
             descriptionGames[0].style.visibility = 'hidden';
-        })
+            audioStack.play().catch(error => {
+                console.error('Erreur lors de la lecture de l\'audio stack:', error);
+            });
+        });
     }
+ 
 
 
     detectCollision()

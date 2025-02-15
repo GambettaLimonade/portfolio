@@ -1,9 +1,9 @@
 {
     "scripts": {
-        "build": "NODE_OPTIONS=--openssl-legacy-provider webpack --config ./bundler/webpack.prod.js",
-        "dev": "NODE_OPTIONS=--openssl-legacy-provider webpack serve --config ./bundler/webpack.dev.js",
-        "deploy": "vercel --prod"
-      },
+  "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider webpack --config ./bundler/webpack.prod.js",
+  "dev": "cross-env NODE_OPTIONS=--openssl-legacy-provider webpack serve --config ./bundler/webpack.dev.js",
+  "deploy": "vercel --prod"
+},
     "dependencies": {
         "@babel/core": "^7.12.10",
         "@babel/preset-env": "^7.12.11",
@@ -37,5 +37,8 @@
     },
     "engines": {
         "node": "18.x"
+    },
+    "devDependencies": {
+        "cross-env": "^7.0.3"
     }
 }

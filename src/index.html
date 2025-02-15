@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GambettaLimo - Portfolio</title>
-    <link rel="icon" type="image/png" href="https://static.vecteezy.com/system/resources/previews/026/518/012/non_2x/furious-look-of-a-man-in-manga-and-anime-style-vector.jpg">
+    <link rel="icon" type="image/png" href="images/soldier.png">
     <link href="https://fonts.googleapis.com/css2?family=Amatic+SC:wght@400;700&family=Shadows+Into+Light&family=Press+Start+2P&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -28,15 +28,18 @@
         }
     
         .sliding-text-left-to-right {
-            animation: slide-left-to-right 20s linear infinite; /* Durée de 5 secondes, mouvement linéaire, répète à l'infini */
+            animation: slide-left-to-right 10s linear infinite; /* Durée de 5 secondes, mouvement linéaire, répète à l'infini */
         }
     
         .sliding-text-right-to-left {
-            animation: slide-right-to-left 20s linear infinite; /* Durée de 5 secondes, mouvement linéaire, répète à l'infini */
+            animation: slide-right-to-left 10s linear infinite; /* Durée de 5 secondes, mouvement linéaire, répète à l'infini */
         }
     </style>
     
     <div id="error-screen" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: black; color: white; z-index: 9999; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; font-size: 24px;">
+        <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10000;">
+            <img src="/images/soldier.png" alt="" style="width: 150px; height: 150px; border-radius: 50%;">
+        </div>  
         <div style="transform: rotate(-10deg);">
             <!-- Texte supplémentaire en haut -->
             <div class="sliding-text-right-to-left" style="color: white;">404 ERROR</div>
@@ -70,27 +73,47 @@
             }, 10000);
         </script>
     </div>
+
+
+    <script>
+        // Créez un élément audio
+        const audio = new Audio('son/son_criquet.mp3'); // Mettez à jour le chemin si nécessaire
+        audio.loop = true; // Mettre en boucle
+        audio.volume = 0.25; // Réglez le volume (0.0 à 1.0)
+
+        // Démarrez l'audio en mode muet
+        audio.muted = true; // Mettez l'audio en mode muet
+        audio.play().catch(error => {
+            console.error('Erreur lors de la lecture de l\'audio de fond:', error);
+        });
+
+        // Ajoutez un gestionnaire d'événements pour activer le son après une interaction
+        document.addEventListener('click', () => {
+            audio.muted = false; // Désactivez le mode muet
+            audio.play().catch(error => {
+                console.error('Erreur lors de la lecture de l\'audio de fond:', error);
+            });
+            // Supprimez l'écouteur après la première interaction
+            document.removeEventListener('click', arguments.callee);
+        });
+    </script>
+
+
+
     
+    <div class="home-icon">
 
+        <img src="/images/soldier.png" alt="">
 
-    <div class="bonhomme home-icon">
-        <div class="tete"></div>
-        <div class="corps"></div>
-        <div class="bras-gauche"></div>
-        <div class="bras-droit"></div>
-        <div class="jambe-gauche"></div>
-        <div class="jambe-droit"></div>
     </div>
+    
     <div class="portfolio">GambettaLimonade - PORTFOLIO</div>
-    <div class="arrow-keys">
-        <div class="key empty"></div>
-        <div class="key"></div>
-        <div class="key empty"></div>
-        <div class="key"></div>
-        <div class="key"></div>
-        <div class="key"></div>
-        <div class="key empty"></div>
+    <div class="soundbouton">
+        <button id="sound-toggle">
+            SOUND
+        </button>
     </div>
+    <div id="subtitles" style="position: fixed; bottom: 7%; left: 30%; right: 30%; text-align: center; color: white; font-size: 20px; background-color: rgba(0, 0, 0, 0.5); padding: 10px; display: none;"></div>
 
 
     <div class="paragraph" style="position: absolute; left: 5%; color: white; bottom: 42%;">

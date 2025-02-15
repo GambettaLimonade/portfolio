@@ -19,6 +19,7 @@ export default class World
 {
     constructor()
     {
+
         this.main = new Main()
         this.scene = this.main.scene
         this.overlay = new Overlay()
