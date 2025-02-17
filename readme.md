@@ -15,3 +15,21 @@ npm run dev
 npm run build
 ```
 "# portfolio" 
+
+
+dev local package.json :
+
+"scripts": {
+        "build": "cross-env NODE_OPTIONS=--openssl-legacy-provider webpack --config ./bundler/webpack.prod.js",
+        "dev": "cross-env NODE_OPTIONS=--openssl-legacy-provider webpack serve --config ./bundler/webpack.dev.js",
+        "deploy": "vercel --prod"
+    }
+
+pour vercel il faut enlever le cross-env :
+
+"scripts": {
+        "build": "NODE_OPTIONS=--openssl-legacy-provider webpack --config ./bundler/webpack.prod.js",
+        "dev": "NODE_OPTIONS=--openssl-legacy-provider webpack serve --config ./bundler/webpack.dev.js",
+        "deploy": "vercel --prod"
+    }
+

@@ -356,19 +356,26 @@ export default class Soldier
 
 
         const subtitlesWork = [
-            { start: 0, end: 4, text: "Welcome, I'm Issam but you can call me Sami." },
-            { start: 4, end: 9, text: "I am a QA tester and I want to showcase a blend of my life." },
-            { start: 9, end: 16, text: "I always wanted to be a professional football player, but the real world pushed me to give up on that dream."},
-            { start: 16, end: 22, text: "As time flew and the need for money arises, I needed to come up with a different piece of skills to grow income."},
-            { start: 23, end: 27, text: "I started to learn mathematics and computer science. I graduated during covid and landed my first job right away."},
-            { start: 27, end: 30, text: "Since that day, I've had fun testing applications"},
-            { start: 30, end: 34, text: "and discovering the new technologies that this world has to offer."}      
+            { start: 0, end: 3.5, text: "Welcome, I'm Issam but you can call me Sami." },
+            { start: 4, end: 7, text: "I am a QA tester and I want to showcase a blend of my life." },
+            { start: 8, end: 14, text: "I always wanted to be a professional football player, but the real world pushed me to give up on that dream."},
+            { start: 14, end: 20, text: "As time flew and the need for money arises, I needed to come up with a different piece of skills to grow income."},
+            { start: 20, end: 27, text: "I started to learn mathematics and computer science. I graduated during covid and landed my first job right away."},
+            { start: 28, end: 31, text: "Since that day, I've had fun testing applications"},
+            { start: 31, end: 34, text: "and discovering the new technologies that this world has to offer."}      
         
         ];
 
 
         const subtitlesLife = [
-            { start: 0, end: 10, text: "Well, well, well I hope you guys recognized some of the items on that table. I mean yeah I am that kind of guy. I grew up watching Dragon Ball Z and naruto. I followed Luffy on his One piece quest. I am that nerdy guy always looking for Pokémon cards. I mean im pretty decent in chess, maybe 2000 elo on chesscom. Anyway it doesnt matter" }
+            { start: 0, end: 1.5, text: "Well, well, well" },
+            { start: 1.5, end: 5, text: "I hope you guys recognized some of the items on that table." },
+            { start: 5, end: 7.5, text: "I mean yeah I am that kind of guy." },
+            { start: 7.5, end: 10, text: "I grew up watching Dragon Ball Z and Naruto." },
+            { start: 11, end: 14, text: "I followed Luffy on his One piece quest." },
+            { start: 14, end: 17, text: "I am that nerdy guy always looking for Pokémon cards." },
+            { start: 17, end: 22, text: "I mean im pretty decent in chess, maybe 2000 elo on chesscom." },
+            { start: 22, end: 23.5, text: "Anyway it doesnt matter..." },
         ];
 
         const subtitlesStack = [
