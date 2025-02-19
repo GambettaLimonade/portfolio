@@ -379,7 +379,14 @@ export default class Soldier
         ];
 
         const subtitlesStack = [
-            { start: 0, end: 10, text: "If you're curious about my technical side, let me give you a quick tour. I'm quite the tech enthusiast, with a strong command of Python and Java. I love diving into automation with tools like the Selenium library and frameworks such as SerenityBDD and Robot Framework. I also delve into the world of CI/CD development, using Git and Jenkins to optimize processes. Additionally, I'm proud to be ISTQB and Selenium certified." }
+            { start: 0, end: 4, text: "If you're curious about my technical side, let me give you a quick tour."},
+            { start: 4, end: 8, text: "I'm quite the tech enthusiast, with a strong command of Python and Java." },
+            { start: 8, end: 16, text: "I love diving into automation with tools like the Selenium library and frameworks such as SerenityBDD and Robot Framework."},
+            { start: 16, end: 23, text: "I also delve into the world of CI/CD development, using Git and Jenkins to optimize processes." },
+            { start: 23.5, end: 27.5, text: "Additionally, I'm proud to be ISTQB and Selenium certified." }
+
+        
+        
         ];
 
         // Appliquez les sous-titres à chaque audio
