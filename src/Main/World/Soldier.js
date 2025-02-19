@@ -329,17 +329,30 @@ export default class Soldier
 
     etapierFocusObject() {
         const audioWork = new Audio('son/work.mp3');
-        audioWork.loop = false;
-        audioWork.volume = 0.5;
-
         const audioLife = new Audio('son/life.mp3');
-        audioLife.loop = false;
-        audioLife.volume = 0.5;
-
         const audioStack = new Audio('son/stack.mp3');
+    
+        audioWork.loop = false;
+        audioLife.loop = false;
         audioStack.loop = false;
+    
+        audioWork.volume = 0.5;
+        audioLife.volume = 0.5;
         audioStack.volume = 0.5;
-
+    
+        let currentAudio = null;
+    
+        function playAudio(audio) {
+            if (currentAudio && !currentAudio.paused) {
+                currentAudio.pause();
+                currentAudio.currentTime = 0; // Réinitialise l'audio
+            }
+            currentAudio = audio;
+            audio.play().catch(error => {
+                console.error('Erreur lors de la lecture de l\'audio:', error);
+            });
+        }
+        
         function toggleSound() {
             const isMuted = audioWork.muted; // Vérifie l'état actuel du son
             audioWork.muted = !isMuted;
@@ -348,13 +361,11 @@ export default class Soldier
         
             // Met à jour le texte du bouton en fonction de l'état du son
             const button = document.getElementById('sound-toggle');
-            button.textContent = isMuted ? 'SOUND: OFF' : 'SOUND: ON';
+            button.textContent = isMuted ? 'SOUND: ON' : 'SOUND: OFF';
         }
-
+    
         document.getElementById('sound-toggle').addEventListener('click', toggleSound);
-
-
-
+    
         const subtitlesWork = [
             { start: 0, end: 3.5, text: "Welcome, I'm Issam but you can call me Sami." },
             { start: 4, end: 7, text: "I am a QA tester and I want to showcase a blend of my life." },
@@ -363,10 +374,8 @@ export default class Soldier
             { start: 20, end: 27, text: "I started to learn mathematics and computer science. I graduated during covid and landed my first job right away."},
             { start: 28, end: 31, text: "Since that day, I've had fun testing applications"},
             { start: 31, end: 34, text: "and discovering the new technologies that this world has to offer."}      
-        
         ];
-
-
+    
         const subtitlesLife = [
             { start: 0, end: 1.5, text: "Well, well, well" },
             { start: 1.5, end: 5, text: "I hope you guys recognized some of the items on that table." },
@@ -377,42 +386,28 @@ export default class Soldier
             { start: 17, end: 22, text: "I mean im pretty decent in chess, maybe 2000 elo on chesscom." },
             { start: 22, end: 23.5, text: "Anyway it doesnt matter..." },
         ];
-
+    
         const subtitlesStack = [
             { start: 0, end: 4, text: "If you're curious about my technical side, let me give you a quick tour."},
             { start: 4, end: 8, text: "I'm quite the tech enthusiast, with a strong command of Python and Java." },
             { start: 8, end: 16, text: "I love diving into automation with tools like the Selenium library and frameworks such as SerenityBDD and Robot Framework."},
             { start: 16, end: 23, text: "I also delve into the world of CI/CD development, using Git and Jenkins to optimize processes." },
             { start: 23.5, end: 27.5, text: "Additionally, I'm proud to be ISTQB and Selenium certified." }
-
-        
-        
         ];
-
+    
         // Appliquez les sous-titres à chaque audio
         this.setupAudioWithSubtitles(audioWork, subtitlesWork);
         this.setupAudioWithSubtitles(audioLife, subtitlesLife);
         this.setupAudioWithSubtitles(audioStack, subtitlesStack);
-
-        // Votre code existant pour les événements de clic
-        var homeBullet = document.getElementsByClassName('home-icon');
-        var workBullet = document.getElementsByClassName('li-work');
-        var gamesBullet = document.getElementsByClassName('li-games');
-        var skillsBullet = document.getElementsByClassName('li-skills');
-
-        var descriptionScreens = document.getElementsByClassName('descriptionScreens');
-        var descriptionGames = document.getElementsByClassName('descriptionGames');
-        var descriptionSkills = document.getElementsByClassName('descriptionSkills');
-
-        homeBullet[0].addEventListener('click', (event) => {
-            event.stopPropagation();
-            this.focused = false;
-            descriptionScreens[0].style.visibility = 'hidden';
-            descriptionGames[0].style.visibility = 'hidden';
-            descriptionSkills[0].style.visibility = 'hidden';
-            console.log("partie 1");
-        });
-
+    
+        const workBullet = document.getElementsByClassName('li-work');
+        const gamesBullet = document.getElementsByClassName('li-games');
+        const skillsBullet = document.getElementsByClassName('li-skills');
+    
+        const descriptionScreens = document.getElementsByClassName('descriptionScreens');
+        const descriptionGames = document.getElementsByClassName('descriptionGames');
+        const descriptionSkills = document.getElementsByClassName('descriptionSkills');
+    
         workBullet[0].addEventListener('click', (event) => {
             event.stopPropagation();
             this.focused = true;
@@ -421,11 +416,9 @@ export default class Soldier
             descriptionScreens[0].style.visibility = 'visible';
             descriptionGames[0].style.visibility = 'hidden';
             descriptionSkills[0].style.visibility = 'hidden';
-            audioWork.play().catch(error => {
-                console.error('Erreur lors de la lecture de l\'audio du work:', error);
-            });
+            playAudio(audioWork);
         });
-
+    
         gamesBullet[0].addEventListener('click', (event) => {
             event.stopPropagation();
             this.focused = true;
@@ -434,11 +427,9 @@ export default class Soldier
             descriptionGames[0].style.visibility = 'visible';
             descriptionScreens[0].style.visibility = 'hidden';
             descriptionSkills[0].style.visibility = 'hidden';
-            audioLife.play().catch(error => {
-                console.error('Erreur lors de la lecture de l\'audio life:', error);
-            });
+            playAudio(audioLife);
         });
-
+    
         skillsBullet[0].addEventListener('click', (event) => {
             event.stopPropagation();
             this.focused = true;
@@ -447,9 +438,7 @@ export default class Soldier
             descriptionSkills[0].style.visibility = 'visible';
             descriptionScreens[0].style.visibility = 'hidden';
             descriptionGames[0].style.visibility = 'hidden';
-            audioStack.play().catch(error => {
-                console.error('Erreur lors de la lecture de l\'audio stack:', error);
-            });
+            playAudio(audioStack);
         });
     }
  

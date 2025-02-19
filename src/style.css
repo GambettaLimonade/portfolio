@@ -108,7 +108,37 @@ ol li:before {
   align-items: center; /* Centre verticalement le contenu */
   border-radius: 5px; /* Ajoute des coins légèrement arrondis */
   cursor: pointer;
+  transition: transform 0.3s ease; /* Transition pour l'agrandissement */
 }
+
+.home-icon:hover {
+  transform: scale(2); /* Agrandit le conteneur à 120% de sa taille originale */
+}
+
+.home-icon img {
+  transition: transform 0.3s ease; /* Transition pour l'animation de l'image */
+}
+
+.home-icon:hover img {
+  animation: jiggle 0.3s infinite; /* Applique l'animation de tremblement */
+}
+
+@keyframes jiggle {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  25% {
+    transform: translateX(-2px);
+  }
+  50% {
+    transform: translateX(2px);
+  }
+  75% {
+    transform: translateX(-2px);
+  }
+}
+
+
 
 .soundbouton{
   position: fixed; /* Fixe l'élément à un endroit spécifique de la fenêtre */
