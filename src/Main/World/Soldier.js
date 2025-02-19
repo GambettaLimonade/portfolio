@@ -6,7 +6,6 @@ import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls.js'
 import { gsap } from "gsap";
 import { TWEEN } from 'three/examples/jsm/libs/tween.module.min'
 
-
 export default class Soldier
 {
     constructor()
@@ -197,6 +196,7 @@ export default class Soldier
         document.addEventListener('keydown', (event) => 
         {
             this.keys[event.key] = true;
+            this.updateKeyIllumination(event.key, true);
         }, false);
     }
 
@@ -206,10 +206,38 @@ export default class Soldier
         document.addEventListener('keyup', (event) => 
         {
                 delete this.keys[event.key];
+                this.updateKeyIllumination(event.key, false);
                 this.animation.actions.running.stop();
             }, false
         );   
         
+    }
+
+
+    updateKeyIllumination(key, isPressed) {
+        let keyElement;
+        switch (key) {
+            case 'ArrowUp':
+                keyElement = document.getElementById('up-key');
+                break;
+            case 'ArrowLeft':
+                keyElement = document.getElementById('left-key');
+                break;
+            case 'ArrowDown':
+                keyElement = document.getElementById('down-key');
+                break;
+            case 'ArrowRight':
+                keyElement = document.getElementById('right-key');
+                break;
+            default:
+                return; // Ne rien faire si ce n'est pas une touche directionnelle
+        }
+    
+        if (isPressed) {
+            keyElement.classList.add('illuminated');
+        } else {
+            keyElement.classList.remove('illuminated');
+        }
     }
 
     moveModelArrow()
@@ -233,9 +261,6 @@ export default class Soldier
             this.angle = this.model.rotation.y
         }
     }
-
-    
-
 
     // TIPHAINE
 

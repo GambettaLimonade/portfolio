@@ -143,7 +143,7 @@ ol li:before {
 .soundbouton{
   position: fixed; /* Fixe l'élément à un endroit spécifique de la fenêtre */
   left: 5%; /* Positionne l'élément à 10% du bord gauche */
-  top: 5%; /* Positionne l'élément à 10% du bas de la fenêtre */
+  top:10%; /* Positionne l'élément à 10% du bas de la fenêtre */
   width: 160px; /* Largeur du carré */
   height: 20px; /* Hauteur du carré, égale à la largeur pour former un carré */
   background-color: rgba(0, 0, 0, 0.5); /* Fond noir semi-transparent */
@@ -169,11 +169,46 @@ ol li:before {
 
 .portfolio {
   position: absolute;
-  top: 2%;
-  left: 20%;
-  transform: translateX(-50%);
-  text-align: center;
-  font-size: 20px;
+  top: 3%;
+  left: 1%;
+  text-align: left;
+  font-size: 2vw; /* Utilisation d'unités relatives pour la taille de la police */
   color: white;
+  white-space: nowrap; /* Empêche le texte de se casser sur plusieurs lignes */
+  overflow: hidden; /* Cache le débordement si nécessaire */
+  max-width: 96%; /* Assure que le texte ne dépasse pas la largeur de l'écran */
 }
 
+
+        /* New styles for the arrow key symbol */
+        .arrow-keys {
+          position: fixed;
+          bottom: 10%;
+          right: 10%;
+          display: grid;
+          grid-template-columns: repeat(3, 20px);
+          grid-template-rows: repeat(2, 20px);
+          gap: 5px;
+          align-items: center;
+          justify-items: center;
+          border-radius: 5px;
+
+      }
+
+      .key-square {
+          width: 20px;
+          height: 20px;
+          background-color: white;
+          border-radius: 5px;
+          transition: background-color 0.2s;
+
+      }
+
+      .empty-space {
+          visibility: hidden;
+      }
+
+
+      .key-square.illuminated {
+        background-color: grey;
+    }
